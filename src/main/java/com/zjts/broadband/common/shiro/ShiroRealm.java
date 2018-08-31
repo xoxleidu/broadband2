@@ -1,4 +1,4 @@
-package com.zjts.broadband.common.shiro;//package com.example.demo.common.shiro;
+//package com.zjts.broadband.common.shiro;
 //
 //import com.example.demo.system.domain.Menu;
 //import com.example.demo.system.domain.Role;
