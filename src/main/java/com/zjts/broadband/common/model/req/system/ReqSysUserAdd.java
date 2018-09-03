@@ -27,8 +27,6 @@ public class ReqSysUserAdd implements Serializable{
     @ApiModelProperty(name = "联系方式",example = "13112341234",required = true)
     private String mobile;
 
-    private String status;
-
     private Date crateTime;
 
     private Date modifyTime;
@@ -76,14 +74,6 @@ public class ReqSysUserAdd implements Serializable{
 
     public void setMobile(String mobile) {
         this.mobile = mobile == null ? null : mobile.trim();
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 
     public Date getCrateTime() {

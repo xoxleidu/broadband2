@@ -1,9 +1,11 @@
 package com.zjts.broadband.system.controller;
 
 
+import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
+import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
 import com.zjts.broadband.system.model.SysUser;
 import com.zjts.broadband.system.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -31,6 +33,18 @@ public class SysUserController extends BaseController {
     @RequestMapping(value = "user/add", method = RequestMethod.POST)
     public APIResponse addUser(@RequestBody @Validated ReqSysUserAdd sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        return sysUserService.add(sysUser);
+        try {
+            return sysUserService.add(sysUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
+    }
+
+    @ApiOperation(value = "用户登录接口")
+    @RequestMapping(value = "user/login", method = RequestMethod.POST)
+    public APIResponse selectUser(@RequestBody @Validated ReqSysUserLogin sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
+        return sysUserService.login(sysUser);
     }
 }

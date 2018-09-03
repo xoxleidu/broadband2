@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SysUserMapper extends BaseMapper<SysUser>{
-    int deleteByPrimaryKey(Long id);
+    SysUser selectByPrimaryKey(Integer id);
 }

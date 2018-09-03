@@ -4,27 +4,46 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
+import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
 import com.zjts.broadband.system.dao.SysUserMapper;
 import com.zjts.broadband.system.model.SysUser;
 import com.zjts.broadband.system.service.SysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Service
+@Transactional
 public class SysUserServiceImp implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
 
     @Override
-    public APIResponse add(ReqSysUserAdd sysUser) {
+    public APIResponse add(ReqSysUserAdd sysUser) throws Exception{
         SysUser sysUser1 = new SysUser();
         BeanUtils.copyProperties(sysUser, sysUser1);
+        sysUser1.setCrateTime((int)sysUser.getCrateTime().getTime());
         Integer insert = sysUserMapper.insert(sysUser1);
-        if (insert != 1){
-            return APIResponse.error(CodeEnum.SAVE_ERROR);
+        throw new NullPointerException();
+//        if (insert != 1){
+//            return APIResponse.error(CodeEnum.SAVE_ERROR);
+//        }
+//        return APIResponse.success();
+    }
+
+    @Override
+    public APIResponse login(ReqSysUserLogin sysUser) {
+        SysUser sysUser1 = new SysUser();
+        BeanUtils.copyProperties(sysUser, sysUser1);
+        SysUser sysUser2 = sysUserMapper.selectById(2);
+        if (sysUser2 == null){
+            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
-        return APIResponse.success();
+        return APIResponse.success(sysUser2);
     }
 }

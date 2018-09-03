@@ -1,16 +1,13 @@
 package com.zjts.broadband.system.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class SysUser{
-    private Long id;
+public class SysUser {
+    private Integer id;
 
     private String username;
 
     private String password;
 
-    private Long deptId;
+    private Integer deptId;
 
     private String emall;
 
@@ -18,19 +15,19 @@ public class SysUser{
 
     private String status;
 
-    private Date crateTime;
+    private Integer crateTime;
 
-    private Date modifyTime;
+    private Integer modifyTime;
 
-    private Date lastLoginTime;
+    private Integer lastLoginTime;
 
     private String description;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,11 +47,11 @@ public class SysUser{
         this.password = password == null ? null : password.trim();
     }
 
-    public Long getDeptId() {
+    public Integer getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(Long deptId) {
+    public void setDeptId(Integer deptId) {
         this.deptId = deptId;
     }
 
@@ -82,27 +79,27 @@ public class SysUser{
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getCrateTime() {
+    public Integer getCrateTime() {
         return crateTime;
     }
 
-    public void setCrateTime(Date crateTime) {
+    public void setCrateTime(Integer crateTime) {
         this.crateTime = crateTime;
     }
 
-    public Date getModifyTime() {
+    public Integer getModifyTime() {
         return modifyTime;
     }
 
-    public void setModifyTime(Date modifyTime) {
+    public void setModifyTime(Integer modifyTime) {
         this.modifyTime = modifyTime;
     }
 
-    public Date getLastLoginTime() {
+    public Integer getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(Date lastLoginTime) {
+    public void setLastLoginTime(Integer lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 

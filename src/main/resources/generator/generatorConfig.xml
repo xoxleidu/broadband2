@@ -27,7 +27,7 @@
         </javaModelGenerator>
 
         <!--XML位置-->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper/system" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
@@ -38,11 +38,11 @@
 
         <!--表和实体类对应关系可以配置多个,选择生成的方法,这里因为用了mybatisplus所以只有delete方法以便于不熟悉或者复制查询的时候用原声sql语句-->
         <!--多表生成可以添加多个table标签-->
-        <table tableName="sys_user_role" domainObjectName="SysUserRole"
+        <table tableName="sys_user" domainObjectName="SysUser"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false" enableSelectByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false">
+               selectByExampleQueryId="false" enableDeleteByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false">
         </table>
-        <!--enableDeleteByPrimaryKey="false"-->
+        <!--  enableSelectByPrimaryKey="false"-->
 
     </context>
 </generatorConfiguration>
