@@ -37,6 +37,7 @@ public class SysUserController extends BaseController {
             return sysUserService.add(sysUser);
         } catch (Exception e) {
             e.printStackTrace();
+
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
