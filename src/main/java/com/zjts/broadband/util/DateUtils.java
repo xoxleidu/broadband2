@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateUtils {
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
@@ -486,4 +487,34 @@ public class DateUtils {
         return cal.getTime();
     }
 
+    /**
+     * 格式化CST（ Thu Aug 27 18:05:49 CST 2015 ）格式字符串
+     *
+     * @param date   date
+     * @param format format
+     * @return String
+     * @throws ParseException ParseException
+     */
+    public static String formatCSTTime(String date, String format) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+        Date d = sdf.parse(date);
+        return getDateFormat(d, format);
+    }
+
+    /**
+     * 按特定的日期格式获取当前字符串型日期
+     *
+     * @param date           指定的时间
+     * @param dateFormatType String，日期格式<br>
+     *                       几种日期格式和测试的结果<br>
+     *                       "yyyy-MM-dd": 2012-08-02<br>
+     *                       "yyyy-MM-dd hh:mm:ss": 2012-08-02 11:27:41<br>
+     *                       "yyyy-MM-dd hh:mm:ss EE": 2012-08-02 11:27:41 星期四<br>
+     *                       "yyyy年MM月dd日 hh:mm:ss EE": 2012年08月02日 11:27:41 星期四<br>
+     * @return String 当前字符串型日期
+     */
+    public static String getDateFormat(Date date, String dateFormatType) {
+        SimpleDateFormat simformat = new SimpleDateFormat(dateFormatType);
+        return simformat.format(date);
+    }
 }

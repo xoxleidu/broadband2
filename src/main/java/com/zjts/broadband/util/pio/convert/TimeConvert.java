@@ -1,6 +1,6 @@
 package com.zjts.broadband.util.pio.convert;
 
-import cc.mrbird.common.util.DateUtil;
+import com.zjts.broadband.util.DateUtils;
 
 public class TimeConvert implements ExportConvert {
 
@@ -10,7 +10,7 @@ public class TimeConvert implements ExportConvert {
 			if (val == null)
 				return "";
 			else {
-				return DateUtil.formatCSTTime(val.toString(), "yyyy-MM-dd HH:mm:ss");
+				return DateUtils.formatCSTTime(val.toString(), "yyyy-MM-dd HH:mm:ss");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
