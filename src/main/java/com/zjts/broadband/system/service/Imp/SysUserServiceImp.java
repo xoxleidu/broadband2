@@ -24,10 +24,10 @@ public class SysUserServiceImp implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public APIResponse add(ReqSysUserAdd sysUser) throws Exception{
+    public APIResponse add(ReqSysUserAdd sysUser) throws Exception {
         SysUser sysUser1 = new SysUser();
         BeanUtils.copyProperties(sysUser, sysUser1);
-        sysUser1.setCrateTime((int)sysUser.getCrateTime().getTime());
+        sysUser1.setCrateTime((int) sysUser.getCrateTime().getTime());
         Integer insert = sysUserMapper.insert(sysUser1);
         throw new NullPointerException();
 //        if (insert != 1){
@@ -41,7 +41,7 @@ public class SysUserServiceImp implements SysUserService {
         SysUser sysUser1 = new SysUser();
         BeanUtils.copyProperties(sysUser, sysUser1);
         SysUser sysUser2 = sysUserMapper.selectById(2);
-        if (sysUser2 == null){
+        if (sysUser2 == null) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
         return APIResponse.success(sysUser2);
