@@ -44,6 +44,7 @@ public class SysUserServiceImp implements SysUserService {
         if (sysUser2 == null) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
+
         return APIResponse.success(sysUser2);
     }
 }
