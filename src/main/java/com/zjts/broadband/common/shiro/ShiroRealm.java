@@ -1,8 +1,10 @@
 //package com.zjts.broadband.common.shiro;
 //
-//import com.example.demo.system.domain.Menu;
-//import com.example.demo.system.domain.Role;
-//import com.example.demo.system.domain.User;
+//import com.zjts.broadband.system.model.SysRole;
+//import com.zjts.broadband.system.model.SysUser;
+//import com.zjts.broadband.system.service.SysPermissionService;
+//import com.zjts.broadband.system.service.SysRoleService;
+//import com.zjts.broadband.system.service.SysUserService;
 //import org.apache.shiro.SecurityUtils;
 //import org.apache.shiro.authc.*;
 //import org.apache.shiro.authz.AuthorizationInfo;
@@ -25,11 +27,11 @@
 //public class ShiroRealm extends AuthorizingRealm {
 //
 //    @Autowired
-//    private UserService userService;
+//    private SysUserService sysUserService;
 //    @Autowired
-//    private RoleService roleService;
+//    private SysRoleService sysRoleService;
 //    @Autowired
-//    private MenuService menuService;
+//    private SysPermissionService sysPermissionService;
 //
 //    /**
 //     * 授权模块，获取用户角色和权限
@@ -39,14 +41,15 @@
 //     */
 //    @Override
 //    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-//        User user = (User) SecurityUtils.getSubject().getPrincipal();
-//        String userName = user.getUsername();
+//
+//        SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+//        String userName = sysUser.getUsername();
 //
 //        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 //
 //        // 获取用户角色集
-//        List<Role> roleList = this.roleService.findUserRole(userName);
-//        Set<String> roleSet = roleList.stream().map(Role::getRoleName).collect(Collectors.toSet());
+//        List<SysRole> roleList = this.sysRoleService.findUserRole(userName);
+//        Set<String> roleSet = roleList.stream().map(SysRole::getRoleName).collect(Collectors.toSet());
 //        simpleAuthorizationInfo.setRoles(roleSet);
 //
 //        // 获取用户权限集
