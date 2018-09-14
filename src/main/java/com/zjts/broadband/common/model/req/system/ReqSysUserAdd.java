@@ -30,8 +30,6 @@ public class ReqSysUserAdd extends BaseModel{
 
     private Date crateTime;
 
-    private Date modifyTime;
-
     private Date lastLoginTime;
 
     private String description;
@@ -83,14 +81,6 @@ public class ReqSysUserAdd extends BaseModel{
 
     public void setCrateTime(Date crateTime) {
         this.crateTime = crateTime;
-    }
-
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
     }
 
     public Date getLastLoginTime() {

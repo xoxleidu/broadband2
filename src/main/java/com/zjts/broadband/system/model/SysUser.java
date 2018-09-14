@@ -13,15 +13,15 @@ public class SysUser {
 
     private String mobile;
 
-    private Integer status;
+    private Integer communityId;
 
-    private Integer crateTime;
-
-    private Integer modifyTime;
+    private String description;
 
     private Integer lastLoginTime;
 
-    private String description;
+    private Integer crateTime;
+
+    private Boolean status;
 
     public Integer getId() {
         return id;
@@ -71,28 +71,20 @@ public class SysUser {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCommunityId() {
+        return communityId;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCommunityId(Integer communityId) {
+        this.communityId = communityId;
     }
 
-    public Integer getCrateTime() {
-        return crateTime;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCrateTime(Integer crateTime) {
-        this.crateTime = crateTime;
-    }
-
-    public Integer getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(Integer modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Integer getLastLoginTime() {
@@ -103,11 +95,19 @@ public class SysUser {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getCrateTime() {
+        return crateTime;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setCrateTime(Integer crateTime) {
+        this.crateTime = crateTime;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

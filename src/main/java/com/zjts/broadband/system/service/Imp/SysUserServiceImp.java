@@ -1,10 +1,12 @@
 package com.zjts.broadband.system.service.Imp;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
 import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
+import com.zjts.broadband.common.model.req.system.ReqSysUserQuery;
 import com.zjts.broadband.system.dao.SysUserMapper;
 import com.zjts.broadband.system.model.SysUser;
 import com.zjts.broadband.system.service.SysUserService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -29,11 +32,10 @@ public class SysUserServiceImp implements SysUserService {
         BeanUtils.copyProperties(sysUser, sysUser1);
         sysUser1.setCrateTime((int) sysUser.getCrateTime().getTime());
         Integer insert = sysUserMapper.insert(sysUser1);
-        throw new NullPointerException();
-//        if (insert != 1){
-//            return APIResponse.error(CodeEnum.SAVE_ERROR);
-//        }
-//        return APIResponse.success();
+        if (insert != 1) {
+            return APIResponse.error(CodeEnum.SAVE_ERROR);
+        }
+        return APIResponse.success();
     }
 
     @Override
@@ -47,4 +49,15 @@ public class SysUserServiceImp implements SysUserService {
 
         return APIResponse.success(sysUser2);
     }
+
+    @Override
+    public APIResponse query(ReqSysUserQuery sysUser) {
+        Page<SysUser> sysUserPage = new Page<SysUser>(sysUser.getCurrentPage(), sysUser.getPageSize());
+        List<SysUser> sysUserList = sysUserMapper.selectPage(sysUserPage, new EntityWrapper<SysUser>().like("username", sysUser.getUsername()));
+        if (sysUserList.isEmpty()) {
+            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
+        }
+        return APIResponse.success(sysUserPage.setRecords(sysUserList));
+    }
+
 }
