@@ -6,6 +6,7 @@ import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
 import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
+import com.zjts.broadband.common.model.req.system.ReqSysUserQuery;
 import com.zjts.broadband.system.model.SysUser;
 import com.zjts.broadband.system.service.SysUserService;
 import io.swagger.annotations.Api;
@@ -46,5 +47,13 @@ public class SysUserController extends BaseController {
     public APIResponse selectUser(@RequestBody @Validated ReqSysUserLogin sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         return sysUserService.login(sysUser);
+    }
+
+
+    @ApiOperation(value = "用户查询")
+    @RequestMapping(value = "user/query", method = RequestMethod.POST)
+    public APIResponse selectUser(@RequestBody @Validated ReqSysUserQuery sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
+        return sysUserService.query(sysUser);
     }
 }
