@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
 
     /**
-     * @param: 添加客户方法
+     * @param: CustomerMessage
      * @return
      * @throws Exception
      */
@@ -36,8 +36,8 @@ public class CustomerServiceImpl implements CustomerService {
         return APIResponse.success();
     }
 
-    /**
-     * @param: 修改客户方法
+    /**@
+     * @param: CustomerMessage
      * @return
      * @throws Exception
      */
@@ -50,8 +50,8 @@ public class CustomerServiceImpl implements CustomerService {
         return APIResponse.success();
     }
 
-    /**
-     * @param: 逻辑删除客户方法
+    /*
+     * @param: CustomerMessage
      * @return
      * @throws Exception
      */
@@ -66,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     /**
-     * @param: 查询所有
+     * @param: QueryAllCustomer
      * @return
      * @throws Exception
      */
@@ -76,7 +76,6 @@ public class CustomerServiceImpl implements CustomerService {
         Page<CustomerMessage>  cunstomerPage= new Page<CustomerMessage>(queryAllCustomer.getCurrentPage(),queryAllCustomer.getPageSize());
         //实现继承了BaseMapper中的方法,带入参数Page对象,创建一个mybatisplus中的实体包装器进行sql操作
         List<CustomerMessage>  customerList=  customerMapper.selectPage(cunstomerPage, new EntityWrapper<CustomerMessage>().eq("status",queryAllCustomer.getStatus()));
-
         if (customerList.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
@@ -84,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * @param: 条件查询
+     * @param: TermQueryCustomer
      * @return
      * @throws Exception
      */

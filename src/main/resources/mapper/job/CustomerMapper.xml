@@ -14,7 +14,7 @@
     <result column="contact_mobile" property="contactMobile" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="creation_time" property="creationTime" jdbcType="INTEGER" />
-    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, name, sex, idcard, tel, mobile, address, contacts, contact_mobile, type, creation_time, 
@@ -23,12 +23,12 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from customer
+    from customer_message
     where id = #{id,jdbcType=INTEGER}
   </select>
 
   <update id="delete" parameterType="java.lang.Integer"  >
-    UPDATE customer SET state=1 WHERE id=#{id}
+    UPDATE customer_message SET status=1 WHERE id=#{id}
   </update>
 
 </mapper>

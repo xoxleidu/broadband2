@@ -28,7 +28,6 @@ public class TermQueryCustomer extends BaseModel {
     }
 
 
-
     public String getCustomerName() {
         return customerName;
     }
