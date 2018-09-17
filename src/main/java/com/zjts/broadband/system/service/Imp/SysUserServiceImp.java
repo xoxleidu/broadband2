@@ -26,6 +26,12 @@ public class SysUserServiceImp implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
 
+    /**
+     *
+     * @param sysUser
+     * @return
+     * @throws Exception
+     */
     @Override
     public APIResponse add(ReqSysUserAdd sysUser) throws Exception {
         SysUser sysUser1 = new SysUser();
