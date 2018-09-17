@@ -22,9 +22,10 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
 
     /**
-     * @param: CustomerMessage
-     * @return
-     * @throws Exception
+     * 添加客户
+     * @param: 接收一个CustomerMessage类型的对象
+     * @return: 返回到APIResponse包装类进行校验
+     * @throws: Exception
      */
     @Override
     public APIResponse add(CustomerMessage customer) throws Exception {
@@ -36,10 +37,11 @@ public class CustomerServiceImpl implements CustomerService {
         return APIResponse.success();
     }
 
-    /**@
-     * @param: CustomerMessage
-     * @return
-     * @throws Exception
+    /**
+     * 修改客户信息
+     * @param: 接收一个CustomerMessage类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws: Exception
      */
     @Override
     public APIResponse update(CustomerMessage customer) throws Exception {
@@ -50,10 +52,11 @@ public class CustomerServiceImpl implements CustomerService {
         return APIResponse.success();
     }
 
-    /*
-     * @param: CustomerMessage
-     * @return
-     * @throws Exception
+    /**
+     * 逻辑删除客户信息
+     * @param: 接收一个Customer类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws:Exception
      */
     @Override
     public APIResponse delete(int id) throws Exception {
@@ -66,9 +69,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     /**
-     * @param: QueryAllCustomer
-     * @return
-     * @throws Exception
+     *查询客户所有信息
+     * @param: 接收一个QueryAllCustomer类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws: Exception
      */
     @Override
     public APIResponse queryAll(QueryAllCustomer queryAllCustomer)throws Exception{
@@ -83,9 +87,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
-     * @param: TermQueryCustomer
-     * @return
-     * @throws Exception
+     * 条件查询客户信息
+     * @param: 接收一个TermQueryCustomer类型的对象
+     * @return: 返回到APIResponse包装类进行校验
+     * @throws: Exception
      */
     @Override
     public APIResponse termQueryCustomer(TermQueryCustomer termQueryCustomer)throws Exception{
@@ -100,16 +105,3 @@ public class CustomerServiceImpl implements CustomerService {
         return APIResponse.success(cunstomerPage.setRecords(customerList));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

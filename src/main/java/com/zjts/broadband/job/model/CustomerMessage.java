@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class CustomerMessage {
-
+    //定义的私有属性
     private Integer id;
 
     @NotNull(message = "用户名不能为空")

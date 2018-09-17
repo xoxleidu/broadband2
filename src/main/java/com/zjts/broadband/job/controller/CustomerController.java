@@ -68,7 +68,7 @@ public class CustomerController  extends BaseController  {
         }
     }
 
-    @ApiOperation(value = "客户查询所有")
+    @ApiOperation(value = "客户查询正常所有")
     @RequestMapping(value = "customerMessage/queryAllCustomer",method = RequestMethod.POST)
     public APIResponse selectAll(@RequestBody @Validated QueryAllCustomer queryAllCustomer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);

@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 public class TermQueryCustomer extends BaseModel {
-
+    //定义的私有属性
     @NotNull(message = "客户名不能为空")
     @Length(min = 4, max = 10, message = "客户名格式为4-10位数字或字母")
     private String customerName;
