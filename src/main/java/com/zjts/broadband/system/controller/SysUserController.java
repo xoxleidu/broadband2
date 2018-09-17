@@ -46,7 +46,6 @@ public class SysUserController extends BaseController {
     @RequestMapping(value = "user/login", method = RequestMethod.POST)
     public APIResponse selectUser(@RequestBody @Validated ReqSysUserLogin sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-
         return sysUserService.login(sysUser);
     }
 

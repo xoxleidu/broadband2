@@ -1,10 +1,8 @@
 package com.zjts.broadband.common.model;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zjts.broadband.common.constant.CodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
 @ApiModel(value = "返回值", description = "统一返回值包装类")
@@ -15,7 +13,6 @@ public class APIResponse<T> implements Serializable  {
 
 	@ApiModelProperty(value = "应答码描述")
 	private String message = CodeEnum.SUCCESS.getMessage();
-
 
 	@ApiModelProperty(value = "应答数据体")
 	private T result;
@@ -105,7 +102,6 @@ public class APIResponse<T> implements Serializable  {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 
 	public T getResult() {
 		return result;

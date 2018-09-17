@@ -17,11 +17,11 @@
 
         <!--jdbc的数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/1" userId="root" password="233">
+                        connectionURL="jdbc:mysql://192.168.88.36:3306/1" userId="root" password="233">
         </jdbcConnection>
 
         <!--实体类位置-->
-        <javaModelGenerator targetPackage="com.zjts.broadband.system.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.zjts.broadband.job.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -32,13 +32,13 @@
         </sqlMapGenerator>
 
         <!--接口位置-->
-        <javaClientGenerator targetPackage="com.zjts.broadband.system.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.zjts.broadband.job.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!--表和实体类对应关系可以配置多个,选择生成的方法,这里因为用了mybatisplus所以只有delete方法以便于不熟悉或者复制查询的时候用原声sql语句-->
         <!--多表生成可以添加多个table标签-->
-        <table tableName="sys_user" domainObjectName="SysUser"
+        <table tableName="customer_message" domainObjectName="CustomerMessage"
                enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" enableDeleteByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false">
         </table>
