@@ -1,4 +1,4 @@
-package com.zjts.broadband.common.model.req.user;
+package com.zjts.broadband.common.model.req.job;
 
 
 import com.zjts.broadband.common.model.BaseModel;
