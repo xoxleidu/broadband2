@@ -9,41 +9,30 @@ import java.io.Serializable;
 
 public class CustomerMessage implements Serializable {
     //定义的私有属性
-    @ExportConfig(value = "编号")
-    private Integer id;
 
-    @ExportConfig(value = "客户姓名")
-    private String customerName;
+    private Integer id;//客户编号
 
-    @ExportConfig(value = "客户性别")
-    private Integer sex;
+    private String customerName;//客户姓名
 
-    @ExportConfig(value = "证件号码")
-    private String idcard;
+    private Integer sex;//客户性别
 
-    @ExportConfig(value = "家庭电话")
-    private String tel;
+    private String idcard;// 证件号码
 
-    @ExportConfig(value = "手机号码")
-    private String mobile;
+    private String tel;//家庭地址
 
-    @ExportConfig(value = "证件地址")
-    private String address;
+    private String mobile;//手机号码
 
-    @ExportConfig(value = "联系人")
-    private String contacts;
+    private String address;//证件地址
 
-    @ExportConfig(value = "联系人电话")
-    private String contactMobile;
+    private String contacts;//联系人
 
-    @ExportConfig(value = "客户类型")
-    private Integer type;
+    private String contactMobile;//联系人电话
 
-    @ExportConfig(value = "创建时间")
-    private Integer creationTime;
+    private Integer type;//客户类型
 
-    @ExportConfig(value = "状态")
-    private Integer status;
+    private Integer creationTime;//创建时间
+
+    private Integer status;//状态
 
     public Integer getId() {
         return id;

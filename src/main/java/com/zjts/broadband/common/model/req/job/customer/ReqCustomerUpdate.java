@@ -18,22 +18,22 @@ import javax.validation.constraints.Pattern;
 
 public class ReqCustomerUpdate{
 
-    @ExportConfig(value = "编号")
-    private Integer id;
+
+    private Integer id;//客户编号
 
     @NotNull(message = "用户名不能为空")
     @Length(min = 4, max = 10, message = "用户名格式为4-10位数字或字母")
-    private String customerName;
+    private String customerName;//客户名称
 
     @NotNull(message = "联系电话不能为空")
     @Pattern(regexp = "^1(3|4|5|7|8|9)\\d{9}$",message = "手机号码格式错误")
-    private String mobile;
+    private String mobile;//客户电话
 
     @NotNull(message = "联系人不能为空")
-    private String contacts;
+    private String contacts;//联系人电话
 
     @NotNull(message = "联系电话不能为空")
-    private String contactMobile;
+    private String contactMobile;//联系电话
 
     public String getCustomerName() {
         return customerName;

@@ -13,15 +13,13 @@ import javax.validation.constraints.Pattern;
  */
 public class ReqCustomerQuery extends BaseModel {
     //定义的私有属性
-    @ExportConfig(value = "客户名称")
-    private String customerName;
-    @ExportConfig(value = "证件号码")
-    private String idcard;
-    @ExportConfig(value = "手机号码")
-    private String mobile;
+    private String customerName;//客户姓名
 
-    @ExportConfig(value = "客户状态")
-    private Integer status;
+    private String idcard;//证件号码
+
+    private String mobile;//手机号码
+
+    private Integer status;//客户状态
 
     public Integer getStatus() {
         return status;
