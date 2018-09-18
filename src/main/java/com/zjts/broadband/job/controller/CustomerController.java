@@ -2,10 +2,11 @@ package com.zjts.broadband.job.controller;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerAdd;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerQuery;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.job.model.CustomerMessage;
-import com.zjts.broadband.job.model.QueryAllCustomer;
 
-import com.zjts.broadband.job.model.TermQueryCustomer;
 import io.swagger.annotations.Api;
 import com.zjts.broadband.job.service.CustomerService;
 import io.swagger.annotations.ApiOperation;
@@ -29,11 +30,11 @@ public class CustomerController  extends BaseController  {
 
     @ApiOperation(value = "客户添加接口")
     @RequestMapping(value = "customerMessage/add", method = RequestMethod.POST)
-    public APIResponse addUser(@RequestBody @Validated CustomerMessage customer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse addUser(@RequestBody @Validated ReqCustomerAdd reqCustomerAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
-            return customerService.add(customer);
+            return customerService.add(reqCustomerAdd);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
@@ -42,17 +43,16 @@ public class CustomerController  extends BaseController  {
 
     @ApiOperation(value = "客户修改接口")
     @RequestMapping(value = "customerMessage/update", method = RequestMethod.POST)
-    public APIResponse update(@RequestBody @Validated CustomerMessage customer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse update(@RequestBody @Validated ReqCustomerUpdate reqCustomerUpdate, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
-            return customerService.update(customer);
+            return customerService.update(reqCustomerUpdate);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
-
 
     @ApiOperation(value = "客户删除接口")
     @RequestMapping(value = "customerMessage/delete", method = RequestMethod.POST)
@@ -68,18 +68,10 @@ public class CustomerController  extends BaseController  {
         }
     }
 
-    @ApiOperation(value = "客户查询正常所有")
+    @ApiOperation(value = "客户查询")
     @RequestMapping(value = "customerMessage/queryAllCustomer",method = RequestMethod.POST)
-    public APIResponse selectAll(@RequestBody @Validated QueryAllCustomer queryAllCustomer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public APIResponse selectAll(@RequestBody @Validated ReqCustomerQuery reqCustomerQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        return customerService.queryAll(queryAllCustomer);
-    }
-
-
-    @ApiOperation(value = "客户条件查询")
-    @RequestMapping(value = "customerMessage/termQueryCustomer",method = RequestMethod.POST)
-    public APIResponse selectAll(@RequestBody @Validated TermQueryCustomer termQueryCustomer, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        return customerService.termQueryCustomer(termQueryCustomer);
+        return customerService.queryAll(reqCustomerQuery);
     }
 }
