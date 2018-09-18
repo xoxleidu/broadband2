@@ -18,11 +18,9 @@ import javax.validation.constraints.Pattern;
 
 public class ReqCustomerUpdate{
 
-
     private Integer id;//客户编号
 
-    @NotNull(message = "用户名不能为空")
-    @Length(min = 4, max = 10, message = "用户名格式为4-10位数字或字母")
+    @NotNull(message = "客户名称不能为空")
     private String customerName;//客户名称
 
     @NotNull(message = "联系电话不能为空")
@@ -51,9 +49,7 @@ public class ReqCustomerUpdate{
         this.mobile = mobile;
     }
 
-    public String getContacts() {
-        return contacts;
-    }
+    public String getContacts() { return contacts; }
 
     public void setContacts(String contacts) {
         this.contacts = contacts;
@@ -70,10 +66,7 @@ public class ReqCustomerUpdate{
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
-
 }
