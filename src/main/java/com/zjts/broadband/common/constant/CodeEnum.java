@@ -24,6 +24,7 @@ public enum CodeEnum {
   VERIFICATION_CODE_ERROR("011","验证码错误！"),
   LOGIN_ERROR("012","用户名或密码错误！"),
   SESSION_NULL_ERROR("013","会话过期,请重新登录。"),
+  DELETE_ERROR("1001","删除失败")
   ;
 
   private final String code;
