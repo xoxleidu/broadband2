@@ -90,32 +90,13 @@ public class GiftController extends BaseController {
     }
 
     /*
-     * 按名称查询
+     * 多条件查询
      * */
-    @ApiOperation(value = "按名称查询（name,current，size）")
+    @ApiOperation(value = "任意条件查询（gId，name，status）")
     @RequestMapping(value = "gift/findByName", method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse findByName(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
-        return giftService.findByName(reqGiftQuery);
-    }
-
-    /*
-     * 按状态查询
-     * */
-    @ApiOperation(value = "按状态查询（status,current，size）")
-    @RequestMapping(value = "gift/findByStatus", method = RequestMethod.POST)
-    @ResponseBody
-    public APIResponse findByStatus(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
-        return giftService.findByStatus(reqGiftQuery);
-    }
-    /*
-     * 按id查询
-     * */
-    @ApiOperation(value = "按id查询（id,current，size）")
-    @RequestMapping(value = "gift/findById", method = RequestMethod.POST)
-    @ResponseBody
-    public APIResponse findById(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
-        return giftService.findById(reqGiftQuery);
+    public APIResponse findGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
+        return giftService.findGift(reqGiftQuery);
     }
 
     @ApiOperation(value = "生成Excel文件") //导出Excel时，实体类要指定列名

@@ -17,12 +17,10 @@ public interface GiftService {
     APIResponse findAllGift(ReqGiftQuery reqGiftQuery);
 
     APIResponse delete(ReqGiftQuery reqGiftQuery);
+    /*
+     * 根据状态查询
+     * */
+    APIResponse findGift(ReqGiftQuery reqGiftQuery);
 
     List<Gift> findAllGift2();
-
-    APIResponse findByName(ReqGiftQuery reqGiftQuery);
-
-    APIResponse findByStatus(ReqGiftQuery reqGiftQuery);
-
-    APIResponse findById(ReqGiftQuery reqGiftQuery);
 }

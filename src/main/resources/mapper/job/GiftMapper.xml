@@ -38,5 +38,20 @@
     where g_id = #{gId}
   </update>
 
+    <select id="findGift" resultType="com.zjts.broadband.job.model.Gift">
+        select * from t_gift
+        where 1=1
+        <if test="name !=null">
+            and name like #{name}
+        </if>
+        <if test="gId !=null">
+            and `g_id`=#{gId}
+        </if>
+        <if test="status !=null">
+            and status=#{status}
+        </if>
+
+    </select>
+
 
 </mapper>

@@ -83,50 +83,21 @@ public class GiftServiceImpl implements GiftService {
         return APIResponse.success(page.setRecords(myItems));
     }
 
-
     /*
-     * 根据名称查询
+     * 多条件查询
      * */
     @Override
-    public APIResponse findByName(ReqGiftQuery reqGiftQuery) {
+    public APIResponse findGift(ReqGiftQuery reqGiftQuery) {
         Page<Gift> page = new Page<Gift>(reqGiftQuery.getCurrentPage(), reqGiftQuery.getPageSize());
-        List<Gift> myItems = giftMapper.selectPage(page,
-                new EntityWrapper<Gift>().like("name", reqGiftQuery.getName())
-        );
+        Gift gift = new Gift();
+        BeanUtils.copyProperties(reqGiftQuery, gift);
+        List<Gift> myItems = giftMapper.findGift(page,gift);
         if (myItems.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
         return APIResponse.success(page.setRecords(myItems));
     }
 
-    /*
-     * 根据状态查询
-     * */
-    @Override
-    public APIResponse findByStatus(ReqGiftQuery reqGiftQuery) {
-        Page<Gift> page = new Page<Gift>(reqGiftQuery.getCurrentPage(), reqGiftQuery.getPageSize());
-        List<Gift> myItems = giftMapper.selectPage(page,
-                new EntityWrapper<Gift>()
-                        .like("status", reqGiftQuery.getStatus())
-        );
-        if (myItems.isEmpty()) {
-            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
-        }
-        return APIResponse.success(page.setRecords(myItems));
-    }
-
-    @Override
-    public APIResponse findById(ReqGiftQuery reqGiftQuery) {
-        Page<Gift> page = new Page<Gift>(reqGiftQuery.getCurrentPage(), reqGiftQuery.getPageSize());
-        List<Gift> myItems = giftMapper.selectPage(page,
-                new EntityWrapper<Gift>()
-                        .eq("g_id", reqGiftQuery.getgId())
-        );
-        if (myItems.isEmpty()) {
-            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
-        }
-        return APIResponse.success(page.setRecords(myItems));
-    }
 
     /*
      * 导出Excel文件
