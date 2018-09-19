@@ -25,7 +25,9 @@ public enum CodeEnum {
   LOGIN_ERROR("012","用户名或密码错误！"),
   SESSION_NULL_ERROR("013","会话过期,请重新登录。"),
   DELETE_ERROR("1001","删除失败"),
-  USE_ERROR("1002","赠品不可用")
+  USE_ERROR("1002","赠品不可用"),
+  NUMBER_NOT_ENOUGH("1003","库存不足")
+
   ;
 
   private final String code;
