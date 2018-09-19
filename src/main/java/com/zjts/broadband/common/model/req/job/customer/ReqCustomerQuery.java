@@ -1,23 +1,25 @@
-package com.zjts.broadband.job.model;
+package com.zjts.broadband.common.model.req.job.customer;
 
 import com.zjts.broadband.common.model.BaseModel;
+import com.zjts.broadband.util.pio.convert.ExportConfig;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-public class TermQueryCustomer extends BaseModel {
+/**
+ * @Description:前端传输客户进行条件查询类
+ */
+public class ReqCustomerQuery extends BaseModel {
     //定义的私有属性
-    @NotNull(message = "客户名不能为空")
-    @Length(min = 4, max = 10, message = "客户名格式为4-10位数字或字母")
-    private String customerName;
+    private String customerName;//客户姓名
 
-    @NotNull(message = "证件号码不能为空")
-    private String idcard;
+    private String idcard;//证件号码
 
-    @NotNull(message = "联系电话不能为空")
-    private String mobile;
+    private String mobile;//手机号码
 
-    private Integer status;
+    private Integer status;//客户状态
 
     public Integer getStatus() {
         return status;

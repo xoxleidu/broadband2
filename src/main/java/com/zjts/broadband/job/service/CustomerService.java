@@ -2,18 +2,18 @@ package com.zjts.broadband.job.service;
 
 
 import com.zjts.broadband.common.model.APIResponse;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerAdd;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerQuery;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.job.model.CustomerMessage;
-import com.zjts.broadband.job.model.QueryAllCustomer;
 
-import com.zjts.broadband.job.model.TermQueryCustomer;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface CustomerService {
 
-    APIResponse add(CustomerMessage customer) throws Exception;
-    APIResponse update(CustomerMessage customer)throws Exception;
+    APIResponse add(ReqCustomerAdd reqCustomerAdd) throws Exception;
+    APIResponse update(ReqCustomerUpdate reqCustomerUpdate)throws Exception;
     APIResponse delete(int id)throws Exception;
-    APIResponse queryAll(QueryAllCustomer queryAllCustomer)throws Exception;
-    APIResponse termQueryCustomer(TermQueryCustomer termQueryCustomer)throws Exception;
+    APIResponse queryAll(ReqCustomerQuery reqCustomerQuery)throws Exception;
 }
