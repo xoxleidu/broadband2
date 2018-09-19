@@ -6,6 +6,7 @@ import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.project.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.project.ReqGiftQuery;
+import com.zjts.broadband.common.model.req.job.project.ReqGiftUse;
 import com.zjts.broadband.job.dao.GiftMapper;
 import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.GiftService;
@@ -98,7 +99,6 @@ public class GiftServiceImpl implements GiftService {
         return APIResponse.success(page.setRecords(myItems));
     }
 
-
     /*
      * 导出Excel文件
      * */
@@ -107,6 +107,20 @@ public class GiftServiceImpl implements GiftService {
         List<Gift> giftList = giftMapper.selectList(new EntityWrapper<>());
 
         return giftList;
+    }
+
+    /*
+    * 调用赠品
+    * */
+    @Override
+    public APIResponse useGift(List<ReqGiftUse> list) {
+        for (ReqGiftUse g : list) {
+            Integer update= giftMapper.useGift(g.getgId(),g.getOutput());
+            if (update != 1) {
+                return APIResponse.error(CodeEnum.USE_ERROR);
+            }
+        }
+        return APIResponse.success();
     }
 
 }

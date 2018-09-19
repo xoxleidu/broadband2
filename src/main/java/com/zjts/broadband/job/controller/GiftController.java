@@ -1,10 +1,13 @@
 package com.zjts.broadband.job.controller;
 
+import com.sun.javafx.collections.MappingChange;
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.project.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.project.ReqGiftQuery;
+import com.zjts.broadband.common.model.req.job.project.ReqGiftUse;
 import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.GiftService;
 import com.zjts.broadband.util.FileUtils;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 
 @Api(tags = "赠品管理")
@@ -110,6 +114,17 @@ public class GiftController extends BaseController {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR, "导出Excel失败，请联系网站管理员！");
         }
+    }
+
+    /*
+     * 查询全部赠品
+     * */
+    @ApiOperation(value = "调用赠品")
+    @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)
+    @ResponseBody
+    public APIResponse useGift(@RequestBody List<ReqGiftUse> list, HttpServletRequest request, HttpServletResponse response) {
+
+        return giftService.useGift(list);
     }
 
 }

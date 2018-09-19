@@ -35,7 +35,7 @@
     <update id="useGift">
     update t_gift
     set output=output+#{numberr},stock=stock-#{numberr}
-    where g_id = #{gId}
+    where g_id = #{gId} and status="0"
   </update>
 
     <select id="findGift" resultType="com.zjts.broadband.job.model.Gift">
