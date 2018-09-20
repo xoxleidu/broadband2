@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class GiftController extends BaseController {
     @ApiOperation(value = "新建赠品分类接口")
     @RequestMapping(value = "gift/add", method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse addGift(@RequestBody ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse addGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
@@ -56,7 +57,7 @@ public class GiftController extends BaseController {
     @Logger(name = "修改赠品数量")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse updateGift(@RequestBody ReqGiftQuery reqGiftQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse updateGift(@RequestBody @Validated ReqGiftQuery reqGiftQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
@@ -117,7 +118,7 @@ public class GiftController extends BaseController {
     }
 
     /*
-     * 查询全部赠品
+     * 调用赠品
      * */
     @ApiOperation(value = "调用赠品")
     @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)

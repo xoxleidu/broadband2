@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,7 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "设备添加接口")
     @RequestMapping(value = "equipment/add", method = RequestMethod.POST)
-    public APIResponse addEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse addEquipment(@RequestBody @Validated ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
@@ -68,7 +69,10 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "设备调用(name，number)")
     @RequestMapping(value = "equipment/useEquipment", method = RequestMethod.POST)
-    public APIResponse useEquipment(@RequestBody List<ReqEquipmentUse> list, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse useEquipment(@RequestBody @Validated List<ReqEquipmentUse> list, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            return parameterVerification(bindingResult);
+        }
         return equipmentService.useEquipment(list);
     }
 
