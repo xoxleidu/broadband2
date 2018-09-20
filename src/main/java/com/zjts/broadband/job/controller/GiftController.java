@@ -37,7 +37,7 @@ public class GiftController extends BaseController {
     @ApiOperation(value = "新建赠品分类接口")
     @RequestMapping(value = "gift/add", method = RequestMethod.POST)
     @ResponseBody
-    public APIResponse addGift(@RequestBody ReqGiftAdd reqGiftAdd, BindingResult bindingResult) {
+    public APIResponse addGift(@RequestBody ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }

@@ -30,7 +30,7 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "设备添加接口")
     @RequestMapping(value = "equipment/add", method = RequestMethod.POST)
-    public APIResponse addEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult) {
+    public APIResponse addEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
@@ -44,31 +44,31 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "设备回收接口")
     @RequestMapping(value = "equipment/recovery", method = RequestMethod.POST)
-    public APIResponse recovery(@RequestBody ReqEquipmentQuery reqEquipmentQuery) {
+    public APIResponse recovery(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         return equipmentService.recovery(reqEquipmentQuery);
     }
 
     @ApiOperation(value = "根据Id修改设备状态（equId，status：0/1/2 --> 可用/待出库/已出库）")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
-    public APIResponse updateEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery) {
+    public APIResponse updateEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         return equipmentService.update(reqEquipmentQuery);
     }
 
     @ApiOperation(value = "查询全部产品")
     @RequestMapping(value = "equipment/findAllEquipment", method = RequestMethod.POST)
-    public APIResponse findAllEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery) {
+    public APIResponse findAllEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         return equipmentService.findAllEquipment(reqEquipmentQuery);
     }
 
     @ApiOperation(value = "任意条件查询（equId，name，code，status）")
     @RequestMapping(value = "equipment/findEquipment", method = RequestMethod.POST)
-    public APIResponse findEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery) {
+    public APIResponse findEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         return equipmentService.findEquipment(reqEquipmentQuery);
     }
 
     @ApiOperation(value = "设备调用(name，number)")
     @RequestMapping(value = "equipment/useEquipment", method = RequestMethod.POST)
-    public APIResponse useEquipment(@RequestBody List<ReqEquipmentUse> list) {
+    public APIResponse useEquipment(@RequestBody List<ReqEquipmentUse> list, HttpServletRequest request, HttpServletResponse response) {
         return equipmentService.useEquipment(list);
     }
 
