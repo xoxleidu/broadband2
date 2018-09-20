@@ -37,7 +37,6 @@ public class GiftController extends BaseController {
      * */
     @ApiOperation(value = "新建赠品分类接口")
     @RequestMapping(value = "gift/add", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse addGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
@@ -56,7 +55,6 @@ public class GiftController extends BaseController {
     @ApiOperation(value = "修改赠品数量接口（id，stock）")
     @Logger(name = "修改赠品数量")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse updateGift(@RequestBody @Validated ReqGiftQuery reqGiftQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
@@ -74,10 +72,9 @@ public class GiftController extends BaseController {
      * */
     @ApiOperation(value = "作废/启用赠品接口（id，status(1/0)）")
     @RequestMapping(value = "gift/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public APIResponse updateGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse updateGift(@RequestBody Gift gift, HttpServletRequest request, HttpServletResponse response) {
         try {
-            return giftService.delete(reqGiftQuery);
+            return giftService.delete(gift);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
@@ -89,7 +86,6 @@ public class GiftController extends BaseController {
      * */
     @ApiOperation(value = "查询全部赠品（current，size）")
     @RequestMapping(value = "gift/findAllGift", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse findAllGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
         return giftService.findAllGift(reqGiftQuery);
     }
@@ -99,14 +95,12 @@ public class GiftController extends BaseController {
      * */
     @ApiOperation(value = "任意条件查询（gId，name，status）")
     @RequestMapping(value = "gift/findByName", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse findGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
         return giftService.findGift(reqGiftQuery);
     }
 
     @ApiOperation(value = "生成Excel文件") //导出Excel时，实体类要指定列名
     @RequestMapping(value = "gift/excel", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse deptExcel(@RequestBody Gift gift, HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Gift> list = this.giftService.findAllGift2();
@@ -122,7 +116,6 @@ public class GiftController extends BaseController {
      * */
     @ApiOperation(value = "调用赠品")
     @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse useGift(@RequestBody List<ReqGiftUse> list, HttpServletRequest request, HttpServletResponse response) {
 
         return giftService.useGift(list);

@@ -17,7 +17,7 @@ public interface GiftService {
 
     APIResponse findAllGift(ReqGiftQuery reqGiftQuery);
 
-    APIResponse delete(ReqGiftQuery reqGiftQuery);
+    APIResponse delete(Gift gift);
     /*
      * 根据状态查询
      * */

@@ -49,10 +49,10 @@ public class EquipmentController extends BaseController {
         return equipmentService.recovery(reqEquipmentQuery);
     }
 
-    @ApiOperation(value = "根据Id修改设备状态（equId，status：0/1/2 --> 可用/待出库/已出库）")
+    @ApiOperation(value = "修改设备（status：0/1/2 --> 可用/待出库/已出库）")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
-    public APIResponse updateEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
-        return equipmentService.update(reqEquipmentQuery);
+    public APIResponse updateEquipment(@RequestBody Equipment equipment, HttpServletRequest request, HttpServletResponse response) {
+        return equipmentService.update(equipment);
     }
 
     @ApiOperation(value = "查询全部产品")
@@ -78,7 +78,6 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "生成Excel文件（空参）")
     @RequestMapping(value = "equipment/excel", method = RequestMethod.POST)
-    @ResponseBody
     public APIResponse deptExcel(@RequestBody Equipment equipment, HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Equipment> list = this.equipmentService.findAllGift2();

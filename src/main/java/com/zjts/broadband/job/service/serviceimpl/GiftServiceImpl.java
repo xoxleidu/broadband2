@@ -59,10 +59,8 @@ public class GiftServiceImpl implements GiftService {
      * */
     @Override
 
-    public APIResponse delete(ReqGiftQuery reqGiftQuery) {
-        Gift gift = new Gift();
-        BeanUtils.copyProperties(reqGiftQuery, gift);
-        Integer delete = giftMapper.deleteGift(gift);
+    public APIResponse delete(Gift gift) {
+        Integer delete = giftMapper.updateById(gift);
         if (delete != 1) {
             return APIResponse.error(CodeEnum.DELETE_ERROR);
         }

@@ -46,9 +46,7 @@ public class EquipmentServiceImpl implements EquipmentService {
      * 根据id修改状态,id status
      * */
     @Override
-    public APIResponse update(ReqEquipmentQuery reqEquipmentQuery) {
-        Equipment equipment = new Equipment();
-        BeanUtils.copyProperties(reqEquipmentQuery, equipment);
+    public APIResponse update(Equipment equipment) {
         if (equipment.getStatus().equals("2")) {
             int current = (int) (System.currentTimeMillis() / 1000);
             equipment.setOutTime(current);

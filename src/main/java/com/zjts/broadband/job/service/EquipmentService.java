@@ -13,7 +13,7 @@ import java.util.List;
 public interface EquipmentService {
     APIResponse add(ReqEquipmentAdd reqEquipmentAdd);
 
-    APIResponse update(ReqEquipmentQuery reqEquipmentQuery);
+    APIResponse update(Equipment equipment);
 
     /*
      * 设备回收
