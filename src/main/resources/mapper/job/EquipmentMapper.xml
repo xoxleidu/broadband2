@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zjts.broadband.job.dao.EquipmentMapper" >
   <resultMap id="BaseResultMap" type="com.zjts.broadband.job.model.Equipment" >
-    <id column="equ_id" property="equId" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
@@ -11,39 +11,8 @@
     <result column="status" property="status" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    equ_id, name, code, price, add_time, out_time, status
+    id, name, code, price, add_time, out_time, status
   </sql>
-
-  <update id="myDeleteById">
-     update equipment
-     set `status` =#{status},`out_time` =#{outTime}
-     where `equ_id` = #{equId}
-  </update>
-
-  <select id="findEquipment" resultType="com.zjts.broadband.job.model.Equipment">
-    select * from equipment
-    where 1=1
-    <if test="name !=null">
-      and name like #{name}
-    </if>
-    <if test="code !=null">
-      and code=#{code}
-    </if>
-    <if test="status">
-      and status=#{status}
-    </if>
-    <if test="equId !=null">
-      and `equ_Id`=#{equId}
-    </if>
-  </select>
-
-  <select id="useEquipment"  resultType="com.zjts.broadband.job.model.Equipment">
-    select *
-    from equipment
-    where name =#{name} and status = "0"
-    limit 1;
-  </select>
-
 
 
 </mapper>

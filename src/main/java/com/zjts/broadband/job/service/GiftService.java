@@ -11,16 +11,10 @@ import java.util.List;
 
 @Service
 public interface GiftService {
-    APIResponse update(ReqGiftQuery reqQuery);
+    APIResponse update(ReqGiftQuery reqGiftQuery);
 
     APIResponse add(ReqGiftAdd reqAdd);
 
-    APIResponse findAllGift(ReqGiftQuery reqGiftQuery);
-
-    APIResponse delete(Gift gift);
-    /*
-     * 根据状态查询
-     * */
     APIResponse findGift(ReqGiftQuery reqGiftQuery);
 
     List<Gift> findAllGift2();

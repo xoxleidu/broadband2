@@ -10,18 +10,5 @@ import java.util.List;
 
 @Repository
 public interface GiftMapper extends BaseMapper<Gift> {
-    Integer updateGiftByid(Gift gift);
 
-    Integer myInsert(Gift gift);
-
-    Integer deleteGift(Gift gift);
-
-    /*
-     * 赠品调用入口
-     * gId  ：  赠品id
-     * number： 需要的数量
-     * */
-    Integer useGift(@Param("gId") Integer gId, @Param("numberr") Integer number);
-
-    List<Gift> findGift(Page<Gift> page, Gift gift);
 }

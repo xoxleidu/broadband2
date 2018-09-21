@@ -3,20 +3,20 @@ package com.zjts.broadband.common.model.req.job.project;
 import com.zjts.broadband.common.model.BaseModel;
 
 public class ReqGiftQuery extends BaseModel {
-    private Integer gId;
-
+    private Integer id;
     private String name;
-
+    private Integer amount;
+    private Integer output;
     private Integer stock;
-
     private String status;
 
-    public Integer getgId() {
-        return gId;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setgId(Integer gId) {
-        this.gId = gId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,6 +25,22 @@ public class ReqGiftQuery extends BaseModel {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public Integer getOutput() {
+        return output;
+    }
+
+    public void setOutput(Integer output) {
+        this.output = output;
     }
 
     public Integer getStock() {

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zjts.broadband.job.dao.GiftMapper">
     <resultMap id="BaseResultMap" type="com.zjts.broadband.job.model.Gift">
-        <id column="g_id" property="gId" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="BIGINT"/>
         <result column="output" property="output" jdbcType="INTEGER"/>
@@ -10,48 +10,7 @@
         <result column="status" property="status" jdbcType="CHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    g_id, name, amount, output, stock, status
+    id, name, amount, output, stock, status
   </sql>
-
-    <update id="updateGiftByid">
-    update t_gift
-    set amount =amount + #{stock},stock=stock+#{stock}
-    where g_id = #{gId}
-  </update>
-
-    <insert id="myInsert">
-    insert into t_gift
-    (name, amount, stock)
-    values (#{name},#{amount},#{stock})
-     ON DUPLICATE KEY UPDATE name=#{name},output=output,amount =amount + #{stock},stock=stock+#{stock},status=status;
-  </insert>
-
-    <update id="deleteGift">
-    update t_gift
-    set status=#{status}
-    where g_id = #{gId}
-  </update>
-
-    <update id="useGift">
-    update t_gift
-    set output=output+#{numberr},stock=stock-#{numberr}
-    where g_id = #{gId} and status="0"
-  </update>
-
-    <select id="findGift" resultType="com.zjts.broadband.job.model.Gift">
-        select * from t_gift
-        where 1=1
-        <if test="name !=null">
-            and name like #{name}
-        </if>
-        <if test="gId !=null">
-            and `g_id`=#{gId}
-        </if>
-        <if test="status !=null">
-            and status=#{status}
-        </if>
-
-    </select>
-
 
 </mapper>

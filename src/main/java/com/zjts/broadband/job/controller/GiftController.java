@@ -1,7 +1,5 @@
 package com.zjts.broadband.job.controller;
 
-import com.sun.javafx.collections.MappingChange;
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 
 @Api(tags = "赠品管理")
@@ -45,15 +42,15 @@ public class GiftController extends BaseController {
             return giftService.add(reqGiftAdd);
         } catch (Exception e) {
             e.printStackTrace();
-            return APIResponse.error(CodeEnum.ERROR, "新增分类失败");
+            return APIResponse.error(CodeEnum.EXIT_ERROR);
         }
     }
 
     /*
-     * 修改赠品数量
+     * 修改赠品
      * */
-    @ApiOperation(value = "修改赠品数量接口（id，stock）")
-    @Logger(name = "修改赠品数量")
+    @ApiOperation(value = "修改赠品接口")
+    @Logger(name = "修改赠品")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
     public APIResponse updateGift(@RequestBody @Validated ReqGiftQuery reqGiftQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -67,36 +64,26 @@ public class GiftController extends BaseController {
         }
     }
 
-    /*
-     * 修改赠品状态，需要传状态值status=？
-     * */
-    @ApiOperation(value = "作废/启用赠品接口（id，status(1/0)）")
-    @RequestMapping(value = "gift/delete", method = RequestMethod.POST)
-    public APIResponse updateGift(@RequestBody Gift gift, HttpServletRequest request, HttpServletResponse response) {
+    @ApiOperation(value = "任意条件查询（id，name，status）")
+    @RequestMapping(value = "gift/findByName", method = RequestMethod.POST)
+    public APIResponse findGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
         try {
-            return giftService.delete(gift);
+            return giftService.findGift(reqGiftQuery);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
 
-    /*
-     * 查询全部赠品
-     * */
-    @ApiOperation(value = "查询全部赠品（current，size）")
-    @RequestMapping(value = "gift/findAllGift", method = RequestMethod.POST)
-    public APIResponse findAllGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
-        return giftService.findAllGift(reqGiftQuery);
-    }
-
-    /*
-     * 多条件查询
-     * */
-    @ApiOperation(value = "任意条件查询（gId，name，status）")
-    @RequestMapping(value = "gift/findByName", method = RequestMethod.POST)
-    public APIResponse findGift(@RequestBody ReqGiftQuery reqGiftQuery, HttpServletRequest request, HttpServletResponse response) {
-        return giftService.findGift(reqGiftQuery);
+    @ApiOperation(value = "调用赠品")
+    @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)
+    public APIResponse useGift(@RequestBody List<ReqGiftUse> list, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return giftService.useGift(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
     }
 
     @ApiOperation(value = "生成Excel文件") //导出Excel时，实体类要指定列名
@@ -111,14 +98,5 @@ public class GiftController extends BaseController {
         }
     }
 
-    /*
-     * 调用赠品
-     * */
-    @ApiOperation(value = "调用赠品")
-    @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)
-    public APIResponse useGift(@RequestBody List<ReqGiftUse> list, HttpServletRequest request, HttpServletResponse response) {
-
-        return giftService.useGift(list);
-    }
 
 }

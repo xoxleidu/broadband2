@@ -4,16 +4,16 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.util.pio.convert.ExportConfig;
 
-@TableName(value = "t_gift")
+@TableName(value = "gift")
 public class Gift  {
 
     @TableId
     @ExportConfig(value = "编号")  //导出Excel时，指定列名
-    private Integer gId;
+    private Integer id;
     @ExportConfig(value = "名称")
     private String name;
     @ExportConfig(value = "总量")
-    private Long amount;
+    private Integer amount;
     @ExportConfig(value = "出库")
     private Integer output;
     @ExportConfig(value = "库存")
@@ -21,12 +21,12 @@ public class Gift  {
     @ExportConfig(value = "状态")
     private String status;
 
-    public Integer getgId() {
-        return gId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setgId(Integer gId) {
-        this.gId = gId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,11 +37,11 @@ public class Gift  {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 

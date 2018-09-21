@@ -7,7 +7,6 @@ import com.zjts.broadband.common.model.req.job.project.ReqEquipmentAdd;
 import com.zjts.broadband.common.model.req.job.project.ReqEquipmentQuery;
 import com.zjts.broadband.common.model.req.job.project.ReqEquipmentUse;
 import com.zjts.broadband.job.model.Equipment;
-import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.EquipmentService;
 import com.zjts.broadband.util.FileUtils;
 import io.swagger.annotations.Api;
@@ -39,32 +38,31 @@ public class EquipmentController extends BaseController {
             return equipmentService.add(reqEquipmentAdd);
         } catch (Exception e) {
             e.printStackTrace();
-            return APIResponse.error(CodeEnum.ERROR, "新增设备失败");
+            return APIResponse.error(CodeEnum.ERROR);
         }
     }
 
-    @ApiOperation(value = "设备回收接口")
-    @RequestMapping(value = "equipment/recovery", method = RequestMethod.POST)
-    public APIResponse recovery(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
-        return equipmentService.recovery(reqEquipmentQuery);
-    }
 
-    @ApiOperation(value = "修改设备（status：0/1/2 --> 可用/待出库/已出库）")
+    @ApiOperation(value = "根据id修改设备状态（status：0/1/2 --> 可用/待出库/已出库）")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
-    public APIResponse updateEquipment(@RequestBody Equipment equipment, HttpServletRequest request, HttpServletResponse response) {
-        return equipmentService.update(equipment);
+    public APIResponse updateEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return equipmentService.update(reqEquipmentQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
     }
 
-    @ApiOperation(value = "查询全部产品")
-    @RequestMapping(value = "equipment/findAllEquipment", method = RequestMethod.POST)
-    public APIResponse findAllEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
-        return equipmentService.findAllEquipment(reqEquipmentQuery);
-    }
-
-    @ApiOperation(value = "任意条件查询（equId，name，code，status）")
+    @ApiOperation(value = "任意条件查询（id，name，code，status）")
     @RequestMapping(value = "equipment/findEquipment", method = RequestMethod.POST)
     public APIResponse findEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
-        return equipmentService.findEquipment(reqEquipmentQuery);
+        try {
+            return equipmentService.findEquipment(reqEquipmentQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
     }
 
     @ApiOperation(value = "设备调用(name，number)")
@@ -73,7 +71,13 @@ public class EquipmentController extends BaseController {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
-        return equipmentService.useEquipment(list);
+
+        try {
+            return equipmentService.useEquipment(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
     }
 
     @ApiOperation(value = "生成Excel文件（空参）")

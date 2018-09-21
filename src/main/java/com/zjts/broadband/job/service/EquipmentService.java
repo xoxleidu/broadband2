@@ -13,19 +13,11 @@ import java.util.List;
 public interface EquipmentService {
     APIResponse add(ReqEquipmentAdd reqEquipmentAdd);
 
-    APIResponse update(Equipment equipment);
-
-    /*
-     * 设备回收
-     * */
-    APIResponse recovery(ReqEquipmentQuery reqEquipmentAdd);
-
-    APIResponse findAllEquipment(ReqEquipmentQuery reqEquipmentQuery);
+    APIResponse update(ReqEquipmentQuery reqEquipmentQuery);
 
     List<Equipment> findAllGift2();
 
     APIResponse findEquipment(ReqEquipmentQuery reqEquipmentQuery);
-
     /*
      * 设备调用测试
      * */

@@ -3,21 +3,23 @@ package com.zjts.broadband.common.model.req.job.project;
 import com.zjts.broadband.common.model.BaseModel;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class ReqGiftUse extends BaseModel {
-    private Integer gId;
-
+    private Integer id;
+    @NotNull
     private String name;
+    @NotNull
     @Min(0)
-    private Integer output;
+    private Integer outNumber;
 
 
-    public Integer getgId() {
-        return gId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setgId(Integer gId) {
-        this.gId = gId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,12 +30,11 @@ public class ReqGiftUse extends BaseModel {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getOutput() {
-        return output;
+    public Integer getOutNumber() {
+        return outNumber;
     }
 
-    public void setOutput(Integer output) {
-        this.output = output;
+    public void setOutNumber(Integer outNumber) {
+        this.outNumber = outNumber;
     }
-
 }

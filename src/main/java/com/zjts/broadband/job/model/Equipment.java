@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.util.pio.convert.ExportConfig;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 @TableName("equipment")
-public class Equipment {
+public class Equipment implements Serializable {
+    private static final long serialVersionUID = 1001943494952931101L;
     @TableId
     @ExportConfig(value = "设备id")  //导出Excel时，指定列名
-    private Integer equId;
+    private Integer id;
     @ExportConfig(value = "名称")
     private String name;
     @ExportConfig(value = "编码")
@@ -23,12 +25,13 @@ public class Equipment {
     @ExportConfig(value = "状态")
     private String status;
 
-    public Integer getEquId() {
-        return equId;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setEquId(Integer equId) {
-        this.equId = equId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
