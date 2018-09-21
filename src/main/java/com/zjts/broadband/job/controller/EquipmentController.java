@@ -45,9 +45,9 @@ public class EquipmentController extends BaseController {
 
     @ApiOperation(value = "根据id修改设备状态（status：0/1/2 --> 可用/待出库/已出库）")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
-    public APIResponse updateEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse updateEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, HttpServletRequest request, HttpServletResponse response) {
         try {
-            return equipmentService.update(reqEquipmentQuery);
+            return equipmentService.update(reqEquipmentAdd);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);

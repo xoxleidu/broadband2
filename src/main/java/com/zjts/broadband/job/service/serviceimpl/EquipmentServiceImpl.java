@@ -9,7 +9,6 @@ import com.zjts.broadband.common.model.req.job.project.ReqEquipmentQuery;
 import com.zjts.broadband.common.model.req.job.project.ReqEquipmentUse;
 import com.zjts.broadband.job.dao.EquipmentMapper;
 import com.zjts.broadband.job.model.Equipment;
-import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.EquipmentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +46,9 @@ public class EquipmentServiceImpl implements EquipmentService {
      * 修改单条记录
      * */
     @Override
-    public APIResponse update(ReqEquipmentQuery reqEquipmentQuery) {
+    public APIResponse update(ReqEquipmentAdd reqEquipmentAdd) {
         Equipment equipment = new Equipment();
-        BeanUtils.copyProperties(reqEquipmentQuery, equipment);
+        BeanUtils.copyProperties(reqEquipmentAdd, equipment);
         if (equipment.getStatus().equals("2")) {
             int current = (int) (System.currentTimeMillis() / 1000);
             equipment.setOutTime(current);

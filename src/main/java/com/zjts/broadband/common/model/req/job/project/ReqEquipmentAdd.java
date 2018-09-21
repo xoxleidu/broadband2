@@ -7,9 +7,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@TableName("t_equipment")
+@TableName("equipment")
 public class ReqEquipmentAdd extends BaseModel {
-
+    private Integer id;
     @NotNull(message = "名称不能为空")
     private String name;
     @NotNull(message = "型号不能为空")
@@ -17,6 +17,14 @@ public class ReqEquipmentAdd extends BaseModel {
     @NotNull(message = "价格不能为空")
     @Min(0)
     private BigDecimal price;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
