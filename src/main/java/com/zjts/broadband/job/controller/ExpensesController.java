@@ -3,10 +3,8 @@ package com.zjts.broadband.job.controller;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
-import com.zjts.broadband.common.model.req.job.project.ReqEquipmentQuery;
-import com.zjts.broadband.common.model.req.job.project.ReqExpensesAdd;
-import com.zjts.broadband.common.model.req.job.project.ReqExpensesQuery;
-import com.zjts.broadband.job.model.Expenses;
+import com.zjts.broadband.common.model.req.job.product.ReqExpensesAdd;
+import com.zjts.broadband.common.model.req.job.product.ReqExpensesQuery;
 import com.zjts.broadband.job.service.ExpensesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 
 @Api(tags = "资费管理")

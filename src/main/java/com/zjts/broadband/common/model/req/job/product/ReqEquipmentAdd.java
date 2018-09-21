@@ -1,21 +1,22 @@
-package com.zjts.broadband.common.model.req.job.project;
+package com.zjts.broadband.common.model.req.job.product;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.common.model.BaseModel;
-import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-
-public class ReqEquipmentQuery extends BaseModel {
+@TableName("equipment")
+public class ReqEquipmentAdd extends BaseModel {
     private Integer id;
-    @ApiModelProperty(name = "名称", example = "小乌龟")
+    @NotNull(message = "名称不能为空")
     private String name;
-    @ApiModelProperty(name = "编码", example = "001")
+    @NotNull(message = "型号不能为空")
     private String code;
-    @ApiModelProperty(name = "价格", example = "0")
+    @NotNull(message = "价格不能为空")
+    @Min(0)
     private BigDecimal price;
-    @ApiModelProperty(name = "状态", example = "0")
-    private String status;
 
     public Integer getId() {
         return id;
@@ -47,14 +48,6 @@ public class ReqEquipmentQuery extends BaseModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 
 }

@@ -1,9 +1,9 @@
 package com.zjts.broadband.job.service;
 
 import com.zjts.broadband.common.model.APIResponse;
-import com.zjts.broadband.common.model.req.job.project.ReqGiftAdd;
-import com.zjts.broadband.common.model.req.job.project.ReqGiftQuery;
-import com.zjts.broadband.common.model.req.job.project.ReqGiftUse;
+import com.zjts.broadband.common.model.req.job.product.ReqGiftAdd;
+import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
+import com.zjts.broadband.common.model.req.job.product.ReqGiftUse;
 import com.zjts.broadband.job.model.Gift;
 import org.springframework.stereotype.Service;
 

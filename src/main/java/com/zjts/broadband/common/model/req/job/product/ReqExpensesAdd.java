@@ -1,4 +1,4 @@
-package com.zjts.broadband.common.model.req.job.project;
+package com.zjts.broadband.common.model.req.job.product;
 
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.common.model.BaseModel;

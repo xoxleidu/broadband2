@@ -1,9 +1,9 @@
 package com.zjts.broadband.job.service;
 
 import com.zjts.broadband.common.model.APIResponse;
-import com.zjts.broadband.common.model.req.job.project.ReqEquipmentAdd;
-import com.zjts.broadband.common.model.req.job.project.ReqEquipmentQuery;
-import com.zjts.broadband.common.model.req.job.project.ReqEquipmentUse;
+import com.zjts.broadband.common.model.req.job.product.ReqEquipmentAdd;
+import com.zjts.broadband.common.model.req.job.product.ReqEquipmentQuery;
+import com.zjts.broadband.common.model.req.job.product.ReqEquipmentUse;
 import com.zjts.broadband.job.model.Equipment;
 import org.springframework.stereotype.Service;
 
