@@ -3,6 +3,7 @@ import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerAdd;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerDelete;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerQuery;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.job.model.CustomerMessage;
@@ -40,7 +41,6 @@ public class CustomerController  extends BaseController  {
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
-
     @ApiOperation(value = "客户修改接口")
     @RequestMapping(value = "customerMessage/update", method = RequestMethod.POST)
     public APIResponse update(@RequestBody @Validated ReqCustomerUpdate reqCustomerUpdate, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
@@ -53,22 +53,19 @@ public class CustomerController  extends BaseController  {
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
-
     @ApiOperation(value = "客户删除接口")
     @RequestMapping(value = "customerMessage/delete", method = RequestMethod.POST)
-    public APIResponse delete(@RequestBody @Validated int id, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse delete(@RequestBody @Validated ReqCustomerDelete reqCustomerDelete, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
-
-            return customerService.delete(id);
+            return customerService.delete(reqCustomerDelete);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
-
-    @ApiOperation(value = "客户查询")
+    @ApiOperation(value = "综合查询")
     @RequestMapping(value = "customerMessage/queryAllCustomer",method = RequestMethod.POST)
     public APIResponse selectAll(@RequestBody @Validated ReqCustomerQuery reqCustomerQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
