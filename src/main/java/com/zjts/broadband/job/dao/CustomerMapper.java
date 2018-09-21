@@ -8,7 +8,4 @@ import org.springframework.stereotype.Service;
 @Repository
 public interface CustomerMapper extends BaseMapper<CustomerMessage> {
     CustomerMessage selectByPrimaryKey(Integer id);
-    int delete(Integer id);
-
-
 }

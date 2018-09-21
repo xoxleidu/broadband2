@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerAdd;
+import com.zjts.broadband.common.model.req.job.customer.ReqCustomerDelete;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerQuery;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.job.dao.CustomerMapper;
@@ -16,18 +17,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
-
     @Autowired
     private CustomerMapper customerMapper;
-
     /**
      * 添加客户
-     * @param: 接收一个CustomerMessage类型的对象
+     * @param: 接收一个ReqCustomerAdd类型的对象
      * @return: 返回到APIResponse包装类进行校验
      * @throws: Exception
      */
@@ -41,10 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return APIResponse.success();
     }
-
     /**
      * 修改客户信息
-     * @param: 接收一个CustomerMessage类型的对象
+     * @param: 接收一个ReqCustomerUpdate类型的对象
      * @return:返回到APIResponse包装类进行校验
      * @throws: Exception
      */
@@ -52,32 +52,32 @@ public class CustomerServiceImpl implements CustomerService {
     public APIResponse update(ReqCustomerUpdate reqCustomerUpdate) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerUpdate, customerMessage);
-
         Integer insert = customerMapper.updateById(customerMessage);
         if (insert != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
         }
         return APIResponse.success();
     }
-
     /**
      * 逻辑删除客户信息
-     * @param: 接收一个Customer类型的对象
+     * @param: 接收一个ReqCustomerDelete类型的对象
      * @return:返回到APIResponse包装类进行校验
      * @throws:Exception
      */
     @Override
-    public APIResponse delete(int id) throws Exception {
-        int delete = customerMapper.delete(id);
+    public APIResponse delete(ReqCustomerDelete reqCustomerDelete) throws Exception {
+        CustomerMessage customerMessage = new CustomerMessage();
+        customerMessage.setStatus(1);
+        BeanUtils.copyProperties(reqCustomerDelete, customerMessage);
+        int delete = customerMapper.updateById(customerMessage);
         if (delete != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
         }
         return APIResponse.success();
     }
-
     /**
-     * 条件查询客户信息
-     * @param: 接收一个TermQueryCustomer类型的对象
+     * 综合查询客户信息
+     * @param: 接收一个ReqCustomerQuery类型的对象
      * @return: 返回到APIResponse包装类进行校验
      * @throws: Exception
      */
@@ -89,9 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
         EntityWrapper  entityWrapper= new EntityWrapper();
         List<CustomerMessage> customerList = new ArrayList<CustomerMessage>();
        CustomerMessage  customerMessage = new CustomerMessage();
-
         BeanUtils.copyProperties(reqCustomerQuery, customerMessage);
-
         if(customerMessage.getStatus()==0||customerMessage.getStatus()==1) {
             entityWrapper.where("status={0}", customerMessage.getStatus());
             customerList = customerMapper.selectPage(cunstomerPage, entityWrapper);
