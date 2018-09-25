@@ -36,6 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
         BeanUtils.copyProperties(reqCustomerAdd, customerMessage);
          Integer time = Math.toIntExact(new Date().getTime() / 1000);
         customerMessage.setCreationTime(time);
+        customerMessage.setStatus(0);
         Integer insert = customerMapper.insert(customerMessage);
         if (insert != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);

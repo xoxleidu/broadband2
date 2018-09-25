@@ -26,7 +26,7 @@ public class ReqCustomerAdd {
 
     @NotNull(message = "证件号码不能为空")
     private String idcard;//证件号码
-
+    
     private String tel;//家庭电话
 
     @NotNull(message = "手机号码不能为空")
@@ -42,11 +42,8 @@ public class ReqCustomerAdd {
     @NotNull(message = "联系电话不能为空")
     private String contactMobile;//联系人电话
 
-    @NotNull(message = "客户类型不能为空")
+    @NotNull(message = "客户类型不能为空0.客户,1.企业")
     private Integer type;//客户类型
-
-    @NotNull(message = "状态不能为空")
-    private Integer status;//状态
 
     public String getName() {
         return customerName;
@@ -120,11 +117,4 @@ public class ReqCustomerAdd {
         this.type = type;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 }
