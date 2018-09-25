@@ -34,9 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
     public APIResponse add(ReqCustomerAdd reqCustomerAdd) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerAdd, customerMessage);
-        SimpleDateFormat format0 = new SimpleDateFormat("yyyyMMdd");
-        String time = format0.format(new Date().getTime());
-        customerMessage.setCreationTime(Integer.parseInt(time));
+         Integer time = Math.toIntExact(new Date().getTime() / 1000);
+        customerMessage.setCreationTime(time);
         Integer insert = customerMapper.insert(customerMessage);
         if (insert != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
