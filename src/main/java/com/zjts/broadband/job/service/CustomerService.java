@@ -1,6 +1,7 @@
 package com.zjts.broadband.job.service;
 
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerAdd;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerDelete;
@@ -19,5 +20,5 @@ public interface CustomerService {
 
     APIResponse delete(ReqCustomerDelete reqCustomerDelete)throws Exception;
 
-    APIResponse queryAll(ReqCustomerQuery reqCustomerQuery)throws Exception;
+    APIResponse query(Page<CustomerMessage> page, ReqCustomerQuery reqCustomerQuery)throws Exception;
 }

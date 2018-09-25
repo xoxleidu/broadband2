@@ -36,7 +36,6 @@ public class CustomerServiceImpl implements CustomerService {
         BeanUtils.copyProperties(reqCustomerAdd, customerMessage);
          Integer time = Math.toIntExact(new Date().getTime() / 1000);
         customerMessage.setCreationTime(time);
-
         Integer insert = customerMapper.insert(customerMessage);
         if (insert != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
@@ -83,28 +82,14 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws: Exception
      */
     @Override
-    public APIResponse queryAll(ReqCustomerQuery reqCustomerQuery)throws Exception{
-        //创建一个mybatisplus中的Page对象,把页数和数量写入
-        Page<CustomerMessage>  cunstomerPage= new Page<CustomerMessage>(reqCustomerQuery.getCurrentPage(),reqCustomerQuery.getPageSize());
-        //实现继承了BaseMapper中的方法,带入参数Page对象,创建一个mybatisplus中的实体包装器进行sql操作
-        EntityWrapper  entityWrapper= new EntityWrapper();
-        List<CustomerMessage> customerList = new ArrayList<CustomerMessage>();
+    public APIResponse query(Page<CustomerMessage> page,ReqCustomerQuery reqCustomerQuery)throws Exception{
+
        CustomerMessage  customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerQuery, customerMessage);
-        if(customerMessage.getStatus()==0||customerMessage.getStatus()==1) {
-            entityWrapper.where("status={0}", customerMessage.getStatus());
-            customerList = customerMapper.selectPage(cunstomerPage, entityWrapper);
-            if (customerMessage.getCustomerName()!= null) {
-                entityWrapper.like("customer_name",customerMessage.getCustomerName());
-            } else if (customerMessage.getMobile() != null) {
-                entityWrapper.orNew("mobile={0}", customerMessage.getMobile());
-            } else if (customerMessage.getIdcard() != null) {
-                entityWrapper.orNew("idcard={0}", customerMessage.getIdcard());
-            }
-        }
+        List<CustomerMessage> customerList=  customerMapper.query(page,customerMessage);
         if (customerList.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
-        return APIResponse.success(cunstomerPage.setRecords(customerList));
+        return APIResponse.success(page.setRecords(customerList));
     }
 }

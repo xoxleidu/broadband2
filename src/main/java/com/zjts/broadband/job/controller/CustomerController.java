@@ -1,4 +1,5 @@
 package com.zjts.broadband.job.controller;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
@@ -66,7 +67,8 @@ public class CustomerController  extends BaseController  {
     @ApiOperation(value = "综合查询")
     @RequestMapping(value = "customerMessage/queryAllCustomer",method = RequestMethod.POST)
     public APIResponse selectAll(@RequestBody @Validated ReqCustomerQuery reqCustomerQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Page<CustomerMessage> page = new Page(reqCustomerQuery.getCurrentPage(),reqCustomerQuery.getPageSize());
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        return customerService.queryAll(reqCustomerQuery);
+        return customerService.query(page,reqCustomerQuery);
     }
 }

@@ -11,23 +11,13 @@ import javax.validation.constraints.Pattern;
 /**
  * @Description:前端传输客户进行条件查询类
  */
-public class ReqCustomerQuery extends BaseModel {
+public class ReqCustomerQuery   extends BaseModel{
     //定义的私有属性
     private String customerName;//客户姓名
 
     private String idcard;//证件号码
 
     private String mobile;//手机号码
-
-    private Integer status;//客户状态
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 
     public String getCustomerName() {
         return customerName;

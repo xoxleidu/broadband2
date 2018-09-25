@@ -4,7 +4,7 @@
 
   <resultMap id="BaseResultMap" type="com.zjts.broadband.job.model.CustomerMessage" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="idcard" property="idcard" jdbcType="VARCHAR" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, sex, idcard, tel, mobile, address, contacts, contact_mobile, type, creation_time, 
+    id, customerName, sex, idcard, tel, mobile, address, contacts, contact_mobile, type, creation_time,
     state
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -27,4 +27,13 @@
     from customer_message
     where id = #{id,jdbcType=INTEGER}
   </select>
-</mapper>
+
+<select id="query" parameterType="com.zjts.broadband.job.model.CustomerMessage" resultType="com.zjts.broadband.job.model.CustomerMessage" >
+  SELECT *  FROM customer_message
+ WHERE status=0
+  <if test="customerName!=null and customerName!=''"> AND customer_name LIKE CONCAT(#{customerName},'%')</if>
+  <if test="idcard!=null and idcard!=''"> OR idcard LIKE CONCAT(#{idcard},'%')</if>
+  <if test="mobile!=null and mobile!=''"> OR mobile LIKE CONCAT(#{mobile},'%')</if>
+
+</select>
+  </mapper>

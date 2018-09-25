@@ -33,6 +33,16 @@ public class CustomerMessage implements Serializable {
 
     private Integer status;//状态
 
+    private Integer sysUserId; //外键
+
+    public Integer getSysUserId() {
+        return sysUserId;
+    }
+
+    public void setSysUserId(Integer sysUserId) {
+        this.sysUserId = sysUserId;
+    }
+
     public Integer getId() {
         return id;
     }
