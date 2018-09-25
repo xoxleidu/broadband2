@@ -29,7 +29,6 @@ public class ReqCustomerQuery extends BaseModel {
         this.status = status;
     }
 
-
     public String getCustomerName() {
         return customerName;
     }

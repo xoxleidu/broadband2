@@ -15,11 +15,10 @@ import javax.validation.constraints.Pattern;
  * @Version1.0
  **/
 
-public class ReqCustomerAdd extends BaseModel {
+public class ReqCustomerAdd {
 
-
-    @NotNull(message = "用户名不能为空")
-    @Length(min = 4, max = 10, message = "用户名格式为4-10位数字或字母")
+    @NotNull(message = "客户名不能为空")
+    @Length(min = 1, max = 16, message = "客户名称不能超过16位")
     private String customerName;//客户姓名
 
     @NotNull(message = "性别不能为空")
@@ -30,7 +29,7 @@ public class ReqCustomerAdd extends BaseModel {
 
     private String tel;//家庭电话
 
-    @NotNull(message = "联系电话不能为空")
+    @NotNull(message = "手机号码不能为空")
     @Pattern(regexp = "^1(3|4|5|7|8|9)\\d{9}$",message = "手机号码格式错误")
     private String mobile;//联系电话
 
@@ -45,9 +44,6 @@ public class ReqCustomerAdd extends BaseModel {
 
     @NotNull(message = "客户类型不能为空")
     private Integer type;//客户类型
-
-    @NotNull(message = "创建时间不能为空")
-    private Integer creationTime;//创建时间
 
     @NotNull(message = "状态不能为空")
     private Integer status;//状态
@@ -122,14 +118,6 @@ public class ReqCustomerAdd extends BaseModel {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Integer getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Integer creationTime) {
-        this.creationTime = creationTime;
     }
 
     public Integer getStatus() {

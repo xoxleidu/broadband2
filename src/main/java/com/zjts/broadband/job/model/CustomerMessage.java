@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 public class CustomerMessage implements Serializable {
     //定义的私有属性
-
     private Integer id;//客户编号
 
     private String customerName;//客户姓名

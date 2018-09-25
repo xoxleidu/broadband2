@@ -32,7 +32,6 @@ public class CustomerController  extends BaseController  {
     @ApiOperation(value = "客户添加接口")
     @RequestMapping(value = "customerMessage/add", method = RequestMethod.POST)
     public APIResponse addUser(@RequestBody @Validated ReqCustomerAdd reqCustomerAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
-
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
             return customerService.add(reqCustomerAdd);
@@ -56,7 +55,6 @@ public class CustomerController  extends BaseController  {
     @ApiOperation(value = "客户删除接口")
     @RequestMapping(value = "customerMessage/delete", method = RequestMethod.POST)
     public APIResponse delete(@RequestBody @Validated ReqCustomerDelete reqCustomerDelete, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
-
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
             return customerService.delete(reqCustomerDelete);

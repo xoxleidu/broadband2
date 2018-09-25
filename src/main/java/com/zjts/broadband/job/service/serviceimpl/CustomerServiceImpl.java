@@ -16,10 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Transactional
@@ -36,6 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
     public APIResponse add(ReqCustomerAdd reqCustomerAdd) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerAdd, customerMessage);
+        SimpleDateFormat format0 = new SimpleDateFormat("yyyyMMdd");
+        String time = format0.format(new Date().getTime());
+        customerMessage.setCreationTime(Integer.parseInt(time));
         Integer insert = customerMapper.insert(customerMessage);
         if (insert != 1) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
