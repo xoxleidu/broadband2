@@ -28,11 +28,20 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-<select id="query" parameterType="com.zjts.broadband.job.model.CustomerMessage" resultType="com.zjts.broadband.job.model.CustomerMessage" >
-  SELECT id,customer_name,sex,idcard,tel,mobile,address,contacts,contact_mobile,`type`,creation_time,status,sys_user_id  FROM customer_message
- WHERE status=0
-  <if test="customerName!=null and customerName!=''"> AND customer_name LIKE CONCAT(#{customerName},'%')</if>
-  <if test="idcard!=null and idcard!=''"> AND idcard LIKE CONCAT(#{idcard},'%')</if>
-  <if test="mobile!=null and mobile!=''"> AND mobile LIKE CONCAT(#{mobile},'%')</if>
-</select>
-  </mapper>
+  <select id="query" parameterType="com.zjts.broadband.job.model.CustomerMessage" resultType="com.zjts.broadband.job.model.CustomerMessage" >
+  SELECT id,customer_name,sex,idcard,tel,mobile,address,contacts,contact_mobile,`type`,creation_time,status,sys_user_id
+  FROM customer_message
+    <where>
+      status=0
+      <if test="customerName!=null and customerName!=''">
+       AND customer_name LIKE CONCAT(#{customerName},'%')
+      </if>
+      <if test="idcard!=null and idcard!=''">
+      AND idcard LIKE CONCAT(#{idcard},'%')
+      </if>
+      <if test="mobile!=null and mobile!=''">
+      AND mobile LIKE CONCAT(#{mobile},'%')
+      </if>
+    </where>
+  </select>
+</mapper>
