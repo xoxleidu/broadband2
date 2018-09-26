@@ -3,6 +3,7 @@ package com.zjts.broadband.system.service.Imp;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
 import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
@@ -33,6 +34,7 @@ public class SysUserServiceImp implements SysUserService {
      * @throws Exception
      */
     @Override
+    @ServiceLog(description = "添加用户")
     public APIResponse add(ReqSysUserAdd sysUser) throws Exception {
         SysUser sysUser1 = new SysUser();
         BeanUtils.copyProperties(sysUser, sysUser1);

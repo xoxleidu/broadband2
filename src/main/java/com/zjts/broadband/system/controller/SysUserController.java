@@ -3,6 +3,7 @@ package com.zjts.broadband.system.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.system.ReqSysUserAdd;
 import com.zjts.broadband.common.model.req.system.ReqSysUserLogin;
@@ -31,6 +32,7 @@ public class SysUserController extends BaseController {
     private SysUserService sysUserService;
 
     @ApiOperation(value = "用户添加接口")
+    @ControllerLog(description = "用户添加")
     @RequestMapping(value = "user/add", method = RequestMethod.POST)
     public APIResponse addUser(@RequestBody @Validated ReqSysUserAdd sysUser, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);

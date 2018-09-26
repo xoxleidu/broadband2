@@ -61,8 +61,19 @@ spring:
         login-username: druid
         login-password: druid
 
-#  data:
-#      mongodb:
-#        host: 192.168.2.180
-#        port: 27017
-#        authentication-database: smb2
+  data:
+      mongodb:
+        host: localhost
+        port: 27017
+        authentication-database: broadband
+
+#    redis:
+#      database: 0
+#      host: 101.201.117.102
+#      port: 6379
+#      password: sp6161266
+#      pool:
+#        max-active: 8
+#        max-wait: -1
+#        max-idle: 8
+#        min-idle: 0
