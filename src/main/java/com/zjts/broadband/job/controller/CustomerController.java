@@ -50,7 +50,7 @@ public class CustomerController  extends BaseController  {
             return customerService.update(reqCustomerUpdate);
         } catch (Exception e) {
             e.printStackTrace();
-            return APIResponse.error(CodeEnum.ERROR);
+            return APIResponse.error(CodeEnum.ERROR,"修改失败");
         }
     }
     @ApiOperation(value = "客户删除接口")
@@ -61,14 +61,21 @@ public class CustomerController  extends BaseController  {
             return customerService.delete(reqCustomerDelete);
         } catch (Exception e) {
             e.printStackTrace();
-            return APIResponse.error(CodeEnum.ERROR);
+            return APIResponse.error(CodeEnum.ERROR,"删除失败");
         }
     }
     @ApiOperation(value = "综合查询")
     @RequestMapping(value = "customerMessage/queryAllCustomer",method = RequestMethod.POST)
     public APIResponse selectAll(@RequestBody @Validated ReqCustomerQuery reqCustomerQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Page<CustomerMessage> page = new Page(reqCustomerQuery.getCurrentPage(),reqCustomerQuery.getPageSize());
-        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        return customerService.query(page,reqCustomerQuery);
+
+        if (bindingResult.hasErrors())
+            return parameterVerification(bindingResult);
+       try {
+           Page<CustomerMessage> page = new Page(reqCustomerQuery.getCurrentPage(),reqCustomerQuery.getPageSize());
+           return customerService.query(page,reqCustomerQuery);
+       }catch (Exception e){
+           return APIResponse.error(CodeEnum.ERROR,"查询失败");
+       }
+
     }
 }

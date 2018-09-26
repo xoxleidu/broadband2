@@ -3,8 +3,7 @@ package com.zjts.broadband.common.model.req.job.customer;
 import com.zjts.broadband.common.model.BaseModel;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 /**
  * @ClassNameReqAddCustomer
@@ -20,11 +19,13 @@ public class ReqCustomerAdd {
     @NotNull(message = "客户名不能为空")
     @Length(min = 1, max = 16, message = "客户名称不能超过16位")
     private String customerName;//客户姓名
-
+    @Min(value=0,message = "最小不能小于0")
+    @Max(value=1,message = "最大不能大于1")
     @NotNull(message = "性别不能为空")
     private Integer sex;//客户性别
 
     @NotNull(message = "证件号码不能为空")
+    @Pattern(regexp = "^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$",message = "身份证号码或者位数错误")
     private String idcard;//证件号码
     
     private String tel;//家庭电话
@@ -34,6 +35,7 @@ public class ReqCustomerAdd {
     private String mobile;//联系电话
 
     @NotNull(message = "证件地址不能为空")
+    @Length(min = 1, max = 50, message = "客户名称不能超过16位")
     private String address;//证件地址
 
     @NotNull(message = "联系人不能为空")

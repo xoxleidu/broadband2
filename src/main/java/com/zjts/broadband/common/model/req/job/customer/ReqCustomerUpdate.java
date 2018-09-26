@@ -21,16 +21,19 @@ public class ReqCustomerUpdate{
     private Integer id;//客户编号
 
     @NotNull(message = "客户名称不能为空")
+    @Length(min = 1, max = 16, message = "客户名称不能超过16位")
     private String customerName;//客户名称
 
-    @NotNull(message = "联系电话不能为空")
+    @NotNull(message = "手机号码不能为空")
     @Pattern(regexp = "^1(3|4|5|7|8|9)\\d{9}$",message = "手机号码格式错误")
     private String mobile;//客户电话
 
     @NotNull(message = "联系人不能为空")
-    private String contacts;//联系人电话
+    @Length(min = 1, max = 10, message = "联系人名称不能超过10位")
+    private String contacts;//联系人
 
     @NotNull(message = "联系电话不能为空")
+    @Pattern(regexp = "^1(3|4|5|7|8|9)\\d{9}$",message = "联系电话格式错误")
     private String contactMobile;//联系电话
 
     public String getCustomerName() {
@@ -66,6 +69,7 @@ public class ReqCustomerUpdate{
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }

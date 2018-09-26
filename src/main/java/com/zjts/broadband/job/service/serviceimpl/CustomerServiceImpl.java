@@ -84,7 +84,6 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public APIResponse query(Page<CustomerMessage> page,ReqCustomerQuery reqCustomerQuery)throws Exception{
-
        CustomerMessage  customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerQuery, customerMessage);
         List<CustomerMessage> customerList=  customerMapper.query(page,customerMessage);

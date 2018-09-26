@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
  */
 public class ReqCustomerQuery   extends BaseModel{
     //定义的私有属性
+
     private String customerName;//客户姓名
 
     private String idcard;//证件号码
@@ -22,7 +23,6 @@ public class ReqCustomerQuery   extends BaseModel{
     public String getCustomerName() {
         return customerName;
     }
-
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
