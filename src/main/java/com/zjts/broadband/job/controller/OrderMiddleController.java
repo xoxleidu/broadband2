@@ -70,13 +70,13 @@ public class OrderMiddleController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "确认订单接口")
-    @RequestMapping(value = "OrderMiddle/updateMoney", method = RequestMethod.POST)
+    @ApiOperation(value = "订单确认接口")
+    @RequestMapping(value = "OrderMiddle/OrderGeneration", method = RequestMethod.POST)
     public APIResponse OrderGeneration(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
-            return APIResponse.success(ordersService.updateMoney(reqOrderMiddleQuery));
+            return APIResponse.success(ordersService.selectByCustomerAll(reqOrderMiddleQuery));
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
