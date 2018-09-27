@@ -71,7 +71,7 @@ public class OrderMiddleController extends BaseController {
     }
 
     @ApiOperation(value = "订单确认接口")
-    @RequestMapping(value = "OrderMiddle/OrderGeneration", method = RequestMethod.POST)
+    @RequestMapping(value = "OrderMiddle/orderGeneration", method = RequestMethod.POST)
     public APIResponse OrderGeneration(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
@@ -82,4 +82,17 @@ public class OrderMiddleController extends BaseController {
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
+    @ApiOperation(value = "订单生成接口")
+    @RequestMapping(value = "OrderMiddle/orderInsert", method = RequestMethod.POST)
+    public APIResponse OrderInsert(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+
+        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
+        try {
+            return APIResponse.success(ordersService.orderInsert(reqOrderMiddleQuery));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.ERROR);
+        }
+    }
+
 }

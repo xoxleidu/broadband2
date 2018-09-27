@@ -17,24 +17,25 @@
     id, customer_id, order_number, create_time, expiry_time, money, remarks, type, install_date, 
     install_address
   </sql>
-    
-    
+
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from orders
         where id = #{id,jdbcType=INTEGER}
     </select>
-    
-    
-    <select id="selectByProductId" resultType="com.zjts.broadband.job.model.Orders_Expenses" parameterType="java.lang.Integer">
+
+
+    <select id="selectByProductId" resultType="com.zjts.broadband.job.model.Orders_Expenses"
+            parameterType="java.lang.Integer">
         SELECT e.type as expensestype ,e.name  as expensesname   FROM
         order_postage_setmeal_setmeal_equipment_gift r
         LEFT JOIN `orders` o   ON o.id=r.order_id
         LEFT JOIN  expenses e  ON e.id=r.expenses_id
         WHERE o.customer_id=#{id}
   </select>
-    
+
     <select id="selectOrderAll" parameterType="com.zjts.broadband.job.model.Orders" resultType="java.util.Map">
         SELECT o.order_number ,o.create_time,o.expiry_time,o.money,r.discount ,o.type
         FROM `orders` o
@@ -42,4 +43,10 @@
         LEFT JOIN  expenses e  ON e.id=r.expenses_id
         WHERE o.customer_id=#{customerId} AND  e.type=#{expensestype}
     </select>
+
+    <insert id="insertOrder" parameterType="com.zjts.broadband.job.model.Orders_Expenses">
+        INSERT INTO 1.order_postage_setmeal_setmeal_equipment_gift
+	    (orders_id,expenses_id,gift_id,equipment_id,product_id,discount)
+	    VALUES( 'id', 'expensesid', 'giftid', 'equipmentid', 'productid', 'discount');
+    </insert>
 </mapper>

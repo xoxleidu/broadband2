@@ -35,7 +35,16 @@ public class Orders_Expenses {
     private Integer money;
     //备注
     private String remarks;
+    //折扣后的金额
+    private  int discountmoney;
 
+    public int getDiscountmoney() {
+        return discountmoney;
+    }
+
+    public void setDiscountmoney(int discountmoney) {
+        this.discountmoney = discountmoney;
+    }
 
     public Integer getExpensesid() {
         return expensesid;

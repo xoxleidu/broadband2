@@ -1,6 +1,7 @@
 package com.zjts.broadband.job.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.job.model.Orders;
 import com.zjts.broadband.job.model.Orders_Expenses;
@@ -18,5 +19,5 @@ public interface OrdersMapper extends BaseMapper<Orders> {
     List<Map> selectCustomerOrderAll(Page<Map> mapPage, Orders_Expenses orderQuery);
 
     int updateMoney(Orders orderQuery);
-    List<Orders_Expenses>  selectByOrderAll(Orders_Expenses orderQuery);
+    int insertOrder(Orders_Expenses orders_expenses);
 }

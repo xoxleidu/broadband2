@@ -13,4 +13,5 @@ public interface OrdersService {
 
     APIResponse updateMoney(ReqOrderMiddleQuery reqOrderMiddleQuery);
     APIResponse selectByCustomerAll(ReqOrderMiddleQuery reqOrderMiddleQuery);
+    APIResponse orderInsert(ReqOrderMiddleQuery reqOrderMiddleQuery);
 }

@@ -17,6 +17,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -57,10 +58,11 @@ public class OrdersServiceImpl implements OrdersService {
         mapPage.setRecords(ordersMapper.selectCustomerOrderAll(mapPage, orderQuery));
         return mapPage;
     }
+
     /**
      * 根据用户ID和订单ID进行用户充值
      *
-     * @param:  ReqOrderMiddleQuery类型的对象
+     * @param: ReqOrderMiddleQuery类型的对象
      * @return: 返回到 APIResponse 类型的的对象
      * @throws: Exception
      */
@@ -83,10 +85,11 @@ public class OrdersServiceImpl implements OrdersService {
         }
         return APIResponse.success(insert);
     }
+
     /**
      * 根据用户ID ，资费ID,套餐ID,设备ID，赠品ID进行详细查询
      *
-     * @param:  ReqOrderMiddleQuery类型的对象
+     * @param: ReqOrderMiddleQuery类型的对象
      * @return: 返回到 APIResponse 类型的的对象
      * @throws: Exception
      */
@@ -94,6 +97,28 @@ public class OrdersServiceImpl implements OrdersService {
     public APIResponse selectByCustomerAll(ReqOrderMiddleQuery reqOrderMiddleQuery) {
         Orders_Expenses orders_expenses = new Orders_Expenses();
         BeanUtils.copyProperties(reqOrderMiddleQuery, orders_expenses);
-        return APIResponse.success(ordersMapper.selectByOrderAll(orders_expenses)) ;
+        List list = new ArrayList<>();
+        list.add(ordersMapper.selectById(reqOrderMiddleQuery.getCustomerId()));
+
+        return APIResponse.success(list);
+    }
+
+    @Override
+    public APIResponse orderInsert(ReqOrderMiddleQuery reqOrderMiddleQuery) {
+        Orders_Expenses orders_expenses = new Orders_Expenses();
+        Orders orders =new Orders();
+        BeanUtils.copyProperties(reqOrderMiddleQuery, orders_expenses);
+        BeanUtils.copyProperties(reqOrderMiddleQuery, orders);
+        int a[] = new int[10];
+        //订单号
+        orders_expenses.setOrderNumber((int) (10 * (Math.random())));
+        //订单创建时间
+        Integer time = Math.toIntExact(new Date().getTime() / 1000);
+           int relust= ordersMapper.insertOrder(orders_expenses);
+           int  insert =ordersMapper.insert(orders);
+        if (insert != 1 && relust!=1) {
+            return APIResponse.error(CodeEnum.SAVE_ERROR);
+        }
+        return APIResponse.success();
     }
 }
