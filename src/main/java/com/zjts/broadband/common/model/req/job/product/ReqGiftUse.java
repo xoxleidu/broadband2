@@ -4,8 +4,11 @@ import com.zjts.broadband.common.model.BaseModel;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ReqGiftUse extends BaseModel {
+public class ReqGiftUse implements Serializable {
+    private static final long serialVersionUID = 1001943494952931101L;
+
     private Integer id;
     @NotNull
     private String name;

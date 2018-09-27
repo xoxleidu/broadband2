@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface EquipmentMapper extends BaseMapper<Equipment> {
 
-    List<Equipment> findEquipment(Page page, Equipment equipment);
+    List<Equipment> findEquipment(Page<Equipment> page, Equipment equipment);
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 @Api(tags = "设备管理")
 @RestController
-@RequestMapping("project")
+@RequestMapping("product")
 public class EquipmentController extends BaseController {
     @Autowired
     private EquipmentService equipmentService;

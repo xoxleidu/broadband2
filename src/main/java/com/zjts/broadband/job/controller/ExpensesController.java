@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Api(tags = "资费管理")
 @RestController
-@RequestMapping("project")
+@RequestMapping("product")
 public class ExpensesController extends BaseController {
     @Autowired
     private ExpensesService expensesService;

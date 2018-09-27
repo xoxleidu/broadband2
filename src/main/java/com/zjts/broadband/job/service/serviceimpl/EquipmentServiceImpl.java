@@ -72,26 +72,8 @@ public class EquipmentServiceImpl implements EquipmentService {
         Page<Equipment> page = new Page<Equipment>(reqEquipmentQuery.getCurrentPage(), reqEquipmentQuery.getPageSize());
         Equipment equipment = new Equipment();
         BeanUtils.copyProperties(reqEquipmentQuery, equipment);
+        List<Equipment> myItems = equipmentMapper.findEquipment(page, equipment);
 
-        EntityWrapper<Equipment> ew = new EntityWrapper<Equipment>();
-        ew.where("1=1");//完善where条件语法
-        if (equipment.getId() != null && equipment.getId() != 0) {
-            ew.and().eq("id", equipment.getId());
-        }
-        if (equipment.getName() != null && equipment.getName() !="") {
-            ew.and().like("name", equipment.getName());
-        }
-        if (equipment.getPrice() != null) {
-            ew.and().eq("price", equipment.getPrice());
-        }
-        if(equipment.getCode()!= null){
-            ew.and().eq("code",equipment.getCode());
-        }
-        if (equipment.getStatus() != null) {
-            ew.and().eq("status", equipment.getStatus());
-        }
-
-        List<Equipment> myItems = equipmentMapper.selectPage(page,ew);
         if (myItems.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }

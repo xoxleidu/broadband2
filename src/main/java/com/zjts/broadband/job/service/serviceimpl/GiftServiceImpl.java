@@ -61,18 +61,7 @@ public class GiftServiceImpl implements GiftService {
         Page<Gift> page = new Page<Gift>(reqGiftQuery.getCurrentPage(), reqGiftQuery.getPageSize());
         Gift gift = new Gift();
         BeanUtils.copyProperties(reqGiftQuery, gift);
-        EntityWrapper<Gift> ew = new EntityWrapper<Gift>();
-        ew.where("1=1"); //完善语法结构
-        if (gift.getId() != null && gift.getId() != 0) {
-            ew.and().eq("id", gift.getId());
-        }
-        if (gift.getName() != null && gift.getName() != "") {
-            ew.and().like("name", gift.getName());
-        }
-        if (gift.getStatus() != null ) {
-            ew.and().eq("status", gift.getStatus());
-        }
-        List<Gift> myItems = giftMapper.selectPage(page, ew);
+        List<Gift> myItems = giftMapper.findGift(page,gift);
         if (myItems.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }

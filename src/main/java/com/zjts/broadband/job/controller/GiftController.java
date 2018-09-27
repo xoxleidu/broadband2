@@ -24,7 +24,7 @@ import java.util.List;
 
 @Api(tags = "赠品管理")
 @RestController
-@RequestMapping("project")
+@RequestMapping("product")
 public class GiftController extends BaseController {
     @Autowired
     private GiftService giftService;
