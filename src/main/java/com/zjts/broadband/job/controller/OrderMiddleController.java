@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
+import com.zjts.broadband.common.model.req.job.ReqAdd;
+import com.zjts.broadband.common.model.req.job.orders.ReqOrderAdd;
 import com.zjts.broadband.common.model.req.job.orders.ReqOrderMiddleQuery;
 import com.zjts.broadband.job.service.OrdersService;
 import io.swagger.annotations.Api;
@@ -29,7 +31,7 @@ public class OrderMiddleController extends BaseController {
     private OrdersService ordersService;
 
     @ApiOperation(value = "根据用户ID查询产品类型接口")
-    @RequestMapping(value = "OrderMiddle/selectByProductId", method = RequestMethod.POST)
+    @RequestMapping(value = "/selectByProductId", method = RequestMethod.POST)
     public APIResponse selectProductId(@RequestBody Integer id, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
@@ -41,8 +43,8 @@ public class OrderMiddleController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "根据用户ID和产品类型查询订单接口")
-    @RequestMapping(value = "OrderMiddle/findSelectAll", method = RequestMethod.POST)
+    @ApiOperation(value = "根据用户ID和产品类型分页查询订单接口")
+    @RequestMapping(value = "/findSelectAll", method = RequestMethod.POST)
     public APIResponse findSelectAll(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
@@ -58,7 +60,7 @@ public class OrderMiddleController extends BaseController {
     }
 
     @ApiOperation(value = "用户充值接口")
-    @RequestMapping(value = "OrderMiddle/updateMoney", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateMoney", method = RequestMethod.POST)
     public APIResponse updateMoney(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
@@ -69,26 +71,13 @@ public class OrderMiddleController extends BaseController {
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
-
-    @ApiOperation(value = "订单确认接口")
-    @RequestMapping(value = "OrderMiddle/orderGeneration", method = RequestMethod.POST)
-    public APIResponse OrderGeneration(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
-
-        if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
-        try {
-            return APIResponse.success(ordersService.selectByCustomerAll(reqOrderMiddleQuery));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return APIResponse.error(CodeEnum.ERROR);
-        }
-    }
     @ApiOperation(value = "订单生成接口")
-    @RequestMapping(value = "OrderMiddle/orderInsert", method = RequestMethod.POST)
-    public APIResponse OrderInsert(@RequestBody ReqOrderMiddleQuery reqOrderMiddleQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/orderInsert", method = RequestMethod.POST)
+    public APIResponse OrderInsert(@RequestBody ReqOrderAdd reqOrderAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
 
         if (bindingResult.hasErrors()) return parameterVerification(bindingResult);
         try {
-            return APIResponse.success(ordersService.orderInsert(reqOrderMiddleQuery));
+            return APIResponse.success(ordersService.orderInsert(reqOrderAdd));
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);

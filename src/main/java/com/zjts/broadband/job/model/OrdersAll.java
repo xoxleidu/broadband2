@@ -2,33 +2,62 @@ package com.zjts.broadband.job.model;
 
 import java.io.Serializable;
 
-public class Orders implements Serializable {
-    private Integer id;
-
-    private Integer customerId;
-
-    private String orderNumber;
-
-    private Integer createTime;
-
-    private Integer expiryTime;
-
-    private Integer money;
-
-    private String remarks;
-
+public class OrdersAll implements Serializable {
+    //订单ID
+    private Integer OrderId;
+    //订单状态
     private Integer type;
-
+    //安装时间
     private Integer installDate;
-
+    // 安装地址
     private String installAddress;
-
-    public Integer getId() {
-        return id;
+    //订单金额
+    private Integer discount;
+    //用户ID
+    private Integer customerId;
+    //订单号
+    private Integer orderNumber;
+    //订单创建时间
+    private Integer createTime;
+    //余额
+    private Integer money;
+    //备注
+    private String remarks;
+    //金额
+    private  int discountmoney;
+    //产品类型 如宽带
+    private  String expensesName;
+    public String getExpensesName() {
+        return expensesName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setExpensesName(String expensesName) {
+        this.expensesName = expensesName;
+    }
+
+
+    public int getDiscountmoney() {
+        return discountmoney;
+    }
+
+    public void setDiscountmoney(int discountmoney) {
+        this.discountmoney = discountmoney;
+    }
+
+    public Integer getOrderId() {
+        return OrderId;
+    }
+
+    public void setOrderId(Integer orderId) {
+        OrderId = orderId;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
     public Integer getCustomerId() {
@@ -39,11 +68,11 @@ public class Orders implements Serializable {
         this.customerId = customerId;
     }
 
-    public String getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(String orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 
@@ -54,15 +83,6 @@ public class Orders implements Serializable {
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
     }
-
-    public Integer getExpiryTime() {
-        return expiryTime;
-    }
-
-    public void setExpiryTime(Integer expiryTime) {
-        this.expiryTime = expiryTime;
-    }
-
     public Integer getMoney() {
         return money;
     }
@@ -102,4 +122,6 @@ public class Orders implements Serializable {
     public void setInstallAddress(String installAddress) {
         this.installAddress = installAddress;
     }
+
+
 }
