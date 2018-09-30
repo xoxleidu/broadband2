@@ -4,28 +4,38 @@ import java.util.List;
 
 public class OrderInsert {
     //订单ID
-    private Integer orderId;
-    //资费表ID
-    private Integer expensesId;
-    //设备表ID
-    private List<OrderInsert> equipmentId;
+    private String orderNumber;
     //套餐表ID
     private Integer productId;
-    //赠品表ID
-    private List<OrderInsert> giftId;
     //订单金额
-    private Integer discount;
+    private Integer discountMoney;
     //用户ID
     private Integer customerId;
-    //订单状态
-    private Integer type;
+    //产品类型
+    private Integer productType;
     //安装时间
     private Integer installDate;
     // 安装地址
     private String installAddress;
     //余额
     private int money;
+    //资费周期
+    private int cycle;
+    //资费周期类型
+    private int cycleType;
+    public int getCycle() {
+        return cycle;
+    }
 
+    public void setCycle(int cycle) {
+        this.cycle = cycle;
+    }
+    public int getCycleType() {
+        return cycleType;
+    }
+    public void setCycleType(int cycleType) {
+        this.cycleType = cycleType;
+    }
     public int getMoney() {
         return money;
     }
@@ -34,23 +44,12 @@ public class OrderInsert {
         this.money = money;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public String getOrderNumber() {
+        return orderNumber;
     }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
-
-    public Integer getExpensesId() {
-        return expensesId;
-    }
-
-    public void setExpensesId(Integer expensesId) {
-        this.expensesId = expensesId;
-    }
-
-
     public Integer getProductId() {
         return productId;
     }
@@ -59,32 +58,24 @@ public class OrderInsert {
         this.productId = productId;
     }
 
-
-    public Integer getDiscount() {
-        return discount;
+    public Integer getDiscountMoney() {
+        return discountMoney;
     }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
+    public void setDiscountMoney(Integer discountMoney) {
+        this.discountMoney = discountMoney;
     }
-
     public Integer getCustomerId() {
         return customerId;
     }
-
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
-
-
-    public Integer getType() {
-        return type;
+    public Integer getProductType() {
+        return productType;
     }
-
-    public void setType(Integer type) {
-        this.type = type;
+    public void setProductType(Integer productType) {
+        this.productType = productType;
     }
-
     public Integer getInstallDate() {
         return installDate;
     }
@@ -101,19 +92,4 @@ public class OrderInsert {
         this.installAddress = installAddress;
     }
 
-    public List<OrderInsert> getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(List<OrderInsert> equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public List<OrderInsert> getGiftId() {
-        return giftId;
-    }
-
-    public void setGiftId(List<OrderInsert> giftId) {
-        this.giftId = giftId;
-    }
 }

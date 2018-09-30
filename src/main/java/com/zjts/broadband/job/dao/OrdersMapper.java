@@ -2,9 +2,7 @@ package com.zjts.broadband.job.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.zjts.broadband.job.model.OrderInsert;
-import com.zjts.broadband.job.model.Orders;
-import com.zjts.broadband.job.model.OrdersAll;
+import com.zjts.broadband.job.model.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +16,9 @@ public interface OrdersMapper extends BaseMapper<Orders> {
 
     int updateMoney(Orders orderQuery);
     int insertOrder(OrderInsert orderInsert);
+    OrderInsert selectExpensesCycle(int id);
+
+    List orderQuery(Page page,OrdersQuery ordersQuery);
+    List orderDetailedQuery(OrdersDetailed ordersDetailed);
+
 }

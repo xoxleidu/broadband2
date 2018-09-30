@@ -13,40 +13,49 @@
         <result column="install_date" property="installDate" jdbcType="INTEGER"/>
         <result column="install_address" property="installAddress" jdbcType="VARCHAR"/>
     </resultMap>
-    <sql id="Base_Column_List">
-    id, customer_id, order_number, create_time, expiry_time, money, remarks, type, install_date, 
-    install_address
-  </sql>
 
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from orders
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-
-
-    <select id="selectByProductId" resultType="com.zjts.broadband.job.model.Orders_Expenses"
+    <select id="selectByProductId" resultType="com.zjts.broadband.job.model.OrdersAll"
             parameterType="java.lang.Integer">
-        SELECT e.type as expensestype ,e.name  as expensesname   FROM
-        order_postage_setmeal_setmeal_equipment_gift r
-        LEFT JOIN `orders` o   ON o.id=r.order_id
-        LEFT JOIN  expenses e  ON e.id=r.expenses_id
-        WHERE o.customer_id=#{id}
+        SELECT e.name  as expensesName   FROM
+        order_product r
+        LEFT JOIN `orders` o   ON o.order_number=r.orders_number
+        LEFT JOIN  expenses e  ON e.id=r.product_id
+        WHERE o.customer_id=#{customerId} and  r.type=2
   </select>
 
-    <select id="selectOrderAll" parameterType="com.zjts.broadband.job.model.Orders" resultType="java.util.Map">
-        SELECT o.order_number ,o.create_time,o.expiry_time,o.money,r.discount ,o.type
+    <select id="selectOrderAll" parameterType="com.zjts.broadband.job.model.OrdersAll" resultType="java.util.Map">
+        SELECT o.order_number as  orderNumber,o.create_time as createTime ,o.money as money,o.type as `type`
         FROM `orders` o
-        LEFT JOIN order_postage_setmeal_setmeal_equipment_gift r  ON o.id=r.order_id
-        LEFT JOIN  expenses e  ON e.id=r.expenses_id
-        WHERE o.customer_id=#{customerId} AND  e.type=#{expensestype}
+        LEFT JOIN order_product r  ON o.order_number=r.orders_number
+        LEFT JOIN  expenses e  ON e.id=r.product_id
+        WHERE o.customer_id=#{customerId} AND  e.Name=#{expensesName}   and  r.type=2
     </select>
 
-    <insert id="insertOrder" parameterType="com.zjts.broadband.job.model.Orders_Expenses">
-        INSERT INTO 1.order_postage_setmeal_setmeal_equipment_gift
-	    (orders_id,expenses_id,gift_id,equipment_id,product_id,discount)
-	    VALUES( 'id', 'expensesid', 'giftid', 'equipmentid', 'productid', 'discount');
+
+    <insert id="insertOrder" parameterType="com.zjts.broadband.job.model.OrderInsert">
+        INSERT INTO  order_product
+	    ( orders_number, `type`, product_id, discountmoney)
+	    VALUES(#{orderNumber}, #{productType}, #{productId}, #{discountMoney});
     </insert>
+    
+    <select id="selectExpensesCycle" parameterType="java.lang.Integer"   resultType="com.zjts.broadband.job.model.OrderInsert">
+        SELECT cycle ,cycle_type as cycleType FROM expenses WHERE  id=#{id}
+    </select>
+    <select id="orderQuery" parameterType="com.zjts.broadband.common.model.req.job.orders.ReqOrderQuery" resultType="com.zjts.broadband.job.model.OrdersQuery">
+        SELECT  o.`order_number`,op.`product_id` ,cm.`status`  FROM order_product op
+        LEFT JOIN orders o ON o.`order_number`=op.orders_number
+        LEFT JOIN customer_message cm ON cm.`id`=o.`customer_id`
+        WHERE  op.type=1 AND o.`customer_id`=#{id}
+        ORDER BY o.`order_number`
+    </select>
+
+
+    <select id="orderDetailedQuery" parameterType="com.zjts.broadband.common.model.req.job.orders.ReqOrderDetailed" resultType="com.zjts.broadband.job.model.OrdersDetailed">
+        SELECT    op.`orders_number`,op.`type`,op.`product_id`,COUNT(op.`product_id`) number ,op.`discountmoney`
+        FROM   order_product op
+        WHERE op.`orders_number`= #{orderNumber}
+        GROUP BY  op.`type` ,op.`product_id`
+    </select>
+
 </mapper>

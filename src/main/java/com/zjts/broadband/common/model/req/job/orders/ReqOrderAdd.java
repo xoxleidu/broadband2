@@ -1,51 +1,40 @@
 package com.zjts.broadband.common.model.req.job.orders;
 
 import com.zjts.broadband.job.model.OrderInsert;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 public class ReqOrderAdd {
-    //订单ID
-    private Integer orderId;
-    //资费表ID
-    private Integer expensesId;
-    //设备表ID
-   private List<ReqOrderAdd> equipmentId;
-    //套餐表ID
-    private Integer productId;
 
 
-
-    //赠品表ID
-    private List<ReqOrderAdd> giftId;
-
-    public List<ReqOrderAdd> getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(List<ReqOrderAdd> equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public List<ReqOrderAdd> getGiftId() {
-        return giftId;
-    }
-
-    public void setGiftId(List<ReqOrderAdd> giftId) {
-        this.giftId = giftId;
-    }
+    //产品的Map集合 key 产品类型  value 是产品id
+    private Map product;
 
     //订单金额
-    private Integer discount;
+
+    @NotNull(message = "订单金额不能为空")
+    @Min(value=0,message = "最小不能小于0")
+    @Max(value=1,message = "最大不能大于1")
+    private Integer discountMoney;
     //用户ID
+    @NotNull(message = "用户ID不能为空")
     private Integer customerId;
-    //订单状态
-    private Integer type;
+    //产品类型
+ //   private Integer productType;
     //安装时间
+    @NotNull(message = "安装时间不能为空")
     private Integer installDate;
     // 安装地址
+    @NotNull(message = "安装地址不能为空")
+    @Length(min = 1, max = 50, message = "安装地址长度不能超过50位")
     private String installAddress;
     //余额
+    @NotNull(message = "余额不能为空")
     private int money;
 
     public int getMoney() {
@@ -56,38 +45,13 @@ public class ReqOrderAdd {
         this.money = money;
     }
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getExpensesId() {
-        return expensesId;
-    }
-
-    public void setExpensesId(Integer expensesId) {
-        this.expensesId = expensesId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
+//    public Integer getProductId() {
+//        return productId;
+//    }
+//
+//    public void setProductId(Integer productId) {
+//        this.productId = productId;
+//    }
 
     public Integer getCustomerId() {
         return customerId;
@@ -95,14 +59,6 @@ public class ReqOrderAdd {
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public Integer getInstallDate() {
@@ -119,5 +75,20 @@ public class ReqOrderAdd {
 
     public void setInstallAddress(String installAddress) {
         this.installAddress = installAddress;
+    }
+
+    public Integer getDiscountMoney() {
+        return discountMoney;
+    }
+
+    public void setDiscountMoney(Integer discountMoney) {
+        this.discountMoney = discountMoney;
+    }
+    public Map getProduct() {
+        return product;
+    }
+
+    public void setProduct(Map product) {
+        this.product = product;
     }
 }
