@@ -4,30 +4,34 @@
   <resultMap id="BaseResultMap" type="com.zjts.broadband.job.model.Equipment" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="modelId" property="modelId" jdbcType="VARCHAR" />
+    <result column="equipment_id" property="equipmentId" jdbcType="VARCHAR"/>
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="add_time" property="addTime" jdbcType="INTEGER" />
     <result column="out_time" property="outTime" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, code, price, add_time, out_time, status
+    id, name, modelId,equipment_id, price, add_time, out_time, status
   </sql>
 
   <select id="findEquipment" resultType="com.zjts.broadband.job.model.Equipment">
     select * from equipment
     where 1=1
     <if test="name !=null">
-      and `name` like #{name}
+      and `name` like #{name,jdbcType=VARCHAR}
     </if>
-    <if test="code !=null">
-      and code=#{code}
+    <if test="modelId !=null">
+      and model_id=#{modelId,jdbcType=VARCHAR}
     </if>
-    <if test="status">
-      and status=#{status}
+    <if test="status !=null">
+      and status=#{status,jdbcType=CHAR}
     </if>
     <if test="id !=null">
-      and `id`=#{id}
+      and `id`=#{id,jdbcType=INTEGER }
+    </if>
+    <if test="equipmentId !=null">
+      and equipment_id=#{equipmentId,jdbcType=VARCHAR}
     </if>
   </select>
 

@@ -14,8 +14,10 @@ public class Equipment implements Serializable {
     private Integer id;
     @ExportConfig(value = "名称")
     private String name;
-    @ExportConfig(value = "编码")
-    private String code;
+    @ExportConfig(value = "设备型号id")
+    private Integer modelId;
+    @ExportConfig(value = "设备ID")
+    private String equipmentId;
     @ExportConfig(value = "价格")
     private BigDecimal price;
     @ExportConfig(value = "入库时间")
@@ -42,12 +44,20 @@ public class Equipment implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getCode() {
-        return code;
+    public Integer getModelId() {
+        return modelId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public BigDecimal getPrice() {

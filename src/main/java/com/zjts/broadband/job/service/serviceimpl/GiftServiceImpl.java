@@ -77,8 +77,7 @@ public class GiftServiceImpl implements GiftService {
         Gift gift = new Gift();
         for (ReqGiftUse g : list) {
             List<Gift> gift1 = giftMapper.selectList(
-                    new EntityWrapper<Gift>().eq("name", g.getName())
-                            .orNew()
+                    new EntityWrapper<Gift>()
                             .eq("id", g.getId()));
             if (gift1.isEmpty()) {
                 return APIResponse.error(CodeEnum.NUMBER_NOT_ENOUGH);

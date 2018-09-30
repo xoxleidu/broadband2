@@ -43,7 +43,7 @@ public class EquipmentController extends BaseController {
     }
 
 
-    @ApiOperation(value = "根据id修改设备状态（status：0/1/2 --> 可用/待出库/已出库）")
+    @ApiOperation(value = "根据id修改设备（status：0/1/2 --> 可用/待出库/已出库）")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
     public APIResponse updateEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -54,7 +54,7 @@ public class EquipmentController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "任意条件查询（id，name，code，status）")
+    @ApiOperation(value = "任意条件查询（id，name，model，equipmentId，status）")
     @RequestMapping(value = "equipment/findEquipment", method = RequestMethod.POST)
     public APIResponse findEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -65,7 +65,7 @@ public class EquipmentController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "设备调用(name，number)")
+    @ApiOperation(value = "设备调用(modelId，number)")
     @RequestMapping(value = "equipment/useEquipment", method = RequestMethod.POST)
     public APIResponse useEquipment(@RequestBody @Validated List<ReqEquipmentUse> list, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -79,6 +79,9 @@ public class EquipmentController extends BaseController {
             return APIResponse.error(CodeEnum.ERROR);
         }
     }
+
+
+
 
     @ApiOperation(value = "生成Excel文件（空参）")
     @RequestMapping(value = "equipment/excel", method = RequestMethod.POST)

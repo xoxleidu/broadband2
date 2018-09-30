@@ -91,7 +91,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         for (ReqEquipmentUse r : list) {
             for (int i = 0; i < r.getNumber(); i++) {
                 list1 = equipmentMapper.selectList(
-                        new EntityWrapper<Equipment>().eq("name", r.getName())
+                        new EntityWrapper<Equipment>().eq("model_id", r.getModelId())
                                 .eq("status", "0")
                                 .last("limit 1"));
                 if (list1.isEmpty()) {
