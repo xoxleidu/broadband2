@@ -7,7 +7,7 @@ public class Orders implements Serializable {
 
     private Integer customerId;
 
-    private Integer orderNumber;
+    private String orderNumber;
 
     private Integer createTime;
 
@@ -39,11 +39,11 @@ public class Orders implements Serializable {
         this.customerId = customerId;
     }
 
-    public Integer getOrderNumber() {
+    public String getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
+    public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 

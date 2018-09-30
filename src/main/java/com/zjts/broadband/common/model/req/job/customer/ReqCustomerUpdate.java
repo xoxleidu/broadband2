@@ -33,7 +33,7 @@ public class ReqCustomerUpdate{
     private String contacts;//联系人
 
     @NotNull(message = "联系电话不能为空")
-    @Pattern(regexp = "^1(3|4|5|7|8|9)\\d{9}$",message = "联系电话格式错误")
+    @Length(min = 11, max = 11, message = "联系人电话不能超过11位")
     private String contactMobile;//联系电话
 
     public String getCustomerName() {

@@ -61,11 +61,12 @@ public class WorkOrderController extends BaseController{
     @ApiOperation(value = "工单查询接口")
     @RequestMapping(value = "query", method = RequestMethod.POST)
     public APIResponse queryWordOrder(@RequestBody @Validated ReqWorkOrderQuery reqWorkOrderQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response){
-        Page<WorkOrder> page = new Page(reqWorkOrderQuery.getCurrentPage(),reqWorkOrderQuery.getPageSize());
+
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
         try {
+            Page<WorkOrder> page = new Page(reqWorkOrderQuery.getCurrentPage(),reqWorkOrderQuery.getPageSize());
             return  workOrderService.query(page, reqWorkOrderQuery);
         } catch (Exception e) {
             e.printStackTrace();

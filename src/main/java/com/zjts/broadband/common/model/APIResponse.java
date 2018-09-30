@@ -31,8 +31,7 @@ public class APIResponse<T> implements Serializable  {
 	 * 返回成功，返回类型为服务器类型
 	 */
 	public static <T> APIResponse<T> success(T t) {
-		return new APIResponse(CodeEnum.SUCCESS.getCode(), CodeEnum.SUCCESS.getMessage(),
-				t,true);
+		return new APIResponse(CodeEnum.SUCCESS.getCode(), CodeEnum.SUCCESS.getMessage(), t,true);
 	}
 
 	/**

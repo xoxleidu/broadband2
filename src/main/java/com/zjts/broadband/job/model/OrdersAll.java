@@ -1,26 +1,16 @@
 package com.zjts.broadband.job.model;
 
-public class Orders_Expenses {
+import java.io.Serializable;
+
+public class OrdersAll implements Serializable {
     //订单ID
-    private Integer id;
-    //资费表ID
-    private Integer expensesid;
-    //资费类型
-    private String expensesname;
-    //资费类型 ID
-    private String expensestype;
-    //套餐表ID
-    private Integer setMealId;
+    private Integer OrderId;
     //订单状态
     private Integer type;
     //安装时间
     private Integer installDate;
     // 安装地址
     private String installAddress;
-    //设备表ID
-    private Integer equipmentId;
-    //赠品表ID
-    private Integer productId;
     //订单金额
     private Integer discount;
     //用户ID
@@ -29,14 +19,22 @@ public class Orders_Expenses {
     private Integer orderNumber;
     //订单创建时间
     private Integer createTime;
-    //订单到期时间
-    private Integer expiryTime;
     //余额
     private Integer money;
     //备注
     private String remarks;
-    //折扣后的金额
+    //金额
     private  int discountmoney;
+    //产品类型 如宽带
+    private  String expensesName;
+    public String getExpensesName() {
+        return expensesName;
+    }
+
+    public void setExpensesName(String expensesName) {
+        this.expensesName = expensesName;
+    }
+
 
     public int getDiscountmoney() {
         return discountmoney;
@@ -46,52 +44,12 @@ public class Orders_Expenses {
         this.discountmoney = discountmoney;
     }
 
-    public Integer getExpensesid() {
-        return expensesid;
+    public Integer getOrderId() {
+        return OrderId;
     }
 
-    public void setExpensesid(Integer expensesid) {
-        this.expensesid = expensesid;
-    }
-
-    public String getExpensesname() {
-        return expensesname;
-    }
-
-    public void setExpensesname(String expensesname) {
-        this.expensesname = expensesname;
-    }
-
-    public String getExpensestype() {
-        return expensestype;
-    }
-
-    public void setExpensestype(String expensestype) {
-        this.expensestype = expensestype;
-    }
-
-    public Integer getSetMealId() {
-        return setMealId;
-    }
-
-    public void setSetMealId(Integer setMealId) {
-        this.setMealId = setMealId;
-    }
-
-    public Integer getEquipmentId() {
-        return equipmentId;
-    }
-
-    public void setEquipmentId(Integer equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setOrderId(Integer orderId) {
+        OrderId = orderId;
     }
 
     public Integer getDiscount() {
@@ -125,15 +83,6 @@ public class Orders_Expenses {
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
     }
-
-    public Integer getExpiryTime() {
-        return expiryTime;
-    }
-
-    public void setExpiryTime(Integer expiryTime) {
-        this.expiryTime = expiryTime;
-    }
-
     public Integer getMoney() {
         return money;
     }
@@ -172,14 +121,6 @@ public class Orders_Expenses {
 
     public void setInstallAddress(String installAddress) {
         this.installAddress = installAddress;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
 
