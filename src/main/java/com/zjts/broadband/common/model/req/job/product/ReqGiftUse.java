@@ -1,6 +1,7 @@
 package com.zjts.broadband.common.model.req.job.product;
 
 import com.zjts.broadband.common.model.BaseModel;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -8,9 +9,9 @@ import java.io.Serializable;
 
 public class ReqGiftUse implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
-
+@Ignore
     private Integer id;
-    @NotNull
+
     private String name;
     @NotNull
     @Min(0)

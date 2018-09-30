@@ -11,13 +11,24 @@ import java.math.BigDecimal;
 public class ReqEquipmentUse implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
 
-    @ApiModelProperty(name = "名称", example = "小乌龟")
-    @NotNull
     private String name;
+    @ApiModelProperty(name = "类型", example = "AN5006-01")
+    @NotNull
+    private Integer modelId;
+
+    private String model;
     @NotNull
     private Integer number;
 
     private BigDecimal price;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Integer getNumber() {
         return number;
@@ -27,12 +38,20 @@ public class ReqEquipmentUse implements Serializable {
         this.number = number;
     }
 
-    public String getName() {
-        return name;
+    public Integer getModelId() {
+        return modelId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public BigDecimal getPrice() {

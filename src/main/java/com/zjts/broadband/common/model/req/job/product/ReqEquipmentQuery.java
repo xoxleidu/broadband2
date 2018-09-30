@@ -7,11 +7,14 @@ import java.math.BigDecimal;
 
 
 public class ReqEquipmentQuery extends BaseModel {
+
     private Integer id;
     @ApiModelProperty(name = "名称", example = "小乌龟")
     private String name;
-    @ApiModelProperty(name = "编码", example = "001")
-    private String code;
+    @ApiModelProperty(name = "型号id", example = "1")
+    private Integer modelId;
+    @ApiModelProperty(name = "设备ID", example = "001")
+    private String equipmentId;
     @ApiModelProperty(name = "价格", example = "0")
     private BigDecimal price;
     @ApiModelProperty(name = "状态", example = "0")
@@ -33,12 +36,20 @@ public class ReqEquipmentQuery extends BaseModel {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getCode() {
-        return code;
+    public Integer getModelId() {
+        return modelId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
+    }
+
+    public String getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(String equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     public BigDecimal getPrice() {
