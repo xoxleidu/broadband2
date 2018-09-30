@@ -35,15 +35,18 @@ public class ReqCustomerAdd {
     private String mobile;//联系电话
 
     @NotNull(message = "证件地址不能为空")
-    @Length(min = 1, max = 50, message = "客户名称不能超过16位")
+    @Length(min = 1, max = 50, message = "证件地址不能超过50位长度")
     private String address;//证件地址
 
     @NotNull(message = "联系人不能为空")
+    @Length(min = 1, max = 10, message = "联系人不能超过10位长度")
     private String contacts;//联系人
 
     @NotNull(message = "联系电话不能为空")
     private String contactMobile;//联系人电话
 
+    @Min(value=0,message = "最小不能小于0")
+    @Max(value=1,message = "最大不能大于1")
     @NotNull(message = "客户类型不能为空0.客户,1.企业")
     private Integer type;//客户类型
 
