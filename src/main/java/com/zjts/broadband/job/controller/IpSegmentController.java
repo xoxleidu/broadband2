@@ -99,16 +99,20 @@ public class IpSegmentController extends BaseController {
 
     /**
      *  通过id对数据进行修改
-     * @param ipSegment
+     * @param
      * @return
      */
     @ApiOperation("修改ip号段数据")
     @PostMapping("/updateIpSegmentDataById")
     @Transactional
-    public APIResponse updateIpSegmentDataById( @RequestBody IpSegment ipSegment,
+    public APIResponse updateIpSegmentDataById( @RequestBody @Validated ReqIpSegmentAdd reqIpSegment,BindingResult bindingResult,
            HttpServletRequest request, HttpServletResponse response){
+        if (bindingResult.hasErrors())
+            return parameterVerification(bindingResult);
         try{
             logger.debug("ipManage 修改ip号段数据 ");
+            IpSegment ipSegment = new IpSegment();
+            BeanUtils.copyProperties(reqIpSegment,ipSegment);
             int a = ipSegmentService.updateIpSegmentDataById(ipSegment);
             if(a>0)
                 return APIResponse.success();
