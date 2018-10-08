@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,7 @@ public class IpSegmentController extends BaseController {
      */
     @ApiOperation("新增ip号段")
     @PostMapping("/addIpSegment")
+    @Transactional
     public APIResponse addIpSegment(@RequestBody
          @Validated ReqIpSegmentAdd reqIpSegment,
                                     BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response){
@@ -76,6 +78,7 @@ public class IpSegmentController extends BaseController {
      */
     @ApiOperation("通过id停用ip号段")
     @PostMapping("/forbidIpSegment")
+    @Transactional
     public APIResponse forbidIpSegment( @RequestBody Integer Id,
             HttpServletRequest request, HttpServletResponse response){
         try{
@@ -101,6 +104,7 @@ public class IpSegmentController extends BaseController {
      */
     @ApiOperation("修改ip号段数据")
     @PostMapping("/updateIpSegmentDataById")
+    @Transactional
     public APIResponse updateIpSegmentDataById( @RequestBody IpSegment ipSegment,
            HttpServletRequest request, HttpServletResponse response){
         try{

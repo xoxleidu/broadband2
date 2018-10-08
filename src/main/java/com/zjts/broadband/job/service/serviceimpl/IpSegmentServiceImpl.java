@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.zjts.broadband.job.dao.IpSegmentMapper;
 import com.zjts.broadband.job.model.IpSegment;
 import com.zjts.broadband.job.service.IpSegmentService;
+import com.zjts.broadband.util.IPUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,15 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
     @Transactional
     @Override
     public Integer addIpSegment(IpSegment ipSegment) throws  IllegalAccessException {
-            ipSegment.setStatus(false);
 
-            return ipMapper.insert(ipSegment);
+        ipSegment.setStatus(false);
+        String ipStart = ipSegment.getStartIp();
+        String ipEnd = ipSegment.getEndIp();
+        if(!IPUtils.ipValid(ipStart))
+            throw new RuntimeException("起始ip不合法");
+        if(!IPUtils.ipValid(ipEnd))
+        throw new RuntimeException("结束ip不合法");
+        return ipMapper.insert(ipSegment);
 
     }
 
@@ -46,7 +53,12 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
     @Transactional
     @Override
     public Integer updateIpSegmentDataById(IpSegment ipSegment)  {
-
+        String ipStart = ipSegment.getStartIp();
+        String ipEnd = ipSegment.getEndIp();
+        if(!IPUtils.ipValid(ipStart))
+            throw new RuntimeException("起始ip不合法");
+        if(!IPUtils.ipValid(ipEnd))
+            throw new RuntimeException("结束ip不合法");
         return ipMapper.updateAllColumnById(ipSegment);
     }
 
