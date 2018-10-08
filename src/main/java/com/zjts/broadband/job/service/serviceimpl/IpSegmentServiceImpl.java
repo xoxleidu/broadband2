@@ -39,9 +39,10 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
         String ipStart = ipSegment.getStartIp();
         String ipEnd = ipSegment.getEndIp();
         if(!IPUtils.ipValid(ipStart))
-            throw new RuntimeException("起始ip不合法");
+            return 0;
         if(!IPUtils.ipValid(ipEnd))
-        throw new RuntimeException("结束ip不合法");
+            return 0;
+
         return ipMapper.insert(ipSegment);
 
     }
@@ -56,9 +57,9 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
         String ipStart = ipSegment.getStartIp();
         String ipEnd = ipSegment.getEndIp();
         if(!IPUtils.ipValid(ipStart))
-            throw new RuntimeException("起始ip不合法");
+            return 0;
         if(!IPUtils.ipValid(ipEnd))
-            throw new RuntimeException("结束ip不合法");
+            return 0;
         return ipMapper.updateAllColumnById(ipSegment);
     }
 
