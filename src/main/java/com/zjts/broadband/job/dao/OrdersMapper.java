@@ -21,4 +21,6 @@ public interface OrdersMapper extends BaseMapper<Orders> {
     List orderQuery(Page page,OrdersQuery ordersQuery);
     List orderDetailedQuery(OrdersDetailed ordersDetailed);
 
+    int updateDiscount(OrderDiscount orderDiscount);
+
 }

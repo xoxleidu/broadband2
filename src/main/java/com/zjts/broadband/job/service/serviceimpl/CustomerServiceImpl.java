@@ -11,8 +11,10 @@ import com.zjts.broadband.job.dao.CustomerMapper;
 import com.zjts.broadband.job.model.CustomerMessage;
 import com.zjts.broadband.job.service.CustomerService;
 import com.zjts.broadband.system.model.SysUser;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,14 +33,16 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws: Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class )
     public APIResponse add(ReqCustomerAdd reqCustomerAdd) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerAdd, customerMessage);
          Integer time = Math.toIntExact(new Date().getTime() / 1000);
         customerMessage.setCreationTime(time);
         customerMessage.setStatus(0);
+        Integer count=  customerMapper.selectCount(new EntityWrapper<CustomerMessage>().eq("idcard",customerMessage.getIdcard()));
         Integer insert = customerMapper.insert(customerMessage);
-        if (insert != 1) {
+        if (insert != 1 || count>0) {
             return APIResponse.error(CodeEnum.SAVE_ERROR);
         }
         return APIResponse.success();
@@ -50,6 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws: Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class )
     public APIResponse update(ReqCustomerUpdate reqCustomerUpdate) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         BeanUtils.copyProperties(reqCustomerUpdate, customerMessage);
@@ -66,6 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @throws:Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class )
     public APIResponse delete(ReqCustomerDelete reqCustomerDelete) throws Exception {
         CustomerMessage customerMessage = new CustomerMessage();
         customerMessage.setStatus(1);

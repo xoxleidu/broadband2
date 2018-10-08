@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @Api(tags = "订单管理")
@@ -116,6 +117,19 @@ public class OrderMiddleController extends BaseController {
             return parameterVerification(bindingResult);
         try {
             return ordersService.orderDetailedQuery(reqOrderDetailed);
+        }catch (Exception e){
+            return APIResponse.error(CodeEnum.ERROR,"查询失败");
+        }
+    }
+
+
+    @ApiOperation(value = "客户订单折扣接口")
+    @RequestMapping(value = "/orderDiscountQuery",method = RequestMethod.POST)
+    public APIResponse orderDiscount(@RequestBody @Validated ReqOrderDiscount reqOrderDiscount, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (bindingResult.hasErrors())
+            return parameterVerification(bindingResult);
+        try {
+            return ordersService.updateDiscount(reqOrderDiscount);
         }catch (Exception e){
             return APIResponse.error(CodeEnum.ERROR,"查询失败");
         }

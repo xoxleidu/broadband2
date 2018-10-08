@@ -7,10 +7,12 @@ import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.common.model.req.job.orders.*;
 ;
+import com.zjts.broadband.job.dao.EquipmentMapper;
 import com.zjts.broadband.job.dao.OrdersMapper;
 import com.zjts.broadband.job.model.*;
 
 import com.zjts.broadband.job.service.OrdersService;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -67,6 +69,7 @@ public class OrdersServiceImpl implements OrdersService {
      * @throws: Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public APIResponse updateMoney(ReqUpdateMoney reqUpdateMoney) throws Exception {
         Orders orders = new Orders();
         BeanUtils.copyProperties(reqUpdateMoney, orders);
@@ -76,8 +79,7 @@ public class OrdersServiceImpl implements OrdersService {
         orders.setId(reqUpdateMoney.getId());
         entityWrapper.setSqlSelect("money").where("customer_id={0}", orders.getCustomerId()).and("id={0}", orders.getId());
         List<Orders> list = ordersMapper.selectList(entityWrapper);
-        for (Orders or : list
-                ) {
+        for (Orders or : list) {
             orders.setMoney(or.getMoney() + orders.getMoney());
         }
         insert = ordersMapper.updateById(orders);
@@ -96,6 +98,7 @@ public class OrdersServiceImpl implements OrdersService {
      * @throws: Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public APIResponse orderInsert(ReqOrderAdd reqOrderAdd) throws Exception {
         OrderInsert orderInsert = new OrderInsert();
         Orders orders = new Orders();
@@ -154,6 +157,7 @@ public class OrdersServiceImpl implements OrdersService {
      * @throws: Exception
      */
     @Override
+    @Transactional(rollbackFor = Exception.class )
     public APIResponse updateOrderType(ReqUpdateOrderType reqUpdateOrderType) throws Exception {
         Orders orders=new Orders();
         BeanUtils.copyProperties(reqUpdateOrderType, orders);
@@ -166,7 +170,10 @@ public class OrdersServiceImpl implements OrdersService {
     }
     /**
      * 客户订单查询
-     * */
+     * @param: 接收一个ReqOrderQuery类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws: Exception
+     */
     @Override
     public APIResponse orderQuery(Page page,ReqOrderQuery reqOrderQuery)throws Exception{
         OrdersQuery  ordersQuery = new OrdersQuery();
@@ -178,19 +185,43 @@ public class OrdersServiceImpl implements OrdersService {
         return APIResponse.success(page.setRecords(orderQueryList));
     }
 
-    //客户订单详细查询
+    /**
+     * 客户订单详细查询
+     * @param: 接收一个ReqOrderDetailed类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws: Exception
+     */
     @Override
     public APIResponse orderDetailedQuery(ReqOrderDetailed reqOrderDetailed)throws Exception{
         OrdersDetailed  ordersDetailed = new OrdersDetailed();
         BeanUtils.copyProperties(reqOrderDetailed, ordersDetailed);
-        List orderDetailedQuery=  ordersMapper.orderDetailedQuery(ordersDetailed);
-        if (orderDetailedQuery.isEmpty()) {
+        List<OrdersDetailed> orderDetailedQuery=  ordersMapper.orderDetailedQuery(ordersDetailed);
+            if (orderDetailedQuery.isEmpty()) {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
         return APIResponse.success(orderDetailedQuery);
     }
 
 
+
+    /**
+     * 客户订单折扣
+     * @param: 接收一个ReqOrderDiscount类型的对象
+     * @return:返回到APIResponse包装类进行校验
+     * @throws: Exception
+     */
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public APIResponse updateDiscount(ReqOrderDiscount reqOrderDiscount)throws Exception{
+        OrderDiscount  orderDiscount = new OrderDiscount();
+        BeanUtils.copyProperties(reqOrderDiscount, orderDiscount);
+        int cout= ordersMapper.updateDiscount(orderDiscount);
+        if (cout != 1) {
+            return APIResponse.error(CodeEnum.ERROR);
+        }
+        return APIResponse.success();
+    }
 
     /**
      * 生成随机的订单号

@@ -4,6 +4,7 @@ import com.zjts.broadband.common.model.BaseModel;
 import com.zjts.broadband.util.pio.convert.ExportConfig;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -17,7 +18,8 @@ import javax.validation.constraints.Pattern;
  **/
 
 public class ReqCustomerUpdate{
-
+    @NotNull(message = "客户编号不能为空")
+    @Min(value = 1 ,message = "客户编号不能小于1")
     private Integer id;//客户编号
 
     @NotNull(message = "客户名称不能为空")

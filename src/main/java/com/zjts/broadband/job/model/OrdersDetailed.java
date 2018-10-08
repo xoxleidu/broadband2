@@ -11,8 +11,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  **/
 
 public class OrdersDetailed {
-    @JsonIgnore//忽略
-    private String orderNumber;//订单编号
+    public String getOrdersNumber() {
+        return ordersNumber;
+    }
+
+    public void setOrdersNumber(String ordersNumber) {
+        this.ordersNumber = ordersNumber;
+    }
+
+
+    private String ordersNumber;//订单编号
 
     private Integer productId ;//产品id
 
@@ -20,14 +28,17 @@ public class OrdersDetailed {
 
     private  Integer number;//各类产品的数量
 
+
     private   double  discountmoney;//单个折扣后的价格
 
-    public String getOrderNumber() {
-        return orderNumber;
+    private  double money;//订单总价格
+
+    public double getMoney() {
+        return money;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setMoney(double money) {
+        this.money = money;
     }
 
     public Integer getProductId() {

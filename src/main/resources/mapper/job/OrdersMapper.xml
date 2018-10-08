@@ -54,8 +54,15 @@
     <select id="orderDetailedQuery" parameterType="com.zjts.broadband.common.model.req.job.orders.ReqOrderDetailed" resultType="com.zjts.broadband.job.model.OrdersDetailed">
         SELECT    op.`orders_number`,op.`type`,op.`product_id`,COUNT(op.`product_id`) number ,op.`discountmoney`
         FROM   order_product op
-        WHERE op.`orders_number`= #{orderNumber}
+        WHERE op.`orders_number`= #{ordersNumber}
         GROUP BY  op.`type` ,op.`product_id`
     </select>
 
+    <insert id="orderDiscount" parameterType="com.zjts.broadband.job.model.OrderDiscount" >
+        UPDATE order_product op
+        SET op.`discount` =#{discount}
+        WHERE op.orders_number=#{ordersNumber}
+        AND op.type=#{type}
+        AND op.`product_id`=#{productId}
+    </insert>
 </mapper>

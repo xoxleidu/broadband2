@@ -13,13 +13,11 @@ import javax.validation.constraints.NotNull;
  **/
 
 public class ReqOrderDetailed {
-    @Length(min=20, max=20)
+    @Length(max = 20 ,min = 20,message = "订单长度错误")
     @NotNull(message = "订单编号不能为空")
     private String ordersNumber;//订单编号
 
-    public String getOrdersNumber() {
-        return ordersNumber;
-    }
+    public String getOrdersNumber() { return ordersNumber; }
 
     public void setOrdersNumber(String ordersNumber) {
         this.ordersNumber = ordersNumber;
