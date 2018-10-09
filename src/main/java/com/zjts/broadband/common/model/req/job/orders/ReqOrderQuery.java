@@ -2,6 +2,7 @@ package com.zjts.broadband.common.model.req.job.orders;
 
 import com.zjts.broadband.common.model.BaseModel;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -13,12 +14,13 @@ import javax.validation.constraints.NotNull;
  **/
 
 public class ReqOrderQuery extends BaseModel  {
-  @NotNull(message = "不能为空")
+
+    @Min(value = 1 ,message = "客户编号不能小于1")
+    @NotNull(message = "不能为空")
     private Integer id;//客户id
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }

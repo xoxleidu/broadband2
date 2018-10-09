@@ -33,9 +33,12 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
     @Transactional
     @Override
     public Integer addIpSegment(IpSegment ipSegment) throws  IllegalAccessException {
-            ipSegment.setStatus(false);
 
-            return ipMapper.insert(ipSegment);
+        ipSegment.setStatus(0);
+
+
+
+        return ipMapper.insert(ipSegment);
 
     }
 
@@ -46,6 +49,7 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
     @Transactional
     @Override
     public Integer updateIpSegmentDataById(IpSegment ipSegment)  {
+
 
         return ipMapper.updateAllColumnById(ipSegment);
     }
@@ -62,7 +66,7 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
     public Boolean forbidIpSegmentById(Integer id)  {
         IpSegment ipSegment = new IpSegment();
         ipSegment.setId(id);
-        ipSegment.setStatus(true);
+        ipSegment.setStatus(1);
         int a =   ipMapper.updateById(ipSegment);
         if(a == 0)
             throw new RuntimeException("停用ip号段失败!");

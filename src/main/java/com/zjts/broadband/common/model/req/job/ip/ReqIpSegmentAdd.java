@@ -4,6 +4,7 @@ import com.zjts.broadband.common.model.BaseModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * <p>
@@ -32,20 +33,22 @@ public class ReqIpSegmentAdd extends BaseModel {
 	/**
 	 * ip号段的起始地址
 	 */
+	@Pattern(regexp = "(?=(\\b|\\D))(((\\d{1,2})|(1\\d{1,2})|(2[0-4]\\d)|(25[0-5]))\\.){3}((\\d{1,2})|(1\\d{1,2})|(2[0-4]\\d)|(25[0-5]))(?=(\\b|\\D))",message = "ip起始号段参数不合法")
 	@NotNull(message = "起始地址不能为空!")
 	@ApiModelProperty(name="ip起始地址",example = "192.168.0.1",required=true)
 	private String startIp;
 	/**
      * ip号段的结束地址
      */
+	@Pattern(regexp = "(?=(\\b|\\D))(((\\d{1,2})|(1\\d{1,2})|(2[0-4]\\d)|(25[0-5]))\\.){3}((\\d{1,2})|(1\\d{1,2})|(2[0-4]\\d)|(25[0-5]))(?=(\\b|\\D))",message = "ip结束号段参数不合法")
 	@NotNull(message = "结束地址不能为空")
 	@ApiModelProperty(name="ip结束地址",example = "192.168.0.100",required=true)
 	private String endIp;
 	/**
      * 号段状态,0表示正常1表示被停用
      */
-	@ApiModelProperty(name="ip结束地址",example = "true",required=true)
-	private Boolean status;
+	@ApiModelProperty(name="ip结束地址",example = "0",required=true)
+	private Integer status;
 
 
 	public Integer getId() {
@@ -84,11 +87,11 @@ public class ReqIpSegmentAdd extends BaseModel {
 		return this;
 	}
 
-	public Boolean isStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public ReqIpSegmentAdd setStatus(Boolean status) {
+	public ReqIpSegmentAdd setStatus(Integer status) {
 		this.status = status;
 		return this;
 	}

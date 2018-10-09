@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +49,8 @@ public class SpeedController  extends BaseController{
      */
     @ApiOperation("新增ip限速")
     @PostMapping("/addIpSpeed")
-	public APIResponse addSpeed(@RequestBody @Validated ReqSpeedAdd reqSpeed,
+    @Transactional
+    public APIResponse addSpeed(@RequestBody @Validated ReqSpeedAdd reqSpeed,
                                 BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response){
             if (bindingResult.hasErrors())
                 return parameterVerification(bindingResult);
@@ -75,6 +77,7 @@ public class SpeedController  extends BaseController{
      */
     @ApiOperation("删除限速规则")
     @PostMapping("/deleteIpSpeedByIpSegmentId")
+    @Transactional
     public APIResponse deleteIpSpeedByIpSegmentId(@RequestBody  Integer id,
                                                   HttpServletRequest request, HttpServletResponse response){
         try {
@@ -98,6 +101,7 @@ public class SpeedController  extends BaseController{
      */
     @ApiOperation("修改限速规则")
     @PostMapping("/updateIpSpeedById")
+    @Transactional
     public APIResponse updateIpSpeedById(@RequestBody @Validated Speed speed,
                                          HttpServletRequest request, HttpServletResponse response){
 

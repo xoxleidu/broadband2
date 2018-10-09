@@ -1,24 +1,17 @@
 package com.zjts.broadband.job.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
- * @ClassNameOrdersDetailed
+ * @ClassNameOrderDiscount
  * @Description TODO
  * @Authoradmin
- * @Date2018/9/2917:54
+ * @Date2018/9/3013:31
  * @Version1.0
  **/
 
-public class OrdersDetailed {
-    public String getOrdersNumber() {
-        return ordersNumber;
+public class OrderDiscount {
+    public Integer getDiscount() {
+        return discount;
     }
-
-    public void setOrdersNumber(String ordersNumber) {
-        this.ordersNumber = ordersNumber;
-    }
-
 
     private String ordersNumber;//订单编号
 
@@ -28,17 +21,12 @@ public class OrdersDetailed {
 
     private  Integer number;//各类产品的数量
 
-
-    private   double  discountmoney;//单个折扣后的价格
-
-    private  double money;//订单总价格
-
-    public double getMoney() {
-        return money;
+    public String getOrdersNumber() {
+        return ordersNumber;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public void setOrdersNumber(String ordersNumber) {
+        this.ordersNumber = ordersNumber;
     }
 
     public Integer getProductId() {
@@ -65,13 +53,9 @@ public class OrdersDetailed {
         this.number = number;
     }
 
-    public double getDiscountmoney() {
-        return discountmoney;
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 
-    public void setDiscountmoney(double discountmoney) {
-        this.discountmoney = discountmoney;
-    }
-
-
+    private Integer discount;//折扣
 }

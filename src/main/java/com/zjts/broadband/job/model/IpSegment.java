@@ -51,7 +51,7 @@ public class IpSegment extends Model<IpSegment> {
      * 号段状态,0表示正常1表示被停用
      */
 	@ApiModelProperty(name="ip结束地址",example = "true",required=true)
-	private Boolean status;
+	private Integer status;
 
 
 	public Integer getId() {
@@ -90,11 +90,11 @@ public class IpSegment extends Model<IpSegment> {
 		return this;
 	}
 
-	public Boolean isStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public IpSegment setStatus(Boolean status) {
+	public IpSegment setStatus(Integer status) {
 		this.status = status;
 		return this;
 	}
