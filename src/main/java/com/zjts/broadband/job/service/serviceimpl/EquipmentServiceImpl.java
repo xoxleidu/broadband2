@@ -88,6 +88,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         List<Equipment> resultList = new ArrayList<>();
         List<Equipment> list1=new ArrayList<>();
 
+       //限制查询设备表中特定型号的一台设备，再用数量作次数循环
         for (ReqEquipmentUse r : list) {
             for (int i = 0; i < r.getNumber(); i++) {
                 list1 = equipmentMapper.selectList(

@@ -32,7 +32,7 @@ public class GiftController extends BaseController {
     /*
      * 新建赠品分类； 接收name和stock（数量）
      * */
-    @ApiOperation(value = "新建赠品分类接口")
+    @ApiOperation(value = "新建赠品分类接口(name,stock)")
     @RequestMapping(value = "gift/add", method = RequestMethod.POST)
     public APIResponse addGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -52,12 +52,12 @@ public class GiftController extends BaseController {
     @ApiOperation(value = "修改赠品接口")
     @Logger(name = "修改赠品")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
-    public APIResponse updateGift(@RequestBody @Validated ReqGiftQuery reqGiftQuery, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse updateGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
         try {
-            return giftService.update(reqGiftQuery);
+            return giftService.update(reqGiftAdd);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);

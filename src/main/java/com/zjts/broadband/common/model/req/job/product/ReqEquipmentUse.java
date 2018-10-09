@@ -10,16 +10,17 @@ import java.math.BigDecimal;
 
 public class ReqEquipmentUse implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
-
+    @ApiModelProperty(name = "设备名称", example = "1")
     private String name;
-    @ApiModelProperty(name = "类型", example = "AN5006-01")
+    @ApiModelProperty(name = "型号id", example = "1")
     @NotNull
     private Integer modelId;
-
+    @ApiModelProperty(name = "型号")
     private String model;
+    @ApiModelProperty(name = "数量")
     @NotNull
     private Integer number;
-
+    @ApiModelProperty(name = "价格")
     private BigDecimal price;
 
     public String getName() {

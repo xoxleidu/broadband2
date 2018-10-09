@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class ReqGiftUse implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
-@Ignore
+   @Ignore
     private Integer id;
 
     private String name;

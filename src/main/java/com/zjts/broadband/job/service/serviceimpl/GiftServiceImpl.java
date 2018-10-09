@@ -10,6 +10,7 @@ import com.zjts.broadband.common.model.req.job.product.ReqGiftUse;
 import com.zjts.broadband.job.dao.GiftMapper;
 import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.GiftService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,8 @@ public class GiftServiceImpl implements GiftService {
         Gift gift = new Gift();
         BeanUtils.copyProperties(reqGiftAdd, gift);
         Integer stock = gift.getStock();
+        gift.setOutput(0);
+        gift.setStatus("0");
         gift.setAmount(stock.intValue());//给总量赋值
         Integer insert = giftMapper.insert(gift);
 
@@ -42,9 +45,9 @@ public class GiftServiceImpl implements GiftService {
      * 修改赠品
      * */
     @Override
-    public APIResponse update(ReqGiftQuery reqGiftQuery) {
+    public APIResponse update(ReqGiftAdd reqGiftAdd) {
         Gift gift = new Gift();
-        BeanUtils.copyProperties(reqGiftQuery, gift);
+        BeanUtils.copyProperties(reqGiftAdd, gift);
         gift.setAmount(gift.getOutput() + gift.getStock());
         Integer insert = giftMapper.updateById(gift);
         if (insert != 1) {
@@ -68,7 +71,6 @@ public class GiftServiceImpl implements GiftService {
         return APIResponse.success(page.setRecords(myItems));
     }
 
-
     /*
      * 调用赠品
      * */
@@ -76,14 +78,11 @@ public class GiftServiceImpl implements GiftService {
     public APIResponse useGift(List<ReqGiftUse> list) {
         Gift gift = new Gift();
         for (ReqGiftUse g : list) {
-            List<Gift> gift1 = giftMapper.selectList(
-                    new EntityWrapper<Gift>()
-                            .eq("id", g.getId()));
-            if (gift1.isEmpty()) {
+            Gift gift1 = giftMapper.selectById(g.getId());
+            if (gift1.getStock()<g.getOutNumber()) {
                 return APIResponse.error(CodeEnum.NUMBER_NOT_ENOUGH);
             } else {
-                gift = gift1.get(0);
-                gift.setStock(gift.getStock() - g.getOutNumber());
+                gift.setStock(gift1.getStock() - g.getOutNumber());
                 gift.setOutput(gift.getOutput() + g.getOutNumber());
                 gift.setAmount(gift.getStock() + gift.getOutput());
                 Integer update = giftMapper.updateById(gift);

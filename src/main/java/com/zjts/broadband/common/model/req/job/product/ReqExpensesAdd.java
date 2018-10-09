@@ -12,6 +12,7 @@ public class ReqExpensesAdd extends BaseModel {
     private Integer id;
 
     @NotNull(message = "资费名称不能为空")
+    @ApiModelProperty(name = "资费名称")
     private String name;
 
     @NotNull(message = "资费类型不能为空")

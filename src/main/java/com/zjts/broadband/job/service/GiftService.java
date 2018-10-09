@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public interface GiftService {
-    APIResponse update(ReqGiftQuery reqGiftQuery);
+    APIResponse update(ReqGiftAdd reqGiftAdd);
 
     APIResponse add(ReqGiftAdd reqAdd);
 

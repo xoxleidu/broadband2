@@ -28,7 +28,7 @@ public class EquipmentController extends BaseController {
     @Autowired
     private EquipmentService equipmentService;
 
-    @ApiOperation(value = "设备添加接口")
+    @ApiOperation(value = "设备添加接口（name，modelId，equipmentId，price）")
     @RequestMapping(value = "equipment/add", method = RequestMethod.POST)
     public APIResponse addEquipment(@RequestBody @Validated ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
