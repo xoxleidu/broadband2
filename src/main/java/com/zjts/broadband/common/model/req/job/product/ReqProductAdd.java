@@ -1,5 +1,7 @@
 package com.zjts.broadband.common.model.req.job.product;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,6 +13,7 @@ public class ReqProductAdd implements Serializable {
 
     private Integer id;
     @NotNull
+    @Length(max = 30,message = "设备名称长度为1-30")
     private String name;
 
     @DecimalMin("0")

@@ -49,13 +49,19 @@ public class PhoneNumberStockServiceImpl implements PhoneNumberStockService {
     public APIResponse updatePhoneNumber(ReqPhoneNumberStockAdd reqPhoneNumberStockAdd) {
         PhoneNumberStock phoneNumberStock=new PhoneNumberStock();
         BeanUtils.copyProperties(reqPhoneNumberStockAdd, phoneNumberStock);
-        Integer update = phoneNumberStockMapper.updateById(phoneNumberStock) ;
-        if (update != 1) {
-            return APIResponse.error(CodeEnum.DELETE_ERROR);
+        if(phoneNumberStock.getStatus().equals("0")||phoneNumberStock.getStatus().equals("1")){
+            Integer update = phoneNumberStockMapper.updateById(phoneNumberStock) ;
+            if (update != 1) {
+                return APIResponse.error(CodeEnum.DELETE_ERROR);
+            }
+            return APIResponse.success();
         }
-        return APIResponse.success();
+        return APIResponse.error(CodeEnum.STATYS_ERROR);
     }
 
+    /*
+    * 查询号码
+    * */
     @Override
     public APIResponse findPhoneNumber(ReqPhoneNumberStockQuery reqPhoneNumberStockQuery) {
         Page<PhoneNumberStock> page = new Page<PhoneNumberStock>(reqPhoneNumberStockQuery.getCurrentPage(), reqPhoneNumberStockQuery.getPageSize());

@@ -6,6 +6,7 @@ import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
+import com.zjts.broadband.common.model.req.job.product.ReqGiftUpdate;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftUse;
 import com.zjts.broadband.job.dao.GiftMapper;
 import com.zjts.broadband.job.model.Gift;
@@ -45,15 +46,20 @@ public class GiftServiceImpl implements GiftService {
      * 修改赠品
      * */
     @Override
-    public APIResponse update(ReqGiftAdd reqGiftAdd) {
+    public APIResponse update(ReqGiftUpdate reqGiftUpdate) {
         Gift gift = new Gift();
-        BeanUtils.copyProperties(reqGiftAdd, gift);
+        BeanUtils.copyProperties(reqGiftUpdate, gift);
         gift.setAmount(gift.getOutput() + gift.getStock());
-        Integer insert = giftMapper.updateById(gift);
-        if (insert != 1) {
-            return APIResponse.error(CodeEnum.SAVE_ERROR);
+        if (gift.getStatus().equals("0")||gift.getStatus().equals("1")){
+            Integer insert = giftMapper.updateById(gift);
+            if (insert != 1) {
+                return APIResponse.error(CodeEnum.SAVE_ERROR);
+            }
+            return APIResponse.success();
+        }else {
+            return APIResponse.error(CodeEnum.STATYS_ERROR);
         }
-        return APIResponse.success();
+
     }
 
     /*

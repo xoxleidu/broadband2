@@ -39,24 +39,24 @@ public class EquipmentModelServiceImpl implements EquipmentModelService {
     }
 
     /*
-     * 修改单条记录
+     * 修改单条设备型号
      * */
     @Override
     public APIResponse update(ReqEquipmentModelAdd reqEquipmentModelAdd) {
         EquipmentModel equipmentModel=new EquipmentModel();
         BeanUtils.copyProperties(reqEquipmentModelAdd, equipmentModel);
-        if (!equipmentModel.getStatus().isEmpty()){
+        if (equipmentModel.getStatus().equals("0")||equipmentModel.getStatus().equals("1")){
             Integer update = equipmentModelMapper.updateById(equipmentModel);
             if (update != 1) {
-                return APIResponse.error(CodeEnum.DELETE_ERROR);
+                return APIResponse.error(CodeEnum.SAVE_ERROR);
             }
             return APIResponse.success();
         }
-        return APIResponse.error(CodeEnum.SAVE_ERROR);
+        return APIResponse.error(CodeEnum.STATYS_ERROR);
     }
 
     /*
-     * 查询设备
+     * 查询设备型号
      * */
     @Override
     public APIResponse findEquipmentModel(ReqEquipmentModelQuery equipmentModel) {

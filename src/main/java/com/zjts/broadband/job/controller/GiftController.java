@@ -5,6 +5,7 @@ import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
+import com.zjts.broadband.common.model.req.job.product.ReqGiftUpdate;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftUse;
 import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.GiftService;
@@ -49,15 +50,15 @@ public class GiftController extends BaseController {
     /*
      * 修改赠品
      * */
-    @ApiOperation(value = "修改赠品接口")
-    @Logger(name = "修改赠品")
+    @ApiOperation(value = "修改赠品 & 增加数量")
+    @Logger(name = "修改赠品 & 增加数量")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
-    public APIResponse updateGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public APIResponse updateGift(@RequestBody @Validated ReqGiftUpdate reqGiftUpdate, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return parameterVerification(bindingResult);
         }
         try {
-            return giftService.update(reqGiftAdd);
+            return giftService.update(reqGiftUpdate);
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);

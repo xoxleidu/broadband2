@@ -26,8 +26,8 @@ public enum CodeEnum {
   SESSION_NULL_ERROR("013","会话过期,请重新登录。"),
   DELETE_ERROR("1001","删除失败"),
   USE_ERROR("1002","赠品不可用"),
-  NUMBER_NOT_ENOUGH("1003","库存不足")
-
+  NUMBER_NOT_ENOUGH("1003","库存不足"),
+  STATYS_ERROR("1004","状态异常")
   ;
 
   private final String code;

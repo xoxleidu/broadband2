@@ -3,6 +3,7 @@ package com.zjts.broadband.common.model.req.job.product;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.common.model.BaseModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ public class ReqExpensesAdd extends BaseModel {
 
     @NotNull(message = "资费名称不能为空")
     @ApiModelProperty(name = "资费名称")
+    @Length(max = 10,message = "设备名称长度为1-10")
     private String name;
 
     @NotNull(message = "资费类型不能为空")

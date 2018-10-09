@@ -3,6 +3,7 @@ package com.zjts.broadband.common.model.req.job.product;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.zjts.broadband.common.model.BaseModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -15,10 +16,13 @@ public class ReqEquipmentAdd implements Serializable {
     private Integer id;
     @ApiModelProperty(name="设备名称",example = "华为光猫",required = true)
     @NotNull(message = "名称不能为空")
+    @Length(max = 10,message = "设备名称长度为1-10")
     private String name;
+
     @ApiModelProperty(name="型号id",example = "1",required = true)
     @NotNull(message = "型号id不能为空")
     private Integer modelId;
+
     @ApiModelProperty(name="设备ID",example = "001",required = true)
     @NotNull(message = "设备ID不能为空")
     private String equipmentId;

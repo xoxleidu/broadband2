@@ -42,11 +42,16 @@ public class ExpensesServiceImpl implements ExpensesService {
     public APIResponse update(ReqExpensesAdd reqExpensesAdd) {
         Expenses expenses=new Expenses();
         BeanUtils.copyProperties(reqExpensesAdd, expenses);
-        Integer update = expensesMapper.updateById(expenses);
-        if (update != 1) {
-            return APIResponse.error(CodeEnum.SAVE_ERROR);
+        if(expenses.getStatus().equals("0")||expenses.getStatus().equals("1")){
+            Integer update = expensesMapper.updateById(expenses);
+            if (update != 1) {
+                return APIResponse.error(CodeEnum.SAVE_ERROR);
+            }
+            return APIResponse.success();
+        }else {
+            return APIResponse.error(CodeEnum.STATYS_ERROR);
         }
-        return APIResponse.success();
+
     }
 
     /*

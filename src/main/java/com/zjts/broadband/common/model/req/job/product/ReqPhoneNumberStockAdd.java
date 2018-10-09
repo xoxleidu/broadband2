@@ -5,8 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ReqPhoneNumberStockAdd extends BaseModel {
+public class ReqPhoneNumberStockAdd implements Serializable {
+    private static final long serialVersionUID =1001943494952931101L;
+
     private Integer id;
     @NotNull(message = "号码不能为空")
     @Length(min = 7,max = 8,message = "固话号码长度7-8位")

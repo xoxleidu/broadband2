@@ -49,19 +49,24 @@ public class EquipmentServiceImpl implements EquipmentService {
     public APIResponse update(ReqEquipmentAdd reqEquipmentAdd) {
         Equipment equipment = new Equipment();
         BeanUtils.copyProperties(reqEquipmentAdd, equipment);
-        if (equipment.getStatus().equals("2")) {
-            int current = (int) (System.currentTimeMillis() / 1000);
-            equipment.setOutTime(current);
-        }
-        if (equipment.getStatus().equals("0")){
-            equipment.setOutTime(0);
-        }
-        Integer delete = equipmentMapper.updateById(equipment) ;
-        if (delete != 1) {
-            return APIResponse.error(CodeEnum.DELETE_ERROR);
+
+        if(equipment.getStatus().equals("0")||equipment.getStatus().equals("1")||equipment.getStatus().equals("2")){
+            if (equipment.getStatus().equals("2")) {
+                int current = (int) (System.currentTimeMillis() / 1000);
+                equipment.setOutTime(current);
+            }
+            if (equipment.getStatus().equals("0")){
+                equipment.setOutTime(0);
+            }
+            Integer delete = equipmentMapper.updateById(equipment) ;
+            if (delete != 1) {
+                return APIResponse.error(CodeEnum.DELETE_ERROR);
+            }
+            return APIResponse.success();
+        }else {
+            return APIResponse.error(CodeEnum.STATYS_ERROR);
         }
 
-        return APIResponse.success();
     }
 
     /*

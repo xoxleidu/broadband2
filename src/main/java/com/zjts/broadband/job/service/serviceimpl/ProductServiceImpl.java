@@ -61,19 +61,26 @@ public class ProductServiceImpl implements ProductService {
         BigDecimal totlePrice = BigDecimal.valueOf(0);
         Product product = new Product();
         BeanUtils.copyProperties(reqProductAdd, product);
-        //计算套餐价格
-        for (ReqExpensesUse r : reqProductAdd.getExpensesList()) {
-            totlePrice = totlePrice.add(r.getPrice());
+
+        if(product.getStatus().equals("0")||product.getStatus().equals("1")){
+            //计算套餐价格
+            for (ReqExpensesUse r : reqProductAdd.getExpensesList()) {
+                totlePrice = totlePrice.add(r.getPrice());
+            }
+            for (ReqEquipmentUse r : reqProductAdd.getEquipmentList()) {
+                totlePrice = totlePrice.add(r.getPrice().multiply(new BigDecimal(r.getNumber())));//计算所有设备价格总和
+            }
+            product.setPrice(totlePrice);
+            Integer update = productMapper.myUpdate(product);
+            if (update != 1) {
+                return APIResponse.error(CodeEnum.SAVE_ERROR, "修改套餐失败");
+            }
+            return APIResponse.success();
+        }else {
+            return APIResponse.error(CodeEnum.STATYS_ERROR);
         }
-        for (ReqEquipmentUse r : reqProductAdd.getEquipmentList()) {
-            totlePrice = totlePrice.add(r.getPrice().multiply(new BigDecimal(r.getNumber())));//计算所有设备价格总和
-        }
-        product.setPrice(totlePrice);
-        Integer update = productMapper.myUpdate(product);
-        if (update != 1) {
-            return APIResponse.error(CodeEnum.SAVE_ERROR, "修改套餐失败");
-        }
-        return APIResponse.success();
+
+
     }
 
     /*
