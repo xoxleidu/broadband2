@@ -2,6 +2,8 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.ip.ReqIpSegmentAdd;
 import com.zjts.broadband.job.model.IpSegment;
@@ -47,6 +49,7 @@ public class IpSegmentController extends BaseController {
      * @param reqIpSegment  IpSegment对象
      * @return
      */
+    @ControllerLog(description="测试新增ip号段")
     @ApiOperation("新增ip号段")
     @PostMapping("/addIpSegment")
     @Transactional

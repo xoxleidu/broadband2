@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.zjts.broadband.common.log.ControllerLog;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.job.dao.IpSegmentMapper;
 import com.zjts.broadband.job.model.IpSegment;
 import com.zjts.broadband.job.service.IpSegmentService;
@@ -30,14 +32,11 @@ public class IpSegmentServiceImpl extends ServiceImpl<IpSegmentMapper, IpSegment
 
     org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     @Transactional
     @Override
     public Integer addIpSegment(IpSegment ipSegment) throws  IllegalAccessException {
-
         ipSegment.setStatus(0);
-
-
-
         return ipMapper.insert(ipSegment);
 
     }

@@ -6,7 +6,7 @@ import com.zjts.broadband.common.controller.BaseController;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.ip.ReqSpeedAdd;
 import com.zjts.broadband.job.model.Speed;
-import com.zjts.broadband.job.service.ISpeedService;
+import com.zjts.broadband.job.service.SpeedService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class SpeedController  extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-    private ISpeedService speedService;
+    private SpeedService speedService;
 
     /**
      *          新增ip限速

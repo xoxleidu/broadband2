@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @author han zq
  * @since 2018-09-13
  */
-public interface ISpeedService extends IService<Speed> {
+public interface SpeedService extends IService<Speed> {
 	
 }

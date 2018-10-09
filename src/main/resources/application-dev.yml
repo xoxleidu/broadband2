@@ -63,9 +63,9 @@ spring:
 
   data:
       mongodb:
-        host: localhost
+        host: 60.10.139.112
         port: 27017
-        authentication-database: broadband
+        database: broadband
 
 #    redis:
 #      database: 0
