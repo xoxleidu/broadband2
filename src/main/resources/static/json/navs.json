@@ -1,0 +1,70 @@
+[{
+	"title" : "后台首页",
+	"icon" : "icon-computer",
+	"href" : "page/main.html",
+	"spread" : false
+},{
+	"title" : "产品选择",
+	"icon" : "icon-text",
+	"href" : "page/product/product.html",
+	"spread" : false
+},{
+	"title" : "用戶操作",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "老用戶信息",
+			"icon" : "&#xe61c;",
+			"href" : "page/user/userInfo.html",
+			"spread" : false
+		},
+		{
+			"title" : "新用戶信息",
+			"icon" : "&#xe609;",
+			"href" : "page/user/oldUserInfo.html",
+			"spread" : false
+		}
+	]
+},{
+	"title" : "订单操作",
+	"icon" : "&#xe630;",
+	"href" : "page/order/order.html",
+	"spread" : false
+},{
+	"title" : "工单派遣",
+	"icon" : "&#xe64c;",
+	"href" : "",
+	"spread" : false
+},{
+	"title" : "套餐管理",
+	"icon" : "&#xe631;",
+	"href" : "",
+	"spread" : false
+},{
+	"title" : "套餐管理",
+	"icon" : "&#xe631;",
+	"href" : "",
+	"spread" : false
+},{
+	"title" : "设备管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "404页面",
+			"icon" : "&#xe61c;",
+			"href" : "page/404.html",
+			"spread" : false
+		},
+		{
+			"title" : "登录",
+			"icon" : "&#xe609;",
+			"href" : "page/login/login.html",
+			"spread" : false,
+			"target" : "_blank"
+		}
+	]
+}]
