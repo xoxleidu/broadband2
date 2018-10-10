@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqPhoneNumberStockAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqPhoneNumberStockQuery;
@@ -34,6 +35,7 @@ public class PhoneNumberStockController extends BaseController {
     private PhoneNumberStockService phoneNumberStockService;
 
     @ApiOperation(value = "添加固话号码接口")
+    @ControllerLog(description = "添加固话号码")
     @RequestMapping(value = "phoneNumber/add", method = RequestMethod.POST)
     public APIResponse addPhoneNumber(@RequestBody @Validated ReqPhoneNumberStockAdd reqPhoneNumberStockAdd,
                                       BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
@@ -49,6 +51,7 @@ public class PhoneNumberStockController extends BaseController {
     }
 
     @ApiOperation(value = "根据id修改固话号码（状态）接口")
+    @ControllerLog(description = "修改固话号码")
     @RequestMapping(value = "phoneNumber/update", method = RequestMethod.POST)
     public APIResponse updatePhoneNumber(@RequestBody @Validated ReqPhoneNumberStockAdd reqPhoneNumberStockAdd,
                                       BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {

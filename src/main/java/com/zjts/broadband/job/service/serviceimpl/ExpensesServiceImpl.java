@@ -3,6 +3,7 @@ package com.zjts.broadband.job.service.serviceimpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqExpensesAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqExpensesQuery;
@@ -24,6 +25,7 @@ public class ExpensesServiceImpl implements ExpensesService {
     private ExpensesMapper expensesMapper;
 
     @Override
+    @ServiceLog(description = "添加资费")
     public APIResponse add(ReqExpensesAdd reqExpensesAdd) {
         Expenses expenses=new Expenses();
         BeanUtils.copyProperties(reqExpensesAdd, expenses);
@@ -39,6 +41,7 @@ public class ExpensesServiceImpl implements ExpensesService {
     * 修改资费
     * */
     @Override
+    @ServiceLog(description = "修改资费")
     public APIResponse update(ReqExpensesAdd reqExpensesAdd) {
         Expenses expenses=new Expenses();
         BeanUtils.copyProperties(reqExpensesAdd, expenses);

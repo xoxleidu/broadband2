@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.*;
 import com.zjts.broadband.job.model.Gift;
@@ -32,6 +33,7 @@ public class ProductController extends BaseController {
     private ProductService productService;
 
     @ApiOperation(value = "添加套餐接口")
+    @ControllerLog(description = "添加套餐接口")
     @RequestMapping(value = "product/add", method = RequestMethod.POST)
     public APIResponse addProduct(@RequestBody @Validated ReqProductAdd reqProductAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -46,6 +48,7 @@ public class ProductController extends BaseController {
     }
 
     @ApiOperation(value = "修改套餐接口")
+    @ControllerLog(description = "修改套餐接口")
     @RequestMapping(value = "product/update", method = RequestMethod.POST)
     public APIResponse updateProduct(@RequestBody @Validated ReqProductAdd reqProductAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {

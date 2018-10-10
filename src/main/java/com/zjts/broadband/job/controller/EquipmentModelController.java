@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentModelAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentModelQuery;
@@ -33,6 +34,7 @@ public class EquipmentModelController extends BaseController {
     private EquipmentModelService equipmentModelService;
 
     @ApiOperation(value = "设备型号添加接口")
+    @ControllerLog(description = "设备型号添加")
     @RequestMapping(value = "model/add", method = RequestMethod.POST)
     public APIResponse addEquipmentModel(@RequestBody @Validated  ReqEquipmentModelAdd reqEquipmentModelAdd ,BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -48,6 +50,7 @@ public class EquipmentModelController extends BaseController {
 
 
     @ApiOperation(value = "根据id修改设备（status：0/1 --> 可用/不可用")
+    @ControllerLog(description = "设备型号修改")
     @RequestMapping(value = "model/update", method = RequestMethod.POST)
     public APIResponse updateEquipmentModel(@RequestBody @Validated  ReqEquipmentModelAdd reqEquipmentModelAdd,BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {

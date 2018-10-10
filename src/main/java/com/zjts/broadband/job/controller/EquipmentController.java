@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentQuery;
@@ -29,6 +30,7 @@ public class EquipmentController extends BaseController {
     private EquipmentService equipmentService;
 
     @ApiOperation(value = "设备添加接口（name，modelId，equipmentId，price）")
+    @ControllerLog(description = "设备添加")
     @RequestMapping(value = "equipment/add", method = RequestMethod.POST)
     public APIResponse addEquipment(@RequestBody @Validated ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -44,6 +46,7 @@ public class EquipmentController extends BaseController {
 
 
     @ApiOperation(value = "根据id修改设备（status：0/1/2 --> 可用/待出库/已出库）")
+    @ControllerLog(description = "设备修改")
     @RequestMapping(value = "equipment/update", method = RequestMethod.POST)
     public APIResponse updateEquipment(@RequestBody ReqEquipmentAdd reqEquipmentAdd, HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -66,6 +69,7 @@ public class EquipmentController extends BaseController {
     }
 
     @ApiOperation(value = "设备调用(modelId，number)")
+    @ControllerLog(description = "设备调用")
     @RequestMapping(value = "equipment/useEquipment", method = RequestMethod.POST)
     public APIResponse useEquipment(@RequestBody @Validated List<ReqEquipmentUse> list, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {

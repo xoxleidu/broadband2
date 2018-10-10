@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqExpensesAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqExpensesQuery;
@@ -25,6 +26,7 @@ public class ExpensesController extends BaseController {
     private ExpensesService expensesService;
 
     @ApiOperation(value = "资费添加接口")
+    @ControllerLog(description = "资费添加接口")
     @RequestMapping(value = "expenses/add", method = RequestMethod.POST)
     public APIResponse addExpenses(@RequestBody @Validated ReqExpensesAdd reqExpensesAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -39,6 +41,7 @@ public class ExpensesController extends BaseController {
     }
 
     @ApiOperation(value = "资费修改接口")
+    @ControllerLog(description = "资费修改接口")
     @RequestMapping(value = "expenses/update", method = RequestMethod.POST)
     public APIResponse updateExpenses(@RequestBody  @Validated ReqExpensesAdd reqExpensesAdd, BindingResult bindingResult,HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {

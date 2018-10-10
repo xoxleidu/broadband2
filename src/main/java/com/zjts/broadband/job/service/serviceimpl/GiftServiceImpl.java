@@ -3,6 +3,7 @@ package com.zjts.broadband.job.service.serviceimpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
@@ -30,6 +31,7 @@ public class GiftServiceImpl implements GiftService {
      * 增加赠品分类
      * */
     @Override
+    @ServiceLog(description = "添加赠品分类")
     public APIResponse add(ReqGiftAdd reqGiftAdd) {
         Gift gift = new Gift();
         BeanUtils.copyProperties(reqGiftAdd, gift);
@@ -46,6 +48,7 @@ public class GiftServiceImpl implements GiftService {
      * 修改赠品
      * */
     @Override
+    @ServiceLog(description = "修改赠品")
     public APIResponse update(ReqGiftUpdate reqGiftUpdate) {
         Gift gift = new Gift();
         BeanUtils.copyProperties(reqGiftUpdate, gift);
@@ -81,6 +84,7 @@ public class GiftServiceImpl implements GiftService {
      * 调用赠品
      * */
     @Override
+    @ServiceLog(description = "调用赠品")
     public APIResponse useGift(List<ReqGiftUse> list) {
         Gift gift = new Gift();
         for (ReqGiftUse g : list) {

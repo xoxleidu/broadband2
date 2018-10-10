@@ -3,6 +3,7 @@ package com.zjts.broadband.job.service.serviceimpl;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.*;
 import com.zjts.broadband.job.dao.ProductMapper;
@@ -26,7 +27,9 @@ public class ProductServiceImpl implements ProductService {
     /*
      * 套餐添加
      * */
+
     @Override
+    @ServiceLog(description = "添加套餐")
     public APIResponse addProduct(ReqProductAdd reqProductAdd) {
         BigDecimal totlePrice = BigDecimal.valueOf(0);
         Product product = new Product();
@@ -57,6 +60,7 @@ public class ProductServiceImpl implements ProductService {
      * 修改套餐
      * */
     @Override
+    @ServiceLog(description = "修改套餐")
     public APIResponse updateProduct(ReqProductAdd reqProductAdd) {
         BigDecimal totlePrice = BigDecimal.valueOf(0);
         Product product = new Product();
@@ -95,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
     /*
      * 套餐基本情况
      * */
+
     @Override
     public APIResponse findProductBase(ReqProductQuery reqProductQuery) {
         Page<Product> page = new Page<>(reqProductQuery.getCurrentPage(), reqProductQuery.getPageSize());

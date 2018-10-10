@@ -2,6 +2,7 @@ package com.zjts.broadband.job.controller;
 
 import com.zjts.broadband.common.constant.CodeEnum;
 import com.zjts.broadband.common.controller.BaseController;
+import com.zjts.broadband.common.log.ControllerLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
@@ -34,6 +35,7 @@ public class GiftController extends BaseController {
      * 新建赠品分类； 接收name和stock（数量）
      * */
     @ApiOperation(value = "新建赠品分类接口(name,stock)")
+    @ControllerLog(description = "新建赠品分类")
     @RequestMapping(value = "gift/add", method = RequestMethod.POST)
     public APIResponse addGift(@RequestBody @Validated ReqGiftAdd reqGiftAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -51,7 +53,7 @@ public class GiftController extends BaseController {
      * 修改赠品
      * */
     @ApiOperation(value = "修改赠品 & 增加数量")
-    @Logger(name = "修改赠品 & 增加数量")
+    @ControllerLog(description = "修改赠品 & 增加数量")
     @RequestMapping(value = "gift/update", method = RequestMethod.POST)
     public APIResponse updateGift(@RequestBody @Validated ReqGiftUpdate reqGiftUpdate, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
@@ -77,6 +79,7 @@ public class GiftController extends BaseController {
     }
 
     @ApiOperation(value = "调用赠品")
+    @ControllerLog(description = "调用赠品")
     @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)
     public APIResponse useGift(@RequestBody List<ReqGiftUse> list, HttpServletRequest request, HttpServletResponse response) {
         try {

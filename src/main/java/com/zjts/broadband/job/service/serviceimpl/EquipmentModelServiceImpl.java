@@ -3,6 +3,7 @@ package com.zjts.broadband.job.service.serviceimpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.constant.CodeEnum;
+import com.zjts.broadband.common.log.ServiceLog;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentModelAdd;
 import com.zjts.broadband.common.model.req.job.product.ReqEquipmentModelQuery;
@@ -28,6 +29,7 @@ public class EquipmentModelServiceImpl implements EquipmentModelService {
      * 添加设备型号
      * */
     @Override
+    @ServiceLog(description = "添加设备型号")
     public APIResponse add(ReqEquipmentModelAdd reqEquipmentModelAdd) {
         EquipmentModel equipmentModel=new EquipmentModel();
         BeanUtils.copyProperties(reqEquipmentModelAdd, equipmentModel);
@@ -42,6 +44,7 @@ public class EquipmentModelServiceImpl implements EquipmentModelService {
      * 修改单条设备型号
      * */
     @Override
+    @ServiceLog(description = "修改设备型号")
     public APIResponse update(ReqEquipmentModelAdd reqEquipmentModelAdd) {
         EquipmentModel equipmentModel=new EquipmentModel();
         BeanUtils.copyProperties(reqEquipmentModelAdd, equipmentModel);
