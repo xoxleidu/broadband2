@@ -1,22 +1,37 @@
 layui.config({
 	base : "js/"
-}).use(['form','layer','jquery','laypage'],function(){
+}).use(['form','layer','jquery','laypage','upload'],function(){
 	var form = layui.form(),
 		layer = parent.layer === undefined ? layui.layer : parent.layer,
 		laypage = layui.laypage,
 		$ = layui.jquery;
 
-	//加载页面数据
+    //加载页面数据
 	var usersData = '';
-	$.get("../../json/usersList.json", function(data){
-		usersData = data;
-		if(window.sessionStorage.getItem("addUser")){
-			var addUser = window.sessionStorage.getItem("addUser");
-			usersData = JSON.parse(addUser).concat(usersData);
-		}
-		//执行加载数据的方法
-		usersList();
-	})
+	var ajaxData = {
+		'pageSize':13
+	};
+
+    $.ajax({
+        type: "post",
+        url: "customer/customerMessage/queryAllCustomer",
+        data: JSON.stringify(ajaxData),
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function(res){
+        	alert(res);
+            usersData = res;
+            if(window.sessionStorage.getItem("addUser")){
+                var addUser = window.sessionStorage.getItem("addUser");
+                usersData = JSON.parse(addUser).concat(usersData);
+            }
+            //执行加载数据的方法
+            usersList();
+        },
+        error: function (e) {
+            alertConsole(e);
+        }
+    })
 
 	//查询
 	$(".search_btn").click(function(){
