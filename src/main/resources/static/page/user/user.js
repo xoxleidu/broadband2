@@ -98,26 +98,52 @@ layui.config({
         //将填写的用户信息存到session以便下次调取
         var key,userInfoHtml = '';
         userInfoHtml = {
-            'realName' : $(".realName").val(),
+            'address' : $("#address").val(),
             'sex' : data.field.sex,
-            'userPhone' : $(".userPhone").val(),
-            'userBirthday' : $(".userBirthday").val(),
-            'province' : data.field.province,
-            'city' : data.field.city,
-            'area' : data.field.area,
-            'userEmail' : $(".userEmail").val(),
-            'myself' : $(".myself").val()
+            'contactMobile' : $("#contactMobile").val(),
+            'contacts' : $("#contacts").val(),
+            'idcard' : $("#idcard").val(),
+            'mobile' : $("#mobile").val(),
+            'name' : $("#name").val(),
+            'tel' : $("#address").val(),
+            'type': 0
         };
-        for(key in data.field){
+        /*for(key in data.field){
             if(key.indexOf("like") != -1){
                 userInfoHtml[key] = "on";
             }
-        }
-        window.sessionStorage.setItem("userInfo",JSON.stringify(userInfoHtml));
-        setTimeout(function(){
-            layer.close(index);
-            layer.msg("提交成功！");
-        },2000);
+        }*/
+        //window.sessionStorage.setItem("userInfo",JSON.stringify(userInfoHtml));
+
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/broadband/customer/customerMessage/add",
+            data: JSON.stringify(userInfoHtml),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                /*if (data.flag === 1) {
+                    kenWindowClose(true);
+                    var callback = eval("window.parent.LoadData1");
+                    callback("操作成功！");
+                }
+                else {
+                    GysAlert({
+                        content: data.message
+                    });
+                }*/
+
+                setTimeout(function(){
+                    layer.close(index);
+                    layer.msg("提交成功！");
+                },2000);
+            },
+            error: function (e) {
+                alertConsole(e);
+            }
+        });
+
+
     	return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     })
 

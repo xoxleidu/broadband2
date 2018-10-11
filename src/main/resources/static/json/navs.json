@@ -15,15 +15,15 @@
 	"spread" : false,
 	"children" : [
 		{
-			"title" : "老用戶信息",
+			"title" : "用戶信息",
 			"icon" : "&#xe61c;",
-			"href" : "page/user/userInfo.html",
+			"href" : "page/user/allUsers.html",
 			"spread" : false
 		},
 		{
 			"title" : "新用戶信息",
 			"icon" : "&#xe609;",
-			"href" : "page/user/oldUserInfo.html",
+			"href" : "page/user/UserInfo.html",
 			"spread" : false
 		}
 	]
@@ -45,7 +45,7 @@
 },{
 	"title" : "套餐管理",
 	"icon" : "&#xe631;",
-	"href" : "",
+	"href" : "page/news/newsList.html",
 	"spread" : false
 },{
 	"title" : "设备管理",
