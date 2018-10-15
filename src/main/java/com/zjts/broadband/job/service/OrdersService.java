@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.zjts.broadband.common.model.APIResponse;
 import com.zjts.broadband.common.model.req.job.customer.ReqCustomerUpdate;
 import com.zjts.broadband.common.model.req.job.orders.*;
-import com.zjts.broadband.job.model.OrderDiscount;
-
 import java.util.Map;
 
 public interface OrdersService {

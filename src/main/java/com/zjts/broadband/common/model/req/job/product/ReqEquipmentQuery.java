@@ -9,15 +9,14 @@ import java.math.BigDecimal;
 public class ReqEquipmentQuery extends BaseModel {
 
     private Integer id;
-    @ApiModelProperty(name = "名称", example = "小乌龟")
-    private String name;
-    @ApiModelProperty(name = "型号id", example = "1")
+
+    @ApiModelProperty(name = "型号表id", example = "1")
     private Integer modelId;
-    @ApiModelProperty(name = "设备ID", example = "001")
-    private String equipmentId;
-    @ApiModelProperty(name = "价格", example = "0")
-    private BigDecimal price;
-    @ApiModelProperty(name = "状态", example = "0")
+
+    @ApiModelProperty(name = "设备编码", example = "001")
+    private String equipmentNumber;
+
+    @ApiModelProperty(name = "设备状态", example = "001")
     private String status;
 
     public Integer getId() {
@@ -28,14 +27,6 @@ public class ReqEquipmentQuery extends BaseModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
     public Integer getModelId() {
         return modelId;
     }
@@ -44,20 +35,12 @@ public class ReqEquipmentQuery extends BaseModel {
         this.modelId = modelId;
     }
 
-    public String getEquipmentId() {
-        return equipmentId;
+    public String getEquipmentNumber() {
+        return equipmentNumber;
     }
 
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setEquipmentNumber(String equipmentNumber) {
+        this.equipmentNumber = equipmentNumber;
     }
 
     public String getStatus() {

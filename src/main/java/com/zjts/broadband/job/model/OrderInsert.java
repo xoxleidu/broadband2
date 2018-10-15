@@ -7,7 +7,7 @@ public class OrderInsert {
     private String orderNumber;
     //套餐表ID
     private Integer productId;
-    //订单金额
+    //订单单项金额
     private Integer discountMoney;
     //用户ID
     private Integer customerId;

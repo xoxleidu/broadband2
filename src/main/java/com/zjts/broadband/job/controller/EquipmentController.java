@@ -29,7 +29,7 @@ public class EquipmentController extends BaseController {
     @Autowired
     private EquipmentService equipmentService;
 
-    @ApiOperation(value = "设备添加接口（name，modelId，equipmentId，price）")
+    @ApiOperation(value = "设备添加接口（modelId，equipmentId）")
     @ControllerLog(description = "设备添加")
     @RequestMapping(value = "equipment/add", method = RequestMethod.POST)
     public APIResponse addEquipment(@RequestBody @Validated ReqEquipmentAdd reqEquipmentAdd, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
@@ -57,7 +57,7 @@ public class EquipmentController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "任意条件查询（id，name，model，equipmentId，status）")
+    @ApiOperation(value = "任意条件查询（id，model，equipmentNumber，status）")
     @RequestMapping(value = "equipment/findEquipment", method = RequestMethod.POST)
     public APIResponse findEquipment(@RequestBody ReqEquipmentQuery reqEquipmentQuery, HttpServletRequest request, HttpServletResponse response) {
         try {

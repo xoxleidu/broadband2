@@ -40,7 +40,6 @@
     <if test="cycle !=null ">
       and cycle=#{cycle,jdbcType=INTEGER}
     </if>
-
     <if test="status !=null">
       and status=#{status,jdbcType=CHAR}
     </if>

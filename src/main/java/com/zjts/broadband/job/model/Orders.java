@@ -3,25 +3,36 @@ package com.zjts.broadband.job.model;
 import java.io.Serializable;
 
 public class Orders implements Serializable {
+
+    //订单ID
     private Integer id;
-
+    //用户ID
     private Integer customerId;
-
+    //订单号
     private String orderNumber;
-
+    //创建时间
     private Integer createTime;
-
+    //结束时间
     private Integer expiryTime;
-
+   //余额
     private Integer money;
-
+   //备注
     private String remarks;
-
+  //状态
     private Integer type;
-
+   //安装时间
     private Integer installDate;
-
+    //安装地址
     private String installAddress;
+     private String telephone;
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public Integer getId() {
         return id;

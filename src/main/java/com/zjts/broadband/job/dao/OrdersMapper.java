@@ -14,7 +14,7 @@ public interface OrdersMapper extends BaseMapper<Orders> {
 
     List<Map> selectOrderAll(Page<Map> mapPage, OrdersAll orderQuery);
 
-    int updateMoney(Orders orderQuery);
+    int updateOrderProduct(OrderUpdate orderUpdate);
     int insertOrder(OrderInsert orderInsert);
     OrderInsert selectExpensesCycle(int id);
 
@@ -22,5 +22,7 @@ public interface OrdersMapper extends BaseMapper<Orders> {
     List orderDetailedQuery(OrdersDetailed ordersDetailed);
 
     int updateDiscount(OrderDiscount orderDiscount);
+    int selectOrderProduct(OrderUpdate orderUpdate);
+    int updateByType(Orders orders);
 
 }

@@ -10,6 +10,7 @@ import com.zjts.broadband.common.model.req.job.product.ReqGiftQuery;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftUpdate;
 import com.zjts.broadband.common.model.req.job.product.ReqGiftUse;
 import com.zjts.broadband.job.dao.GiftMapper;
+import com.zjts.broadband.job.model.EquipmentModel;
 import com.zjts.broadband.job.model.Gift;
 import com.zjts.broadband.job.service.GiftService;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -78,6 +80,22 @@ public class GiftServiceImpl implements GiftService {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
         return APIResponse.success(page.setRecords(myItems));
+    }
+
+    /*
+     * 根据id多选查询赠品
+     * */
+    @Override
+    public APIResponse findById(List<Integer> ids) {
+        List<Gift> result =new ArrayList<>();
+        for (Integer id : ids) {
+            Gift gift=giftMapper.selectById(id);
+            if (gift.equals(null)) {
+                return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
+            }
+            result.add(gift);
+        }
+        return APIResponse.success(result);
     }
 
     /*

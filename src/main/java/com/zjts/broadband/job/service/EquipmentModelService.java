@@ -16,5 +16,7 @@ public interface EquipmentModelService {
 
     APIResponse findEquipmentModel(ReqEquipmentModelQuery query);
 
+    APIResponse findEquipmentModelById(List<Integer> idList);
+
     List<EquipmentModel> findForExcel();
 }

@@ -25,8 +25,29 @@ public class OrdersAll implements Serializable {
     private String remarks;
     //金额
     private  int discountmoney;
-    //产品类型 如宽带
+    //资费名称
     private  String expensesName;
+    //产品类型
+    private  int projectType;
+    //产品类型ID
+    private  int projectId;
+
+    public int getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(int projectType) {
+        this.projectType = projectType;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
     public String getExpensesName() {
         return expensesName;
     }

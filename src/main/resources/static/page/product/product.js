@@ -1,14 +1,9 @@
-layui.config({
-	base : "js/"
-}).use(['form','layer','jquery','layedit','laydate','element'],function(){
-	var form = layui.form(),
-		layer = parent.layer === undefined ? layui.layer : parent.layer,
-		laypage = layui.laypage,
-		layedit = layui.layedit,
-		laydate = layui.laydate,
-    	element = layui.element;
-		$ = layui.jquery;
+layui.use(['form','layer'],function(){
+    var form = layui.form
+        layer = parent.layer === undefined ? layui.layer : top.layer,
+        $ = layui.jquery;
 
+    //alert(JSON.stringify(layer));
 
     ///product/product/findProductById
     ///product/expenses/find
@@ -18,16 +13,18 @@ layui.config({
 
 	//页面初始化
     var serverPath = "http://localhost:8080/broadband";
+    $("#sysIdcard").val(parent.$('#idcard').val());
+    //parent.parent.$("#hideCollectionId").val();//取得父页面之父页面的非动态生成的元素
+    var findProductBase = {
+        "currentPage": 1,
+        "pageSize": 50
+    };
+
     var productData ="";
     var expensesData = "";
     var equipmentData = "";
     var equipmentModelData = "";
     var giftData = "";
-
-	var findProductBase = {
-        "currentPage": 1,
-        "pageSize": 50
-    };
 
     $.ajax({
         type: "post",
@@ -63,7 +60,7 @@ layui.config({
 
     $.ajax({
         type: "post",
-        url: serverPath + "/product/equipment/findEquipment",
+        url: serverPath + "/product/model/find",
         data: JSON.stringify(findProductBase),
         contentType: "application/json;charset=utf-8",
         dataType: "json",
@@ -97,7 +94,7 @@ layui.config({
 
         var dataHtml = '';
         for(var i=0;i<data.length;i++){
-            dataHtml += '<input id="product" value="'
+            dataHtml += '<input name="product" value="'
                 + data[i].id
                 + '" title="'
                 + data[i].name
@@ -111,7 +108,7 @@ layui.config({
 
         var dataHtml = '';
         for(var i=0;i<data.length;i++){
-            dataHtml += '<input id="expenses" value="'
+            dataHtml += '<input name="expenses" value="'
                 + data[i].id
                 + '" title="'
                 + data[i].name
@@ -125,7 +122,7 @@ layui.config({
 
         var dataHtml = '';
         for(var i=0;i<data.length;i++){
-            dataHtml += '<input id="equipment" value="'
+            dataHtml += '<input name="equipment" value="'
                 + data[i].id
                 + '" title="'
                 + data[i].name
@@ -139,7 +136,7 @@ layui.config({
 
         var dataHtml = '';
         for(var i=0;i<data.length;i++){
-            dataHtml += '<input id="gift" value="'
+            dataHtml += '<input name="gift" value="'
                 + data[i].id
                 + '" title="'
                 + data[i].name
@@ -151,26 +148,109 @@ layui.config({
 
     //提交个人资料
     form.on("submit(addProduct)",function(data){
-        var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
-        //将填写的用户信息存到session以便下次调取
-        var key,userInfoHtml = '';
-        userInfoHtml = {
-            'product' : $("#product").val(),
-            'expenses' : $("#expenses").val(),
-            'equipment' : $("#equipment").val(),
-            'gift' : $("#gift").val()
+        var productIndex = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});
+
+        $('#productId').val($("input[name='product']:checked").val());
+        $('#expensesId').val($("input[name='expenses']:checked").val());
+
+        var checkboxEquipment = [];
+        $.each($('input:checkbox[name="equipment"]:checked'),function(){
+            checkboxEquipment.push($(this).val());
+
+        })
+        $('#equipmentIds').val(checkboxEquipment);
+
+        var checkboxGift = [];
+        $.each($('input:checkbox[name="gift"]:checked'),function(){
+            checkboxGift.push($(this).val());
+
+        })
+        $('#giftIds').val(checkboxGift);
+
+
+        var productInfo = '';
+        productInfo = {
+            'product' : $("input[name='product']:checked").val(),
+            'expenses' : $("input[name='expenses']:checked").val(),
+            'equipment' : checkboxEquipment,
+            'gift' : checkboxGift
         };
 
-        alert();
-        alert(JSON.stringify(userInfoHtml));
-        /*for(key in data.field){
-            if(key.indexOf("like") != -1){
-                userInfoHtml[key] = "on";
-            }
-        }*/
-        //window.sessionStorage.setItem("userInfo",JSON.stringify(userInfoHtml));
+        $('#productInfo').val(JSON.stringify(productInfo));
 
-        /*$.ajax({
+
+        //将填写的用户信息存到session以便下次调取
+        //window.sessionStorage.setItem("productInfoJson",JSON.stringify(productInfoJson));
+
+        setTimeout(function(){
+            layer.close(productIndex);
+            layer.msg("提交成功！");
+            OpenFrame();
+        },500);
+
+
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    })
+
+
+    function OpenFrame() {
+
+        var productConfirmIndex = layui.layer.open({
+            title : "产品选择",
+            type : 2,
+            id:'productConfirm',
+            content: "../product/productConfirm.html",
+            success: function(layero, index){
+                //var body = layui.layer.getChildFrame('body', index);
+                //body.find("#equipmentIds").val("12333");  //登录名
+                setTimeout(function(){
+                    layui.layer.tips('点击此处返回文章列表', '.layui-layer-setwin .layui-layer-close', {
+                        tips: 3
+                    });
+                },1000)
+            }
+        })
+        //改变窗口大小时，重置弹窗的高度，防止超出可视区域（如F12调出debug的操作）
+        $(window).resize(function(){
+            layui.layer.full(productConfirmIndex);
+        })
+        layui.layer.full(productConfirmIndex);
+
+        /*layer.open({
+            type: 2,
+            skin: 'layui-layer-lan',
+            title: '产品订单',
+            fix: false,
+            shadeClose: false,
+            maxmin: true,
+            id:'productConfirm',
+            move: false,
+            closeBtn:2,
+            //以下代码为打开窗口添加按钮
+            /!* btn: ['确定', '取消'],
+            btnAlign: 'c',
+            yes: function(index, layero){
+              /!* //layer.closeAll();//关闭所有弹出层
+              //var parentWin = layero.find('iframe')[0];
+              var parentWin = layer.getChildFrame('body', index);
+              alert(parentWin);
+              parentWin.contentWindow.doOk();
+              //layer.close(index);//这块是点击确定关闭这个弹出层
+            }, *!/
+            area: ['750px', '450px'],
+            content: "../product/productConfirm.html",
+            success: function(layero, index){
+                /!*var body = layer.getChildFrame('body', index);
+                var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+                console.log(body.html()) //得到iframe页的body内容
+                body.find("input[name='productInfo']").val(JSON.stringify(productInfoJson))*!/
+            }
+        });*/
+
+    }
+
+
+    /*$.ajax({
             type: "post",
             url: "http://localhost:8080/broadband/customer/customerMessage/add",
             data: JSON.stringify(userInfoHtml),
@@ -198,8 +278,5 @@ layui.config({
             }
         });*/
 
-
-        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    })
 	
 })

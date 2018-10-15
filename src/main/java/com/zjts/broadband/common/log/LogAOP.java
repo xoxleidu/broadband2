@@ -1,16 +1,13 @@
 package com.zjts.broadband.common.log;
 
-import com.alibaba.fastjson.JSONObject;
 import com.mongodb.BasicDBObject;
-import com.zjts.broadband.common.model.LogInfo;
-import com.zjts.broadband.system.model.SysUser;
+import com.zjts.broadband.system.model.SysLog;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +28,6 @@ import java.util.Map;
 
 /**
  * 后台系统日志 - 切点类
- * Created by ALEX on 2017/9/7.
  */
 @Aspect
 @Component
@@ -49,74 +45,40 @@ public class LogAOP {
     @Pointcut("execution (* com.zjts.broadband.*.service.*.*(..)) @annotation(com.zjts.broadband.common.log.ServiceLog)")
     public void serviceAspect() {
     }
+
     //Controller层切点
     @Pointcut("@annotation(com.zjts.broadband.common.log.ControllerLog)")
     public void controllerAspect() {
     }
 
+
     /**
-     * 环绕通知 用于拦截Controller层记录用户的操作
+     * 前置通知 用于拦截Controller层记录用户的操作
      *
      * @param joinPoint 切点
      */
-    @After("controllerAspect()")
-    public void doAround(JoinPoint  joinPoint) {
+    @Before("controllerAspect()")
+    public void doBefore(JoinPoint joinPoint) {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
         try {
-            Signature sig = joinPoint.getSignature();
-            MethodSignature msig = null;
-            if (!(sig instanceof MethodSignature)) {
-                throw new IllegalArgumentException("该注解只能用于方法");
-            }
-            //*========数据库日志=========*//
-            LogInfo map = new LogInfo();
-//            Map<String, Object> map = new HashMap();
-            //操作人姓名
-//            SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
-//            String userName = sysUser.getUsername();
-            String userName = "";
-            if (StringUtils.isBlank(userName)) {
-                userName = "未知用户";
-            }
-            map.setUserName(userName);
-
-            String ip = request.getRemoteAddr();
-            //注解描述
-            map.setDescription(getControllerMethodDescription(joinPoint));
-            //获取类名和方法名
-            map.setMethod((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-
             //请求的IP
-            map.setRequestIp(ip);
-            map.setExceptionCode(null);
-            map.setExceptionDetail(null);
-            //获取方法参数
-            String params = "";
-            if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
-                for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                    params += joinPoint.getArgs()[i] + ";";
-                }
-            }
-            map.setParams(params);
-            Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-
-
-            map.setCreateDate((Long)(new Date().getTime()));
+            String ip = request.getRemoteAddr();
+            //*========数据库日志=========*//
+            SysLog sysLog = new SysLog();
+            sysLog.setUsername((String) session.getAttribute("username"));
+            sysLog.setMethod((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
+            sysLog.setCreateTime(new Date());
+            sysLog.setRequestip(ip);
+            sysLog.setType(0);
+            sysLog.setOperation(getControllerMethodDescription(joinPoint));
             //保存数据库
- //           joinPoint.proceed();
-            mongoTemplate.save(map);
-            logger.info("保存日志成功:{}",map.toString());
+            mongoTemplate.save(sysLog);
         } catch (Exception e) {
             //记录本地异常日志
-            e.printStackTrace();
             logger.error("记录本地系统日志异常");
             logger.error("异常信息:{}", e.getMessage());
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            logger.error("记录本地系统日志异常");
-            logger.error("异常信息:{}", throwable.getMessage());
         }
     }
 
@@ -132,34 +94,35 @@ public class LogAOP {
         HttpSession session = request.getSession();
         try {
             //读取headUAC中的用户
-//            SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
-//            String userName = sysUser.getUsername();
-              String userName = "";
-            if (StringUtils.isBlank(userName)) {
-                userName = "未知用户";
+            String username = request.getHeader("head_uac");
+            if (StringUtils.isBlank(username)) {
+                username = "未知用户";
             }
-
+//            if (idcard != null) {
+//                username = idcard;
+//            }
             //获取请求ip
             String ip = request.getRemoteAddr();
             //获取用户请求方法的参数并序列化为JSON格式字符串
             String params = "";
             if (joinPoint.getArgs() != null && joinPoint.getArgs().length > 0) {
                 for (int i = 0; i < joinPoint.getArgs().length; i++) {
-                    params += joinPoint.getArgs()[i].toString() + ";";
+                    params += joinPoint.getArgs()[i] + ";";
                 }
             }
             /*==========数据库日志=========*/
-            LogInfo map = new LogInfo();
-            map.setDescription(getServiceMthodDescription(joinPoint));
-            map.setMethod((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-            map.setRequestIp(ip);
-            map.setExceptionCode(e.getClass().getName());
-            map.setExceptionDetail(e.getMessage());
-            map.setParams(params);
-            map.setUserName(userName);
-            map.setCreateDate((long)(new Date().getTime()));
+            SysLog sysLog = new SysLog();
+            sysLog.setUsername((String) session.getAttribute("username"));
+            sysLog.setMethod((joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
+            sysLog.setCreateTime(new Date());
+            sysLog.setRequestip(ip);
+            sysLog.setType(1);
+            sysLog.setOperation(getServiceMthodDescription(joinPoint));
+            sysLog.setExceptioncode(e.getClass().getName());
+            sysLog.setExceptiondetail(e.getMessage());
+            sysLog.setParams(params);
             //保存数据库
-            mongoTemplate.save(map);
+            mongoTemplate.save(sysLog);
         } catch (Exception ex) {
             //记录本地异常日志
             logger.error("记录系统异常信息异常");

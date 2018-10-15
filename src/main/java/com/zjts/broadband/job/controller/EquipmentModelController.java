@@ -64,7 +64,7 @@ public class EquipmentModelController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "任意条件查询（id，model，status）")
+    @ApiOperation(value = "任意条件查询（id，name，model，price，status）")
     @RequestMapping(value = "model/find", method = RequestMethod.POST)
     public APIResponse findEquipmentModel(@RequestBody ReqEquipmentModelQuery query, HttpServletRequest request, HttpServletResponse response) {
         try {
@@ -72,6 +72,17 @@ public class EquipmentModelController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             return APIResponse.error(CodeEnum.ERROR);
+        }
+    }
+
+    @ApiOperation(value = "根据id多选设备")
+    @RequestMapping(value = "model/findById", method = RequestMethod.POST)
+    public APIResponse findEquipmentModelById(@RequestBody List<Integer> idList, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return equipmentModelService.findEquipmentModelById(idList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.zjts.broadband.common.model.req.job.orders;
 
 import com.zjts.broadband.common.model.BaseModel;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 

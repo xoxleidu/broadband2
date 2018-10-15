@@ -78,6 +78,17 @@ public class GiftController extends BaseController {
         }
     }
 
+    @ApiOperation(value = "根据id多选赠品")
+    @RequestMapping(value = "gift/findById", method = RequestMethod.POST)
+    public APIResponse findById(@RequestBody List<Integer> ids, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return giftService.findById(ids);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
+        }
+    }
+
     @ApiOperation(value = "调用赠品")
     @ControllerLog(description = "调用赠品")
     @RequestMapping(value = "gift/useGift", method = RequestMethod.POST)

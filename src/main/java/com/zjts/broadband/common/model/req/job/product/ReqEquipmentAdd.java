@@ -14,10 +14,6 @@ import java.math.BigDecimal;
 public class ReqEquipmentAdd implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
     private Integer id;
-    @ApiModelProperty(name="设备名称",example = "华为光猫",required = true)
-    @NotNull(message = "名称不能为空")
-    @Length(max = 10,message = "设备名称长度为1-10")
-    private String name;
 
     @ApiModelProperty(name="型号id",example = "1",required = true)
     @NotNull(message = "型号id不能为空")
@@ -25,12 +21,8 @@ public class ReqEquipmentAdd implements Serializable {
 
     @ApiModelProperty(name="设备ID",example = "001",required = true)
     @NotNull(message = "设备ID不能为空")
-    private String equipmentId;
+    private String equipmentNumber;
 
-    @ApiModelProperty(name="价格",example = "180",required = true)
-    @NotNull(message = "价格不能为空")
-    @Min(0)
-    private BigDecimal price;
 
     private String status;
     public Integer getId() {
@@ -41,14 +33,6 @@ public class ReqEquipmentAdd implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
     public Integer getModelId() {
         return modelId;
     }
@@ -57,20 +41,12 @@ public class ReqEquipmentAdd implements Serializable {
         this.modelId = modelId;
     }
 
-    public String getEquipmentId() {
-        return equipmentId;
+    public String getEquipmentNumber() {
+        return equipmentNumber;
     }
 
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setEquipmentNumber(String equipmentNumber) {
+        this.equipmentNumber = equipmentNumber;
     }
 
     public String getStatus() {

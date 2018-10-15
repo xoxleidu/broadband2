@@ -6,9 +6,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.88.36:3306/1?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/1?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username: root
-    password: 233
+    password: root
     druid:
       #  初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       initialSize: 10
@@ -61,13 +61,13 @@ spring:
         login-username: druid
         login-password: druid
 
-  data:
-      mongodb:
-        host: 60.10.139.112
-        port: 27017
-        database: broadband
-
-#    redis:
+#  data:
+#      mongodb:
+#        host: localhost
+#        port: 27017
+#        database: broadband
+#
+##    redis:
 #      database: 0
 #      host: 101.201.117.102
 #      port: 6379

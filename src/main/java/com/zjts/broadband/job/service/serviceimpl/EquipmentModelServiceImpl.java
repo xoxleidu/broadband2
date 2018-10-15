@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,6 +73,22 @@ public class EquipmentModelServiceImpl implements EquipmentModelService {
             return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
         }
         return APIResponse.success(page.setRecords(myItems));
+    }
+
+    /*
+     * 根据多个id查询设备
+     * */
+    @Override
+    public APIResponse findEquipmentModelById(List<Integer> ids) {
+        List<EquipmentModel> result =new ArrayList<>();
+        for (Integer id : ids) {
+            EquipmentModel e=equipmentModelMapper.selectById(id);
+            if (e.equals(null)) {
+                return APIResponse.error(CodeEnum.FIND_NULL_ERROR);
+            }
+            result.add(e);
+        }
+        return APIResponse.success(result);
     }
 
 

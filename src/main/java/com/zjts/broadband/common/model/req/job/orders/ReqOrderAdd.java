@@ -1,31 +1,27 @@
 package com.zjts.broadband.common.model.req.job.orders;
 
+import com.zjts.broadband.common.model.BaseModel;
 import com.zjts.broadband.job.model.OrderInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Map;
 
-public class ReqOrderAdd {
+public class ReqOrderAdd extends BaseModel {
 
 
-    //产品的Map集合 key 产品类型  value 是产品id
-    private Map product;
+    //产品的list集合
+    private List<ReqOrderProduct> product;
 
-    //订单金额
-
-    @NotNull(message = "订单金额不能为空")
-    @Min(value=0,message = "最小不能小于0")
-    @Max(value=1,message = "最大不能大于1")
-    private Integer discountMoney;
+    //固话号码
+    private String telephone;
     //用户ID
     @NotNull(message = "用户ID不能为空")
     private Integer customerId;
-    //产品类型
- //   private Integer productType;
     //安装时间
     @NotNull(message = "安装时间不能为空")
     private Integer installDate;
@@ -35,7 +31,17 @@ public class ReqOrderAdd {
     private String installAddress;
     //余额
     @NotNull(message = "余额不能为空")
+    @Min(value=0,message = "最小余额不能小于0")
     private int money;
+
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public int getMoney() {
         return money;
@@ -44,14 +50,6 @@ public class ReqOrderAdd {
     public void setMoney(int money) {
         this.money = money;
     }
-
-//    public Integer getProductId() {
-//        return productId;
-//    }
-//
-//    public void setProductId(Integer productId) {
-//        this.productId = productId;
-//    }
 
     public Integer getCustomerId() {
         return customerId;
@@ -77,18 +75,11 @@ public class ReqOrderAdd {
         this.installAddress = installAddress;
     }
 
-    public Integer getDiscountMoney() {
-        return discountMoney;
-    }
-
-    public void setDiscountMoney(Integer discountMoney) {
-        this.discountMoney = discountMoney;
-    }
-    public Map getProduct() {
+    public List<ReqOrderProduct> getProduct() {
         return product;
     }
 
-    public void setProduct(Map product) {
+    public void setProduct(List<ReqOrderProduct> product) {
         this.product = product;
     }
 }

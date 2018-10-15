@@ -18,6 +18,8 @@ public interface GiftService {
 
     APIResponse findGift(ReqGiftQuery reqGiftQuery);
 
+    APIResponse findById(List<Integer> ids);
+
     List<Gift> findAllGift2();
 
     APIResponse useGift(List<ReqGiftUse> list);

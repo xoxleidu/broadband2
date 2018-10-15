@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+
 public class ReqAdd extends BaseModel {
     @NotNull(message = "用户名不能为空")
     @Length(min = 4, max = 10, message = "用户名格式为4-10位数字或字母")

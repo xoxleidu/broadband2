@@ -10,23 +10,23 @@ import java.math.BigDecimal;
 public class Equipment implements Serializable {
     private static final long serialVersionUID = 1001943494952931101L;
     @TableId
-    @ExportConfig(value = "设备id")  //导出Excel时，指定列名
+    @ExportConfig(value = "设备表id")  //导出Excel时，指定列名
     private Integer id;
-    @ExportConfig(value = "名称")
-    private String name;
-    @ExportConfig(value = "设备型号id")
+
+    @ExportConfig(value = "设备型号表id")
     private Integer modelId;
-    @ExportConfig(value = "设备ID")
-    private String equipmentId;
-    @ExportConfig(value = "价格")
-    private BigDecimal price;
+
+    @ExportConfig(value = "设备编号")
+    private String equipmentNumber;
+
     @ExportConfig(value = "入库时间")
     private Integer addTime;
+
     @ExportConfig(value = "出库时间")
     private Integer outTime;
+
     @ExportConfig(value = "状态")
     private String status;
-
 
     public Integer getId() {
         return id;
@@ -34,14 +34,6 @@ public class Equipment implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
     }
 
     public Integer getModelId() {
@@ -52,20 +44,12 @@ public class Equipment implements Serializable {
         this.modelId = modelId;
     }
 
-    public String getEquipmentId() {
-        return equipmentId;
+    public String getEquipmentNumber() {
+        return equipmentNumber;
     }
 
-    public void setEquipmentId(String equipmentId) {
-        this.equipmentId = equipmentId;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setEquipmentNumber(String equipmentNumber) {
+        this.equipmentNumber = equipmentNumber;
     }
 
     public Integer getAddTime() {
@@ -89,6 +73,6 @@ public class Equipment implements Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 }
